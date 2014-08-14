@@ -1,0 +1,140 @@
+*******************************************************
+*PROGRAM FOR SIMULATION OF LATTICE PURE GAUGE THEORIES*
+*     WITH MEASURE OF THE TOPOLOGICAL CHARGE          *
+*******************************************************
+
+
+** ACTION
+*****************************************************
+The action used is the standard Wilson action, with the
+normalization:
+
+-beta*Tr(plaquette)   (NOT Tr/7)
+
+The update is performed by means of heatbath and 
+overrelaxation updates and random gauge 
+transformations.
+
+For compilers lacking of inter-procedural optimization
+it is usually convenient to use also 
+--enable-one-file-compilation 
+in order to compile just a single big file.
+
+After the configuration, the compilation is performed as
+usual by
+make
+
+
+**KNOWN ISSUES
+********************************************************
+
+On some systems, configure fails while checking for 
+the presence of the SIMD extensions, i.e. in one of
+the following lines
+
+checking for x86 cpuid 0x00000001 output... 20655:1100800:29ae3ff:bfebfbff
+checking whether mmx is supported... yes
+checking whether sse is supported... yes
+checking whether sse2 is supported... yes
+checking whether sse3 is supported... yes
+checking whether ssse3 is supported... yes
+checking whether sse4.1 is supported... yes
+checking whether sse4.2 is supported... yes
+checking whether avx is supported... no
+
+if this happens use
+--disable-simd-check
+
+
+** INPUT PARAMETERS
+********************************************************
+An example of input file is give by ./src/input.in. The format 
+of this file is
+
+name_of_the_var  value_of_the_var  comments(up to carriage return)
+
+The variables are:
+
+latox, latoy, latoz, latot: the lattice extensions in 
+	the x, y, z, and t directions respectively
+
+beta: the beta to be simulated
+theta: the (imaginary part) of the imaginary theta to be simulated
+campione: the total number of updates to be performed
+thermal: the number of thermalization updates to be
+	performed prior to starting the measures
+over: number of overrelaxation updates to be performed 
+	after each heatbath update
+measevery: number of updates between the measures
+
+nummeas: number of measures, see cooling and wilsontime 
+	and later
+cooling: nummeas measures of the top. charge are performed, 
+        each one after "cooling" cooling steps. If <=0 
+        no cooling is performed
+wilsontime: nummeas measures of the top. charge are performed,
+        each one after a wilson flow of "wislontime" time.
+        If wilsontime <=0 no wilson evolution is performed
+wilsonstep: step for the integration of the wilson flow with
+        the 4-th order Runge Kutta integrator
+smoothing: if =0 cooling is used as smoothing procedure, 
+        if =1 wilson flow, if =2 both are measured
+
+inizio: starting configuration (0=ordered configuration, 
+	1=random configuration, 2=saved configuration)
+saveconf: if !=0 the last configuration is written in 
+  the file conf_file (see later)
+
+conf_file: name of the configuration file (to read or write
+	the configuration)
+data_file: name of the data file
+err_file: name of the error file
+
+randseed: random seed. If equal to 0 the time is used
+
+** OUTPUT OF SUN_TOPO
+********************************************************
+
+The measured observables are the spatial/temporal 
+mean plaquettes, the mean Polyakov loop and the topological charge.
+The first line of the output data_file is 
+
+ latox latoy latoz latot beta
+
+the others are of the form
+
+ spatial_plaquette temporal_plaquette real_part_polyakov imag_part_polyakov \
+ top. charge measured without cooling \ 
+
+ top. charge and average plaquette after "cooling" cooling steps \
+ top. charge and average plaquette after "2*cooling" cooling steps \
+ ...
+ top. charge and average plaquette after "nummeas*cooling" cooling steps \
+
+in case cooling =0 or <0 the last 5 columns are all equal. If the 
+smoothing procedure used is the Wilson flow the outout is analogous.
+
+** ANALYSIS
+********************************************************
+
+In the directory src/Analisi some analysis script are present:
+
+autocorr_self.py: to compute the autocorrelation of the various 
+             column of the imput file
+
+ordina.py: to sort the file with respect to a prescribed column
+
+unisci.py: to merge the output files of different simulations with the 
+           same parameters
+
+analisi_loc.py: to compute e.g. b2, b4 (errors estimated with jacknife)
+           of local observables
+
+analisi_top.py: to compute e.g. b2, b4 (errors estimated with jacknife)
+           of topological observables
+
+merge.py: to prepare the files fo the reweighing
+
+
+For all the scripts some more details are obtained by calling 
+them (e.g. ./analisi.py).
