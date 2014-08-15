@@ -10,7 +10,7 @@
 #include"../Rng/random.h"
 #include"../Su2/su2_upd.h"
 
-void heatbath_aux_G2(G2 *link, G2 const * const staple, double beta_aux)
+void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple, double beta_aux)
    {
    G2 aux, mult;
    double w[4], w_mod, k[4], temp[4], temp_mod, norm;
@@ -261,7 +261,7 @@ void heatbath_aux_G2(G2 *link, G2 const * const staple, double beta_aux)
    }
 
 
-void unitarize_G2(G2 *A)
+void unitarize_G2(G2 *__restrict__ A)
    {
    double nn, cc;
    double beta_aux=1.0e+12;

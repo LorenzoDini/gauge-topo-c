@@ -10,7 +10,7 @@
 
 
 /* computation of the plaquette (the trace of) in position r and positive directions i,j  */
-double plaquettep(Gauge_Conf const * const GC, long int r, int i, int j)
+double plaquettep(Gauge_Conf const *__restrict__ const GC, long int r, int i, int j)
    {
    GAUGE_GROUP M;
 /*
@@ -34,7 +34,10 @@ double plaquettep(Gauge_Conf const * const GC, long int r, int i, int j)
 
 
 /* compute the mean plaquettes (spatial, temporal) */
-void plaquette(Gauge_Conf const * const GC, Const const * const param, double *plaqs, double *plaqt) 
+void plaquette(Gauge_Conf const *__restrict__ const GC, 
+               Const const *__restrict__ const param, 
+               double *__restrict__ plaqs, 
+               double *__restrict__ plaqt) 
    {
    int i, j, r;
    double ps=0.0, pt=0.0;
@@ -68,7 +71,10 @@ void plaquette(Gauge_Conf const * const GC, Const const * const param, double *p
 
 
 /* compute the mean Polyakov loop (the trace of) */
-void polyakow(Gauge_Conf const * const GC, Const const * const param, double *repoly, double *impoly) 
+void polyakow(Gauge_Conf const *__restrict__ const GC, 
+              Const const *__restrict__ const param, 
+              double *__restrict__ repoly, 
+              double *__restrict__ impoly) 
    {
    int t, r;
    double rp, ip;
@@ -97,7 +103,7 @@ void polyakow(Gauge_Conf const * const GC, Const const * const param, double *re
 
 
 /* compute the topological charge */
-double topcharge(Gauge_Conf const * const GC, Const const * const param)
+double topcharge(Gauge_Conf const *__restrict__ const GC, Const const *__restrict__ const param)
    {
    GAUGE_GROUP aux1, aux2, aux3;
    double ris, real1, real2, loc_charge; 
@@ -148,7 +154,7 @@ double topcharge(Gauge_Conf const * const GC, Const const * const param)
    }
 
 /* compute the topological charge density at point "r" */
-double topchargedens(Gauge_Conf const * const GC, int r) 
+double topchargedens(Gauge_Conf const *__restrict__ const GC, int r) 
    {
    GAUGE_GROUP aux1, aux2, aux3;
    double real1, real2, loc_charge; 
@@ -194,7 +200,10 @@ double topchargedens(Gauge_Conf const * const GC, int r)
 
 
 /* compute Const::d_nummeas values of the topological charge after some cooling */
-void topcharge_cooling(Gauge_Conf const * const GC, Const const * const param, double *charge, double *meanplaq) 
+void topcharge_cooling(Gauge_Conf const *__restrict__ const GC, 
+                       Const const *__restrict__ const param, 
+                       double *__restrict__ charge, 
+                       double *__restrict__ meanplaq) 
    {
    if(param->d_cooling>0)  /* if using cooling */
      {  
@@ -236,7 +245,10 @@ void topcharge_cooling(Gauge_Conf const * const GC, Const const * const param, d
 
 
 /* compute Const::d_nummeas values of the topological charge after some cooling2 */
-void topcharge_cooling2(Gauge_Conf const * const GC, Const const * const param, double *charge, double *meanplaq) 
+void topcharge_cooling2(Gauge_Conf const *__restrict__ const GC, 
+                        Const const *__restrict__ const param, 
+                        double *__restrict__ charge, 
+                        double *__restrict__ meanplaq) 
    {
    if(param->d_cooling>0)  /* if using cooling */
      {  

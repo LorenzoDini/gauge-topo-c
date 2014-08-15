@@ -12,7 +12,7 @@
 #include"../Rng/random.h"
 
 /* A=1 */
-void one_G2(G2 *A)
+void one_G2(G2 *__restrict__ A)
    {
   int i, j;
 
@@ -28,7 +28,7 @@ void one_G2(G2 *A)
    }
 
 /* A=0 */
-void zero_G2(G2 *A)
+void zero_G2(G2 *__restrict__ A)
    {
    int i, j;
    
@@ -42,7 +42,7 @@ void zero_G2(G2 *A)
    }
 
 /* A=B */
-void equal_G2(G2 *A, G2 const * const B)
+void equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   { 
   int i, j;
   
@@ -56,7 +56,7 @@ void equal_G2(G2 *A, G2 const * const B)
   }
 
 /* A=B^{dag} */
-void equal_dag_G2(G2 *A, G2 const * const B)
+void equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   { 
   int i, j;
   
@@ -70,7 +70,7 @@ void equal_dag_G2(G2 *A, G2 const * const B)
   }
 
 /* A+=B */
-void plus_equal_G2(G2 *A, G2 const * const B)
+void plus_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   { 
   int i, j;
   
@@ -84,7 +84,7 @@ void plus_equal_G2(G2 *A, G2 const * const B)
   }
 
 /* A+=B^{dag} */
-void plus_equal_dag_G2(G2 *A, G2 const * const B)
+void plus_equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   { 
   int i, j;
   
@@ -98,7 +98,7 @@ void plus_equal_dag_G2(G2 *A, G2 const * const B)
   }
 
 /* A-=B */
-void minus_equal_G2(G2 *A, G2 const * const B)
+void minus_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   { 
   int i, j;
   
@@ -112,7 +112,7 @@ void minus_equal_G2(G2 *A, G2 const * const B)
   }
 
 /* A-=B^{dag} */
-void minus_equal_dag_G2(G2 *A, G2 const * const B)
+void minus_equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   { 
   int i, j;
   
@@ -126,7 +126,7 @@ void minus_equal_dag_G2(G2 *A, G2 const * const B)
   }
 
 /* A=b*B+c*C */
-void lin_comb_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C)
+void lin_comb_G2(G2 *__restrict__ A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C)
   {
   int i, j;
   
@@ -140,7 +140,7 @@ void lin_comb_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const
   }
 
 /* A=b*B^{dag}+c*C */
-void lin_comb_dag1_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C)  
+void lin_comb_dag1_G2(G2 *__restrict__ A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C)  
   {
   int i, j;
   
@@ -154,7 +154,7 @@ void lin_comb_dag1_G2(G2 *A, double b, G2 const * const B, double c, G2 const * 
   }
 
 /* A=b*B+c*C^{dag} */
-void lin_comb_dag2_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C) 
+void lin_comb_dag2_G2(G2 *__restrict__ A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C) 
   {
   int i, j;
   
@@ -168,7 +168,7 @@ void lin_comb_dag2_G2(G2 *A, double b, G2 const * const B, double c, G2 const * 
   }
 
 /* A=b*B^{dag}+c*C^{dag} */
-void lin_comb_dag12_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C)
+void lin_comb_dag12_G2(G2 *__restrict__ A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C)
   {
   int i, j;
   
@@ -182,7 +182,7 @@ void lin_comb_dag12_G2(G2 *A, double b, G2 const * const B, double c, G2 const *
   }
 
 /* A*=r */
-void times_equal_real_G2(G2 *A, double r)
+void times_equal_real_G2(G2 *__restrict__ A, double r)
   {
   int i, j;
 
@@ -310,7 +310,7 @@ void times_equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
   }
 
 /* A=B*C */
-void times_G2(G2 *A, G2 const * const B, G2 const * const C)    
+void times_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const *__restrict__ const C)    
   {
   int i, j, k;
   double sum;
@@ -330,7 +330,7 @@ void times_G2(G2 *A, G2 const * const B, G2 const * const C)
   }
 
 /* A=B^{dag}*C */
-void times_dag1_G2(G2 *A, G2 const * const B, G2 const * const C)
+void times_dag1_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const *__restrict__ const C)
   {
   int i, j, k;
   double sum;
@@ -350,7 +350,7 @@ void times_dag1_G2(G2 *A, G2 const * const B, G2 const * const C)
   }
 
 /* A=B*C^{dag} */
-void times_dag2_G2(G2 *A, G2 const * const B, G2 const * const C) 
+void times_dag2_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const *__restrict__ const C) 
   {
   int i, j, k;
   double sum;
@@ -370,7 +370,7 @@ void times_dag2_G2(G2 *A, G2 const * const B, G2 const * const C)
   }
 
 /* A=B^{dag}*C^{dag} */
-void times_dag12_G2(G2 *A, G2 const * const B, G2 const * const C)
+void times_dag12_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const *__restrict__ const C)
   {
   int i, j, k;
   double sum;
@@ -392,7 +392,7 @@ void times_dag12_G2(G2 *A, G2 const * const B, G2 const * const C)
                                /* ROTATION MATRICES */
 
 /* D1 */
-void D1(G2 *A, double x)
+void D1(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -425,7 +425,7 @@ void D1(G2 *A, double x)
   }
 
 /* D2 */
-void D2(G2 *A, double x)
+void D2(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -458,7 +458,7 @@ void D2(G2 *A, double x)
   }
 
 /* D3 */
-void D3(G2 *A, double x)
+void D3(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -491,7 +491,7 @@ void D3(G2 *A, double x)
   }
 
 /* D4 */
-void D4(G2 *A, double x)
+void D4(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -524,7 +524,7 @@ void D4(G2 *A, double x)
   }
 
 /* D5 */
-void D5(G2 *A, double x)
+void D5(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -557,7 +557,7 @@ void D5(G2 *A, double x)
   }
 
 /* D6 */
-void D6(G2 *A, double x)
+void D6(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -590,7 +590,7 @@ void D6(G2 *A, double x)
   }
 
 /* D7 */
-void D7(G2 *A, double x)
+void D7(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c;
@@ -623,7 +623,7 @@ void D7(G2 *A, double x)
   }
 
 /* D8 */
-void D8(G2 *A, double x)
+void D8(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -663,7 +663,7 @@ void D8(G2 *A, double x)
   }
 
 /* D9 */
-void D9(G2 *A, double x)
+void D9(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -703,7 +703,7 @@ void D9(G2 *A, double x)
   }
 
 /* D10 */
-void D10(G2 *A, double x)
+void D10(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -743,7 +743,7 @@ void D10(G2 *A, double x)
   }
 
 /* D11 */
-void D11(G2 *A, double x)
+void D11(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -783,7 +783,7 @@ void D11(G2 *A, double x)
   }
 
 /* D12 */
-void D12(G2 *A, double x)
+void D12(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -823,7 +823,7 @@ void D12(G2 *A, double x)
   }
 
 /* D13 */
-void D13(G2 *A, double x)
+void D13(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -863,7 +863,7 @@ void D13(G2 *A, double x)
   }
 
 /* D14 */
-void D14(G2 *A, double x)
+void D14(G2 *__restrict__ A, double x)
   {
   int i, j;
   double s, c, s2, c2;
@@ -904,7 +904,7 @@ void D14(G2 *A, double x)
                                         /* END OF ROTATION MATRICES */
 
 /* random matrix */
-void rand_matrix_G2(G2 *A)
+void rand_matrix_G2(G2 *__restrict__ A)
   {
   double aux, alpha8;
   G2 M, N;
@@ -983,19 +983,19 @@ void rand_matrix_G2(G2 *A)
   }
 
 /* 1/7 of the real part of the trace */
-double retr_G2(G2 const * const A)
+double retr_G2(G2 const *__restrict__ const A)
    {
    return (A->comp[0][0]+A->comp[1][1]+A->comp[2][2]+A->comp[3][3]+A->comp[4][4]+A->comp[5][5]+A->comp[6][6])/7.0;
    }
 
 /* 1/7 of the imaginary part of the trace */
-double imtr_G2(G2 const * const A)
+double imtr_G2(G2 const *__restrict__ const A)
    {
    return 0.0;
    }
 
 /* L^2 norm */
-double norm_G2(G2 const * const A)
+double norm_G2(G2 const *__restrict__ const A)
    {
    int i, j;
    double aux=0.0;
@@ -1012,7 +1012,7 @@ double norm_G2(G2 const * const A)
    }
 
 
-void print_on_screen_G2(G2 const * const A) 
+void print_on_screen_G2(G2 const *__restrict__ const A) 
    {
    int i;
    
@@ -1028,7 +1028,7 @@ void print_on_screen_G2(G2 const * const A)
       }
    }
 
-void print_on_file_G2(FILE *fp, G2 const * const A)
+void print_on_file_G2(FILE *fp, G2 const *__restrict__ const A)
    {
    int i;
    
@@ -1044,7 +1044,7 @@ void print_on_file_G2(FILE *fp, G2 const * const A)
       }
    }
 
-void read_from_file_G2(FILE *fp, G2 *A)
+void read_from_file_G2(FILE *fp, G2 *__restrict__ A)
    {
    int i, err;
    

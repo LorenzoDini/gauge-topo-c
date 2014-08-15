@@ -12,7 +12,7 @@
 #include"../Rng/random.h"
 #include"../Su2/su2_upd.h"
 
-void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const param)
+void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple, Const const *__restrict__ const param)
    {
    G2 aux, mult;
    double w[4], w_mod, k[4], temp[4], temp_mod, norm;
@@ -299,7 +299,7 @@ void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const p
 
 
 
-void single_overrelaxation_G2(G2 *link, G2 const * const staple, Const const * const param)
+void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple, Const const *__restrict__ const param)
    {
    G2 M, aux;
    double w0, w1;
@@ -393,7 +393,7 @@ void single_overrelaxation_G2(G2 *link, G2 const * const staple, Const const * c
    }
 
 
-void cool_G2(G2 *link, G2 const * const staple)
+void cool_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple)
    {
    G2 helper, helper2;
    double energy1, energy2;

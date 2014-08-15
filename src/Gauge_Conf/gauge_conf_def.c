@@ -11,7 +11,7 @@
 #include"../Macro/macro.h"
 #include"../Su2/su2.h"
 
-int init_gauge_conf(Gauge_Conf *GC, Const const * const param)
+int init_gauge_conf(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
   {
   int i, j;
   #if HAVE_POSIX_MEMALIGN == 1 
@@ -131,7 +131,7 @@ int init_gauge_conf(Gauge_Conf *GC, Const const * const param)
   }
 
 
-void end_gauge_conf(Gauge_Conf *GC, Const const * const param)
+void end_gauge_conf(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
   {
   int i;
 
@@ -147,7 +147,7 @@ void end_gauge_conf(Gauge_Conf *GC, Const const * const param)
   }
 
 
-void save_on_file(Gauge_Conf const * const GC, Const const * const param)
+void save_on_file(Gauge_Conf const *__restrict__ const GC, Const const *__restrict__ const param)
   {
   int i, j;
   FILE *fp;
@@ -173,7 +173,7 @@ void save_on_file(Gauge_Conf const * const GC, Const const * const param)
 
 
 /* allocate GC and initialize with GC2 */
-void init_gauge_conf_from_gauge_conf(Gauge_Conf *GC, Gauge_Conf const * const GC2, Const const * const param) 
+void init_gauge_conf_from_gauge_conf(Gauge_Conf *__restrict__ GC, Gauge_Conf const *__restrict__ const GC2, Const const *__restrict__ const param) 
   {
   int i, j;
   #if HAVE_POSIX_MEMALIGN==1

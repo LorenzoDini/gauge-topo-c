@@ -12,7 +12,7 @@
 
 /* random number generator for heabath (see Kennedy, Pendleton Phys. Lett. B 156, 393 (1985))
    given "k" return "a" in [-1,1] with P(a) = sqrt(1-a*a)*exp(k*a) */
-void randheat(double k, double *out)
+void randheat(double k, double *__restrict__ out)
     {
     double r, r1, r2, c, r3;
 
@@ -68,7 +68,7 @@ void randheat(double k, double *out)
 
 
 /* heatbath */
-void single_heatbath_Su2(Su2 *link, Su2 const * const staple, Const const * const param)
+void single_heatbath_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const staple, Const const *__restrict__ const param)
     {
     double p, p0;
     FILE *fp;  
@@ -98,7 +98,7 @@ void single_heatbath_Su2(Su2 *link, Su2 const * const staple, Const const * cons
 
 
 /* overrelaxation */
-void single_overrelaxation_Su2(Su2 *link, Su2 const * const staple, Const const * const param)
+void single_overrelaxation_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const staple, Const const *__restrict__ const param)
     {
     double p;
     Su2 matrix1, matrix2;
@@ -126,7 +126,7 @@ void single_overrelaxation_Su2(Su2 *link, Su2 const * const staple, Const const 
 
 
 /* cooling */
-void cool_Su2(Su2 *link, Su2 const * const staple)
+void cool_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const staple)
     {
     Su2 matrix1;
     

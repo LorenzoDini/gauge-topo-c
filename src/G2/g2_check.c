@@ -9,7 +9,7 @@
 
 /* verify the cubic condition needed for an SO(7) matrix to be in G2
    return 1 if ok, 0 else */
-int cc_check_G2(G2 const * const A, double *cc)
+int cc_check_G2(G2 const *__restrict__ const A, double *__restrict__ cc)
   {
   int i;
   double  test[35];
@@ -591,7 +591,7 @@ int cc_check_G2(G2 const * const A, double *cc)
 
 /* verify that the matrix is in G2: 
  return 1 if is in G2, 0 otherwise */
-int check_G2(G2 const * const A, double *n, double *cc)
+int check_G2(G2 const *__restrict__ const A, double *__restrict__ n, double *__restrict__ cc)
     {
     int unitarity, cubic_condition;
     G2 M, N;
