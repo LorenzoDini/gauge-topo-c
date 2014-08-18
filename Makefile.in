@@ -124,7 +124,8 @@ am__g2_topo_SOURCES_DIST = ./src/g2_topo.c ./src/g2_topo_include.h \
 	./src/G2/g2_upd.h ./src/Gauge_Conf/gauge_conf_def.c \
 	./src/Gauge_Conf/gauge_conf_meas.c \
 	./src/Gauge_Conf/gauge_conf_upd.c \
-	./src/Gauge_Conf/gauge_conf.h ./src/Geometry/geometry.c \
+	./src/Gauge_Conf/gauge_conf.h \
+	./src/Gauge_Conf/topology_readme.txt ./src/Geometry/geometry.c \
 	./src/Geometry/geometry.h ./src/Macro/macro.h \
 	./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
 	./src/Rng/dSFMT/dSFMT.c ./src/Rng/dSFMT/dSFMT-common.h \
@@ -332,6 +333,7 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_FALSE@                  ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
+@ONE_FILE_COMPILATION_FALSE@                  ./src/Gauge_Conf/topology_readme.txt \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Geometry/geometry.c ./src/Geometry/geometry.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Macro/macro.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
@@ -367,6 +369,7 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
 @ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
 @ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/topology_readme.txt \
 @ONE_FILE_COMPILATION_TRUE@               ./src/Geometry/geometry.c ./src/Geometry/geometry.h \
 @ONE_FILE_COMPILATION_TRUE@               ./src/Macro/macro.h \
 @ONE_FILE_COMPILATION_TRUE@               ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \

@@ -19,6 +19,7 @@ if ONE_FILE_COMPILATION
                ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
                ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
                ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
+               ./src/Gauge_Conf/topology_readme.txt \
                ./src/Geometry/geometry.c ./src/Geometry/geometry.h \
                ./src/Macro/macro.h \
                ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
@@ -36,6 +37,7 @@ else
                   ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
                   ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
                   ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
+                  ./src/Gauge_Conf/topology_readme.txt \
                   ./src/Geometry/geometry.c ./src/Geometry/geometry.h \
                   ./src/Macro/macro.h \
                   ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
