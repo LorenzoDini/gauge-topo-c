@@ -6,7 +6,7 @@ The discretization used on the lattice is obtained by using the clover form of t
 discretized field-strenth, i.e. the clover Q_{\mu\nu} ("quadrifoglio" in the code) is 
 given by
 
-Q_{\mu\nu} = \exp(4 i a^2 F_{\nu\nu ) ~ 1 + 4 i a^2 F_{\mu\nu}
+Q_{\mu\nu}  ~ 4 + 4 i a^2 F_{\mu\nu}
 
 and thus
 
