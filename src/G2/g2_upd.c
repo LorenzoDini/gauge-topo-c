@@ -30,7 +30,7 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
         {
         /* update on the first SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
 
-        /* action = (param->d_beta)*Tr(w*k) */
+        /* action = (param->d_beta)*(w*k) */
         w[0]=aux.comp[3][3]+aux.comp[4][4]+aux.comp[5][5]+aux.comp[6][6];
         w[1]=aux.comp[3][6]-aux.comp[6][3]+aux.comp[4][5]-aux.comp[5][4];
         w[2]=aux.comp[5][3]-aux.comp[3][5]+aux.comp[4][6]-aux.comp[6][4];
@@ -105,7 +105,8 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
           mult.comp[6][5]=k[3];
           mult.comp[6][6]=k[0];
 
-          times_equal_G2(link, &mult);
+          /* times_equal_G2(link, &mult); */
+          times_equal_4_G2(link, &mult, 3, 4, 5, 6);
           }
        else
           {
@@ -119,7 +120,7 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
         {
         /* update on the second SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
 
-        /* action = (param->d_beta)*Tr(w*k) */
+        /* action = (param->d_beta)*(w*k) */
         w[0]=aux.comp[1][1]+aux.comp[2][2]+aux.comp[5][5]+aux.comp[6][6];
         w[1]=aux.comp[6][1]-aux.comp[1][6]+aux.comp[5][2]-aux.comp[2][5];
         w[2]=aux.comp[1][5]-aux.comp[5][1]+aux.comp[6][2]-aux.comp[2][6];
@@ -194,7 +195,8 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
           mult.comp[6][5]=k[3];
           mult.comp[6][6]=k[0];
 
-          times_equal_G2(link, &mult);
+          /* times_equal_G2(link, &mult); */
+          times_equal_4_G2(link, &mult, 1, 2, 5, 6);
           }
         else
           {
@@ -208,7 +210,7 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
         {
         /* update on the third SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
 
-        /* action = (param->d_beta)*Tr(w*k) */
+        /* action = (param->d_beta)*(w*k) */
         w[0]=aux.comp[1][1]+aux.comp[2][2]+aux.comp[3][3]+aux.comp[4][4];
         w[1]=aux.comp[4][1]-aux.comp[1][4]+aux.comp[2][3]-aux.comp[3][2];
         w[2]=aux.comp[1][3]-aux.comp[3][1]+aux.comp[2][4]-aux.comp[4][2];
@@ -283,7 +285,8 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
           mult.comp[4][3]=k[3];
           mult.comp[4][4]=k[0];
 
-          times_equal_G2(link, &mult);
+          /* times_equal_G2(link, &mult); */
+          times_equal_4_G2(link, &mult, 1, 2, 3, 4);
           }
         else
           {
@@ -317,8 +320,12 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D1(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
    times_equal_G2(&aux, &M);
+   */
+   times_equal_4_G2(link, &M, 3, 4, 5, 6);
+   times_equal_4_G2(&aux, &M, 3, 4, 5, 6);
 
    /* D2 */
    w0=aux.comp[3][3]+aux.comp[4][4]+aux.comp[5][5]+aux.comp[6][6];
@@ -329,8 +336,12 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D2(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
    times_equal_G2(&aux, &M);
+   */
+   times_equal_4_G2(link, &M, 3, 4, 5, 6);
+   times_equal_4_G2(&aux, &M, 3, 4, 5, 6);
 
    /* D3 */
    w0=aux.comp[3][3]+aux.comp[4][4]+aux.comp[5][5]+aux.comp[6][6];
@@ -341,8 +352,12 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D3(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
    times_equal_G2(&aux, &M);
+   */
+   times_equal_4_G2(link, &M, 3, 4, 5, 6);
+   times_equal_4_G2(&aux, &M, 3, 4, 5, 6);
 
    /* D4 */
    w0=aux.comp[1][1]+aux.comp[2][2]+aux.comp[5][5]+aux.comp[6][6];
@@ -353,8 +368,12 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D4(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
    times_equal_G2(&aux, &M);
+   */
+   times_equal_4_G2(link, &M, 1, 2, 5, 6);
+   times_equal_4_G2(&aux, &M, 1, 2, 5, 6);
 
    /* D5 */
    w0=aux.comp[1][1]+aux.comp[2][2]+aux.comp[5][5]+aux.comp[6][6];
@@ -365,8 +384,13 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D5(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
    times_equal_G2(&aux, &M);
+   */
+   times_equal_4_G2(link, &M, 1, 2, 5, 6);
+   times_equal_4_G2(&aux, &M, 1, 2, 5, 6);
+
 
    /* D6 */
    w0=aux.comp[1][1]+aux.comp[2][2]+aux.comp[3][3]+aux.comp[4][4];
@@ -377,8 +401,12 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D6(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
    times_equal_G2(&aux, &M);
+   */
+   times_equal_4_G2(link, &M, 1, 2, 3, 4);
+   times_equal_4_G2(&aux, &M, 1, 2, 3, 4);
 
    /* D7 */
    w0=aux.comp[1][1]+aux.comp[2][2]+aux.comp[3][3]+aux.comp[4][4];
@@ -389,7 +417,10 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    if(w0<0) phi+=PI;
    
    D7(&M, 2.0*phi);
+   /*
    times_equal_G2(link, &M);
+   */
+   times_equal_4_G2(link, &M, 1, 2, 3, 4);
    }
 
 

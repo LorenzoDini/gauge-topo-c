@@ -36,6 +36,7 @@ void lin_comb_dag12_G2(G2 *__restrict__A, double b, G2 const *__restrict__ const
 void times_equal_real_G2(G2 *__restrict__ A, double r); /* A*=r */
 
 void times_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B);     /* A*=B       */
+void times_equal_4_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, int i0, int i1, int i2, int i3);
 void times_equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B); /* A*=B^{dag} */
 
 void times_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const *__restrict__ const C);       /* A=B*C             */

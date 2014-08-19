@@ -25,7 +25,7 @@ void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple,
 
       if(mode==0)
         {
-        /* action = Tr[beta*w*k]  */
+        /* action = beta_aux*(w*k) */
         w[0]=aux.comp[3][3]+aux.comp[4][4]+aux.comp[5][5]+aux.comp[6][6];
         w[1]=aux.comp[3][6]-aux.comp[6][3]+aux.comp[4][5]-aux.comp[5][4];
         w[2]=aux.comp[5][3]-aux.comp[3][5]+aux.comp[4][6]-aux.comp[6][4];
@@ -104,7 +104,7 @@ void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple,
 
       if(mode==1)
         {
-        /* actions = Tr[beta*w*k] */
+        /* action = beta_aux*(w*k) */
         w[0]=aux.comp[1][1]+aux.comp[2][2]+aux.comp[5][5]+aux.comp[6][6];
         w[1]=aux.comp[6][1]-aux.comp[1][6]+aux.comp[5][2]-aux.comp[2][5];
         w[2]=aux.comp[1][5]-aux.comp[5][1]+aux.comp[6][2]-aux.comp[2][6];
@@ -182,7 +182,7 @@ void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple,
 
       if(mode==2)
         {
-        /* action = Tr[beta*w*k] */
+        /* action = beta_aux*(w*k) */
         w[0]=aux.comp[1][1]+aux.comp[2][2]+aux.comp[3][3]+aux.comp[4][4];
         w[1]=aux.comp[4][1]-aux.comp[1][4]+aux.comp[2][3]-aux.comp[3][2];
         w[2]=aux.comp[1][3]-aux.comp[3][1]+aux.comp[2][4]-aux.comp[4][2];

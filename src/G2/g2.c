@@ -252,6 +252,62 @@ void times_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B)
      }
   }
 
+/* this is used in the update, is the product when B[i][j] is different from the unity matrix for just 4 values of i and j */
+void times_equal_4_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, int i0, int i1, int i2, int i3)
+  {
+  int i, j; 
+  register double sum, aux0, aux1, aux2, aux3;
+
+  for(i=0; i<7; i++)
+     {
+     aux0=A->comp[i][i0];
+     aux1=A->comp[i][i1];
+     aux2=A->comp[i][i2];
+     aux3=A->comp[i][i3];
+
+     j=i0; 
+        {
+        sum=aux0*(B->comp[i0][j]);
+        sum+=aux1*(B->comp[i1][j]);
+        sum+=aux2*(B->comp[i2][j]);
+        sum+=aux3*(B->comp[i3][j]);
+
+        A->comp[i][j]=sum;
+        }
+
+     j=i1; 
+        {
+        sum=aux0*(B->comp[i0][j]);
+        sum+=aux1*(B->comp[i1][j]);
+        sum+=aux2*(B->comp[i2][j]);
+        sum+=aux3*(B->comp[i3][j]);
+
+        A->comp[i][j]=sum;
+        }
+
+     j=i2; 
+        {
+        sum=aux0*(B->comp[i0][j]);
+        sum+=aux1*(B->comp[i1][j]);
+        sum+=aux2*(B->comp[i2][j]);
+        sum+=aux3*(B->comp[i3][j]);
+
+        A->comp[i][j]=sum;
+        }
+
+     j=i3; 
+        {
+        sum=aux0*(B->comp[i0][j]);
+        sum+=aux1*(B->comp[i1][j]);
+        sum+=aux2*(B->comp[i2][j]);
+        sum+=aux3*(B->comp[i3][j]);
+
+        A->comp[i][j]=sum;
+        }
+     }
+  }
+
+
 /* A*=B^{dag} */
 /*
 void times_equal_dag_G2(G2 *A, G2 const * const B)
