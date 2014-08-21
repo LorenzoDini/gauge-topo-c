@@ -139,10 +139,10 @@ double topcharge(Gauge_Conf const *__restrict__ const GC, Const const *__restric
          quadrifoglio(GC, r, dir[3][i], dir[0][i], &aux2);
 
          times_dag2(&aux3, &aux2, &aux1); /* aux3=aux2*(aux1^{dag}) */
-         real1=retr(&aux3)*7.0;
+         real1=retr(&aux3)*NCOLOR; /* retr = real part of the trace / COLOR */
 
          times(&aux3, &aux2, &aux1); /* aux3=aux2*aux1 */
-         real2=retr(&aux3)*7.0;
+         real2=retr(&aux3)*NCOLOR;
         
          loc_charge+=(sign*(real1-real2));
          sign=-sign;
@@ -186,10 +186,10 @@ double topchargedens(Gauge_Conf const *__restrict__ const GC, int r)
       quadrifoglio(GC, r, dir[3][i], dir[0][i], &aux2);
  
          times_dag2(&aux3, &aux2, &aux1); /* aux3=aux2*(aux1^{dag}) */
-         real1=retr(&aux3)*7.0;
+         real1=retr(&aux3)*NCOLOR; /* retr = real part of the trace / NCOLOR */
 
          times(&aux3, &aux2, &aux1); /* aux3=aux2*aux1 */
-         real2=retr(&aux3)*7.0;
+         real2=retr(&aux3)*NCOLOR;
         
       loc_charge+=(sign*(real1-real2));
       sign=-sign;

@@ -3,7 +3,18 @@
 
 #include"../../config.h" 
 
-#define GAUGE_GROUP G2
+#define G2_GROUP
+
+#ifdef G2_GROUP
+  #define GAUGE_GROUP G2
+  #define NCOLOR 7
+#endif
+
+#ifdef Su2_GROUP
+  #define GAUGE_GROUP Su2
+  #define NCOLOR 2
+#endif
+
 
 #define INT_ALIGN 8
 #define DOUBLE_ALIGN 16

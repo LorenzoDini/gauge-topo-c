@@ -13,7 +13,7 @@
 
 void init_function_pointers(void)
   {
-  /*
+  #ifdef Su2_GROUP 
   one  = &one_Su2;
   zero = &zero_Su2;
   equal     = &equal_Su2;
@@ -43,8 +43,9 @@ void init_function_pointers(void)
   single_heatbath = &single_heatbath_Su2;
   single_overrelaxation = &single_overrelaxation_Su2;
   cool = &cool_Su2;
-  */
-
+  #endif
+ 
+  #ifdef G2_GROUP
   one  = &one_G2;
   zero = &zero_G2;
   equal     = &equal_G2;
@@ -74,6 +75,6 @@ void init_function_pointers(void)
   single_heatbath = &single_heatbath_G2;
   single_overrelaxation = &single_overrelaxation_G2;
   cool = &cool_G2;
-
+  #endif
   }
 #endif

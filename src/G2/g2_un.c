@@ -294,4 +294,5 @@ void unitarize_G2(G2 *__restrict__ A)
         }
    }
 
+
 #endif

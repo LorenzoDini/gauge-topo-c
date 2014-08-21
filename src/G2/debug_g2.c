@@ -181,8 +181,6 @@ int main(void)
    else printf("  ERROR!!!!!!!!!!!\n");
    printf("    n=%g  cc=%g\n", n, cc);
 
-
-
    printf("\n\n");
    printf("VERIFY THAT COOLING DECREASES THE ENERGY ...");
    rand_matrix_G2(&M);

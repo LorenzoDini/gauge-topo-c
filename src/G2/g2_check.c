@@ -588,7 +588,6 @@ int cc_check_G2(G2 const *__restrict__ const A, double *__restrict__ cc)
   else return 0;
   }
 
-
 /* verify that the matrix is in G2: 
  return 1 if is in G2, 0 otherwise */
 int check_G2(G2 const *__restrict__ const A, double *__restrict__ n, double *__restrict__ cc)
@@ -596,6 +595,7 @@ int check_G2(G2 const *__restrict__ const A, double *__restrict__ n, double *__r
     int unitarity, cubic_condition;
     G2 M, N;
 
+    /* check unitarity */
     equal_G2(&M, A);  /* M=A */
     times_dag2_G2(&N, &M, &M); /* N=M*M^{dag} */
     one_G2(&M);
@@ -610,7 +610,9 @@ int check_G2(G2 const *__restrict__ const A, double *__restrict__ n, double *__r
       unitarity=0;
       }
 
+    /* check cubic condition */
     cubic_condition=cc_check_G2(A, cc);
+    /* note that the cubic condition implies det=+1 */
 
     return unitarity*cubic_condition;
     }
