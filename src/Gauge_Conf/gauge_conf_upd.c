@@ -115,19 +115,25 @@ void update(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
       }
    
    /* random gauge transformation */
+   #ifdef G2_GROUP
    for(r=0; r<(param->d_volume); r++)
       {
       rand_matrix(&aux1);
 
       for(i=0; i<4; i++)
          {
-         times(&aux2, &aux1, &(GC->lattice[r][i]));   /* aux2=aux1*lattice[r][i] */
-         equal(&(GC->lattice[r][i]), &aux2);          /* lattice[r][i]-> rand * lattice[r][i] */ 
+         times(&aux2, &aux1, &(GC->lattice[r][i]));   
+         /* aux2=aux1*lattice[r][i] */
+         equal(&(GC->lattice[r][i]), &aux2);          
+         /* lattice[r][i]-> rand * lattice[r][i] */ 
 
-         times_dag2(&aux2, &(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux1);   /* aux2=lattice[r][i] * aux1^dag */
-         equal(&(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux2);               /* lattice[nnm(r,i)][i] -> lattice[nnm(r,i)][i] * rand^dag */
+         times_dag2(&aux2, &(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux1);   
+         /* aux2=lattice[r][i] * aux1^dag */
+         equal(&(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux2);               
+         /* lattice[nnm(r,i)][i] -> lattice[nnm(r,i)][i] * rand^dag */
          } 
       }
+   #endif
 
    /* final unitarization */
    for(r=0; r<(param->d_volume); r++)
@@ -159,19 +165,25 @@ void cooling(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param,
          }
 
       /* random gauge transformation */
+      #ifdef G2_GROUP
       for(r=0; r<(param->d_volume); r++)
          {
          rand_matrix(&aux1);
 
          for(i=0; i<4; i++)
             {
-            times(&aux2, &aux1, &(GC->lattice[r][i]));   /* aux2=aux1*lattice[r][i] */
-            equal(&(GC->lattice[r][i]), &aux2);          /* lattice[r][i]-> rand * lattice[r][i] */ 
+            times(&aux2, &aux1, &(GC->lattice[r][i]));   
+            /* aux2=aux1*lattice[r][i] */
+            equal(&(GC->lattice[r][i]), &aux2);          
+            /* lattice[r][i]-> rand * lattice[r][i] */ 
 
-            times_dag2(&aux2, &(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux1);   /* aux2=lattice[r][i] * aux1^dag */
-            equal(&(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux2);               /* lattice[nnm(r,i)][i] -> lattice[nnm(r,i)][i] * rand^dag */
+            times_dag2(&aux2, &(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux1);   
+            /* aux2=lattice[r][i] * aux1^dag */
+            equal(&(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux2);                
+            /* lattice[nnm(r,i)][i] -> lattice[nnm(r,i)][i] * rand^dag */
             } 
          }
+      #endif
       }
 
    /* final unitarization */
@@ -204,19 +216,25 @@ void cooling2(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param
          }
 
       /* random gauge transformation */
+      #ifdef G2_GROUP
       for(r=0; r<(param->d_volume); r++)
          {
          rand_matrix(&aux1);
 
          for(i=0; i<4; i++)
             {
-            times(&aux2, &aux1, &(GC->lattice[r][i]));   /* aux2=aux1*lattice[r][i] */
-            equal(&(GC->lattice[r][i]), &aux2);          /* lattice[r][i]-> rand * lattice[r][i] */ 
+            times(&aux2, &aux1, &(GC->lattice[r][i]));   
+            /* aux2=aux1*lattice[r][i] */
+            equal(&(GC->lattice[r][i]), &aux2);          
+            /* lattice[r][i]-> rand * lattice[r][i] */ 
 
-            times_dag2(&aux2, &(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux1);   /* aux2=lattice[r][i] * aux1^dag */
-            equal(&(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux2);               /* lattice[nnm(r,i)][i] -> lattice[nnm(r,i)][i] * rand^dag */
+            times_dag2(&aux2, &(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux1);   
+            /* aux2=lattice[r][i] * aux1^dag */
+            equal(&(GC->lattice[nnm(&(GC->geo),r,i)][i]), &aux2);               
+            /* lattice[nnm(r,i)][i] -> lattice[nnm(r,i)][i] * rand^dag */
             } 
          }
+      #endif
       }
 
    /* final unitarization */
