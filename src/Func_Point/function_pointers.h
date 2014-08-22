@@ -10,6 +10,9 @@
 #include"../Macro/macro.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
+#include"../SuN/sun.h"
+#include"../SuN/sun_upd.h"
+
 
 
 void (*one)(GAUGE_GROUP *A);         /* A=1 */

@@ -1,0 +1,22 @@
+latox 4
+latoy 4 
+latoz 4
+latot 4
+
+beta 1.385
+campione 10
+thermal 0
+over 5 
+measevery 1
+
+nummeas 3  
+cooling 1   (x nummeas, if <=0 no cooling)
+
+inizio 0      (0=ordered  1=random  2=from saved configuration)
+saveconf 0    (0 does not save last configuration)
+
+conf_file  conf.dat
+data_file  dati.dat
+err_file   err.dat
+
+randseed 0    (0=time)

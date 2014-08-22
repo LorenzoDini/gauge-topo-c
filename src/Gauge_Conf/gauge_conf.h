@@ -8,6 +8,7 @@
 #include"../Geometry/geometry.h"
 #include"../Macro/macro.h"
 #include"../Su2/su2.h"
+#include"../SuN/sun.h"
 
 typedef struct Gauge_Conf {
   Geometry geo;

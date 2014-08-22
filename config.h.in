@@ -1,7 +1,13 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Uses the gauge group G2 */
+#undef G2_GROUP
+
 /* Support AVX (Advanced Vector Extensions) instructions */
 #undef HAVE_AVX
+
+/* Define to 1 if you have the <complex.h> header file. */
+#undef HAVE_COMPLEX_H
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
@@ -63,6 +69,9 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Number of colors */
+#undef NCOLOR
+
 /* Activate the one file compilation */
 #undef ONE_FILE_MODE
 
@@ -89,6 +98,12 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* Uses the gauge group SU(2) */
+#undef Su2_GROUP
+
+/* Uses the gauge group SU(N) */
+#undef SuN_GROUP
 
 /* Version number of package */
 #undef VERSION

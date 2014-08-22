@@ -271,7 +271,8 @@ void print_parameters(Const const * const param, time_t time_start, time_t time_
     fprintf(fp, "| Simulation details |\n");
     fprintf(fp, "+--------------------+\n\n");
 
-    fprintf(fp, "Gauge group: %s\n", QUOTEME(GAUGE_GROUP) ); 
+    fprintf(fp, "Gauge group: %s\n", QUOTEME(GAUGE_GROUP) );
+    fprintf(fp, "Number of colors: %s\n", QUOTEME(NCOLOR) );
     #ifdef ONE_FILE_MODE
       fprintf(fp, "compiled in the single file mode\n");
     #endif  

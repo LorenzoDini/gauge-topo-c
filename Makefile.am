@@ -1,10 +1,12 @@
-bin_PROGRAMS = debug_rng debug_su2 debug_g2 gauge_topo
+bin_PROGRAMS = debug_rng debug_su2 debug_sun debug_g2 gauge_topo
 
 if ONE_FILE_COMPILATION
   gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h
   EXTRA_DIST = \
                ./src/input.in \
-               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_MAXPOLY.cc  ./src/Analisi/merge.py \
+               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_G2.cc  
+               ./src/Analisi/ANALISIMH_MAXPOLY.cc ./src/Analisi/ANALISIMH_MAXPOLY_G2.cc \
+               ./src/Analisi/merge.py \
                ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
                ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
                ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
@@ -25,7 +27,11 @@ if ONE_FILE_COMPILATION
                ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
                $(dSFMT) \
                ./src/Su2/su2.c ./src/Su2/su2.h \
-               ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h 
+               ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+               ./src/SuN/sun.c ./src/SuN/sun.h \
+               ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+               ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
+
   DISTCHECK_CONFIGURE_FLAGS = --enable-one-file-compilation
 else
   gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h \
@@ -43,10 +49,16 @@ else
                   ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
                   $(dSFMT) \
                   ./src/Su2/su2.c ./src/Su2/su2.h \
-                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h 
+                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                  ./src/SuN/sun.c ./src/SuN/sun.h \
+                  ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                  ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
+
   EXTRA_DIST = \
                ./src/input.in \
-               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_MAXPOLY.cc  ./src/Analisi/merge.py \
+               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_G2.cc \
+               ./src/Analisi/ANALISIMH_MAXPOLY.cc ./src/Analisi/ANALISIMH_MAXPOLY_G2.cc \
+               ./src/Analisi/merge.py \
                ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
                ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
                ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
@@ -65,6 +77,17 @@ debug_su2_SOURCES=./src/Su2/debug_su2.c \
                   ./src/Macro/macro.h \
                   ./src/Su2/su2.c ./src/Su2/su2.h \
                   ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                  $(dSFMT)
+
+debug_sun_SOURCES=./src/SuN/debug_sun.c \
+                  ./src/Const/const.c ./src/Const/const.h \
+                  ./src/Macro/macro.h \
+                  ./src/Su2/su2.c ./src/Su2/su2.h \
+                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                  ./src/SuN/sun.c ./src/SuN/sun.h \
+                  ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                  ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h \
                   ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
                   $(dSFMT)
 

@@ -32,8 +32,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = debug_rng$(EXEEXT) debug_su2$(EXEEXT) debug_g2$(EXEEXT) \
-	gauge_topo$(EXEEXT)
+bin_PROGRAMS = debug_rng$(EXEEXT) debug_su2$(EXEEXT) \
+	debug_sun$(EXEEXT) debug_g2$(EXEEXT) gauge_topo$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -71,6 +71,13 @@ am_debug_su2_OBJECTS = debug_su2.$(OBJEXT) const.$(OBJEXT) \
 debug_su2_OBJECTS = $(am_debug_su2_OBJECTS)
 debug_su2_LDADD = $(LDADD)
 debug_su2_DEPENDENCIES =
+am_debug_sun_OBJECTS = debug_sun.$(OBJEXT) const.$(OBJEXT) \
+	su2.$(OBJEXT) su2_upd.$(OBJEXT) sun.$(OBJEXT) \
+	sun_aux.$(OBJEXT) sun_upd.$(OBJEXT) random.$(OBJEXT) \
+	$(am__objects_1)
+debug_sun_OBJECTS = $(am_debug_sun_OBJECTS)
+debug_sun_LDADD = $(LDADD)
+debug_sun_DEPENDENCIES =
 am__gauge_topo_SOURCES_DIST = ./src/gauge_topo.c \
 	./src/gauge_topo_include.h ./src/Const/const.c \
 	./src/Const/const.h ./src/Func_Point/function_pointers.c \
@@ -96,7 +103,9 @@ am__gauge_topo_SOURCES_DIST = ./src/gauge_topo.c \
 	./src/Rng/dSFMT/dSFMT-params521.h \
 	./src/Rng/dSFMT/dSFMT-params86243.h \
 	./src/Rng/dSFMT/dSFMT-params.h ./src/Su2/su2.c ./src/Su2/su2.h \
-	./src/Su2/su2_upd.c ./src/Su2/su2_upd.h
+	./src/Su2/su2_upd.c ./src/Su2/su2_upd.h ./src/SuN/sun.c \
+	./src/SuN/sun.h ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+	./src/SuN/sun_upd.c ./src/SuN/sun_upd.h
 @ONE_FILE_COMPILATION_FALSE@am_gauge_topo_OBJECTS =  \
 @ONE_FILE_COMPILATION_FALSE@	gauge_topo.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	const.$(OBJEXT) \
@@ -108,7 +117,9 @@ am__gauge_topo_SOURCES_DIST = ./src/gauge_topo.c \
 @ONE_FILE_COMPILATION_FALSE@	gauge_conf_upd.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	geometry.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	random.$(OBJEXT) $(am__objects_1) \
-@ONE_FILE_COMPILATION_FALSE@	su2.$(OBJEXT) su2_upd.$(OBJEXT)
+@ONE_FILE_COMPILATION_FALSE@	su2.$(OBJEXT) su2_upd.$(OBJEXT) \
+@ONE_FILE_COMPILATION_FALSE@	sun.$(OBJEXT) sun_aux.$(OBJEXT) \
+@ONE_FILE_COMPILATION_FALSE@	sun_upd.$(OBJEXT)
 @ONE_FILE_COMPILATION_TRUE@am_gauge_topo_OBJECTS =  \
 @ONE_FILE_COMPILATION_TRUE@	gauge_topo.$(OBJEXT)
 gauge_topo_OBJECTS = $(am_gauge_topo_OBJECTS)
@@ -123,9 +134,11 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(gauge_topo_SOURCES)
+	$(debug_su2_SOURCES) $(debug_sun_SOURCES) \
+	$(gauge_topo_SOURCES)
 DIST_SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(am__gauge_topo_SOURCES_DIST)
+	$(debug_su2_SOURCES) $(debug_sun_SOURCES) \
+	$(am__gauge_topo_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -162,6 +175,7 @@ ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
+GAUGEGROUP = @GAUGEGROUP@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -174,6 +188,7 @@ LIBS = @LIBS@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
+N_c = @N_c@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -245,12 +260,17 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
 @ONE_FILE_COMPILATION_FALSE@                  $(dSFMT) \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Su2/su2.c ./src/Su2/su2.h \
-@ONE_FILE_COMPILATION_FALSE@                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h 
+@ONE_FILE_COMPILATION_FALSE@                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+@ONE_FILE_COMPILATION_FALSE@                  ./src/SuN/sun.c ./src/SuN/sun.h \
+@ONE_FILE_COMPILATION_FALSE@                  ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+@ONE_FILE_COMPILATION_FALSE@                  ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
 
 @ONE_FILE_COMPILATION_TRUE@gauge_topo_SOURCES = ./src/gauge_topo.c ./src/gauge_topo_include.h
 @ONE_FILE_COMPILATION_FALSE@EXTRA_DIST = \
 @ONE_FILE_COMPILATION_FALSE@               ./src/input.in \
-@ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_MAXPOLY.cc  ./src/Analisi/merge.py \
+@ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_G2.cc \
+@ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/ANALISIMH_MAXPOLY.cc ./src/Analisi/ANALISIMH_MAXPOLY_G2.cc \
+@ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/merge.py \
 @ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
 @ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
 @ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
@@ -260,28 +280,7 @@ top_srcdir = @top_srcdir@
 
 @ONE_FILE_COMPILATION_TRUE@EXTRA_DIST = \
 @ONE_FILE_COMPILATION_TRUE@               ./src/input.in \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_MAXPOLY.cc  ./src/Analisi/merge.py \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ordina.py \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/random.cc \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/unisci.py \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Const/const.c ./src/Const/const.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2.c ./src/G2/g2.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_check.c ./src/G2/g2_check.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_un.c ./src/G2/g2_un.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/topology_readme.txt \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Geometry/geometry.c ./src/Geometry/geometry.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Macro/macro.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
-@ONE_FILE_COMPILATION_TRUE@               $(dSFMT) \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Su2/su2.c ./src/Su2/su2.h \
-@ONE_FILE_COMPILATION_TRUE@               ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h 
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_G2.cc  
 
 @ONE_FILE_COMPILATION_TRUE@DISTCHECK_CONFIGURE_FLAGS = --enable-one-file-compilation
 debug_rng_SOURCES = ./src/Rng/debug_rng.c ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
@@ -292,6 +291,17 @@ debug_su2_SOURCES = ./src/Su2/debug_su2.c \
                   ./src/Macro/macro.h \
                   ./src/Su2/su2.c ./src/Su2/su2.h \
                   ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                  $(dSFMT)
+
+debug_sun_SOURCES = ./src/SuN/debug_sun.c \
+                  ./src/Const/const.c ./src/Const/const.h \
+                  ./src/Macro/macro.h \
+                  ./src/Su2/su2.c ./src/Su2/su2.h \
+                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                  ./src/SuN/sun.c ./src/SuN/sun.h \
+                  ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                  ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h \
                   ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
                   $(dSFMT)
 
@@ -418,6 +428,9 @@ debug_rng$(EXEEXT): $(debug_rng_OBJECTS) $(debug_rng_DEPENDENCIES) $(EXTRA_debug
 debug_su2$(EXEEXT): $(debug_su2_OBJECTS) $(debug_su2_DEPENDENCIES) $(EXTRA_debug_su2_DEPENDENCIES) 
 	@rm -f debug_su2$(EXEEXT)
 	$(LINK) $(debug_su2_OBJECTS) $(debug_su2_LDADD) $(LIBS)
+debug_sun$(EXEEXT): $(debug_sun_OBJECTS) $(debug_sun_DEPENDENCIES) $(EXTRA_debug_sun_DEPENDENCIES) 
+	@rm -f debug_sun$(EXEEXT)
+	$(LINK) $(debug_sun_OBJECTS) $(debug_sun_LDADD) $(LIBS)
 gauge_topo$(EXEEXT): $(gauge_topo_OBJECTS) $(gauge_topo_DEPENDENCIES) $(EXTRA_gauge_topo_DEPENDENCIES) 
 	@rm -f gauge_topo$(EXEEXT)
 	$(LINK) $(gauge_topo_OBJECTS) $(gauge_topo_LDADD) $(LIBS)
@@ -433,6 +446,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_g2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_rng.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_su2.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_sun.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/function_pointers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2_check.Po@am__quote@
@@ -446,6 +460,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/random.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/su2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/su2_upd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sun.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sun_aux.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sun_upd.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -628,6 +645,62 @@ debug_su2.obj: ./src/Su2/debug_su2.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/Su2/debug_su2.c' object='debug_su2.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_su2.obj `if test -f './src/Su2/debug_su2.c'; then $(CYGPATH_W) './src/Su2/debug_su2.c'; else $(CYGPATH_W) '$(srcdir)/./src/Su2/debug_su2.c'; fi`
+
+debug_sun.o: ./src/SuN/debug_sun.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT debug_sun.o -MD -MP -MF $(DEPDIR)/debug_sun.Tpo -c -o debug_sun.o `test -f './src/SuN/debug_sun.c' || echo '$(srcdir)/'`./src/SuN/debug_sun.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/debug_sun.Tpo $(DEPDIR)/debug_sun.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/debug_sun.c' object='debug_sun.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_sun.o `test -f './src/SuN/debug_sun.c' || echo '$(srcdir)/'`./src/SuN/debug_sun.c
+
+debug_sun.obj: ./src/SuN/debug_sun.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT debug_sun.obj -MD -MP -MF $(DEPDIR)/debug_sun.Tpo -c -o debug_sun.obj `if test -f './src/SuN/debug_sun.c'; then $(CYGPATH_W) './src/SuN/debug_sun.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/debug_sun.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/debug_sun.Tpo $(DEPDIR)/debug_sun.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/debug_sun.c' object='debug_sun.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_sun.obj `if test -f './src/SuN/debug_sun.c'; then $(CYGPATH_W) './src/SuN/debug_sun.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/debug_sun.c'; fi`
+
+sun.o: ./src/SuN/sun.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sun.o -MD -MP -MF $(DEPDIR)/sun.Tpo -c -o sun.o `test -f './src/SuN/sun.c' || echo '$(srcdir)/'`./src/SuN/sun.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sun.Tpo $(DEPDIR)/sun.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/sun.c' object='sun.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sun.o `test -f './src/SuN/sun.c' || echo '$(srcdir)/'`./src/SuN/sun.c
+
+sun.obj: ./src/SuN/sun.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sun.obj -MD -MP -MF $(DEPDIR)/sun.Tpo -c -o sun.obj `if test -f './src/SuN/sun.c'; then $(CYGPATH_W) './src/SuN/sun.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/sun.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sun.Tpo $(DEPDIR)/sun.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/sun.c' object='sun.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sun.obj `if test -f './src/SuN/sun.c'; then $(CYGPATH_W) './src/SuN/sun.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/sun.c'; fi`
+
+sun_aux.o: ./src/SuN/sun_aux.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sun_aux.o -MD -MP -MF $(DEPDIR)/sun_aux.Tpo -c -o sun_aux.o `test -f './src/SuN/sun_aux.c' || echo '$(srcdir)/'`./src/SuN/sun_aux.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sun_aux.Tpo $(DEPDIR)/sun_aux.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/sun_aux.c' object='sun_aux.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sun_aux.o `test -f './src/SuN/sun_aux.c' || echo '$(srcdir)/'`./src/SuN/sun_aux.c
+
+sun_aux.obj: ./src/SuN/sun_aux.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sun_aux.obj -MD -MP -MF $(DEPDIR)/sun_aux.Tpo -c -o sun_aux.obj `if test -f './src/SuN/sun_aux.c'; then $(CYGPATH_W) './src/SuN/sun_aux.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/sun_aux.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sun_aux.Tpo $(DEPDIR)/sun_aux.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/sun_aux.c' object='sun_aux.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sun_aux.obj `if test -f './src/SuN/sun_aux.c'; then $(CYGPATH_W) './src/SuN/sun_aux.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/sun_aux.c'; fi`
+
+sun_upd.o: ./src/SuN/sun_upd.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sun_upd.o -MD -MP -MF $(DEPDIR)/sun_upd.Tpo -c -o sun_upd.o `test -f './src/SuN/sun_upd.c' || echo '$(srcdir)/'`./src/SuN/sun_upd.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sun_upd.Tpo $(DEPDIR)/sun_upd.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/sun_upd.c' object='sun_upd.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sun_upd.o `test -f './src/SuN/sun_upd.c' || echo '$(srcdir)/'`./src/SuN/sun_upd.c
+
+sun_upd.obj: ./src/SuN/sun_upd.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sun_upd.obj -MD -MP -MF $(DEPDIR)/sun_upd.Tpo -c -o sun_upd.obj `if test -f './src/SuN/sun_upd.c'; then $(CYGPATH_W) './src/SuN/sun_upd.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/sun_upd.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sun_upd.Tpo $(DEPDIR)/sun_upd.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SuN/sun_upd.c' object='sun_upd.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sun_upd.obj `if test -f './src/SuN/sun_upd.c'; then $(CYGPATH_W) './src/SuN/sun_upd.c'; else $(CYGPATH_W) '$(srcdir)/./src/SuN/sun_upd.c'; fi`
 
 gauge_topo.o: ./src/gauge_topo.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gauge_topo.o -MD -MP -MF $(DEPDIR)/gauge_topo.Tpo -c -o gauge_topo.o `test -f './src/gauge_topo.c' || echo '$(srcdir)/'`./src/gauge_topo.c
@@ -1054,6 +1127,32 @@ uninstall-am: uninstall-binPROGRAMS
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS
 
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISIMH_MAXPOLY.cc ./src/Analisi/ANALISIMH_MAXPOLY_G2.cc \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/merge.py \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/ordina.py \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/random.cc \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Analisi/unisci.py \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Const/const.c ./src/Const/const.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2.c ./src/G2/g2.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_check.c ./src/G2/g2_check.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_un.c ./src/G2/g2_un.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Gauge_Conf/topology_readme.txt \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Geometry/geometry.c ./src/Geometry/geometry.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Macro/macro.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+@ONE_FILE_COMPILATION_TRUE@               $(dSFMT) \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Su2/su2.c ./src/Su2/su2.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/SuN/sun.c ./src/SuN/sun.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+@ONE_FILE_COMPILATION_TRUE@               ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

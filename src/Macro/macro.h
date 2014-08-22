@@ -3,16 +3,20 @@
 
 #include"../../config.h" 
 
-#define G2_GROUP
+/* the choice of the group is done with configure
+#define SuN_GROUP
+*/
 
 #ifdef G2_GROUP
   #define GAUGE_GROUP G2
-  #define NCOLOR 7
 #endif
 
 #ifdef Su2_GROUP
   #define GAUGE_GROUP Su2
-  #define NCOLOR 2
+#endif
+
+#ifdef SuN_GROUP
+  #define GAUGE_GROUP SuN
 #endif
 
 

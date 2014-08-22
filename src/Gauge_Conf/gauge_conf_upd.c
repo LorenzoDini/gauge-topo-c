@@ -9,6 +9,9 @@
 #include"../Rng/random.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
+#include"../SuN/sun.h"
+#include"../SuN/sun_upd.h"
+
 
 /* compute the staple in position r, direction i and save it in M */
 void calcstaples(Gauge_Conf const *__restrict__ const GC, int r, int i, GAUGE_GROUP *__restrict__ M) 

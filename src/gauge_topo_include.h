@@ -17,6 +17,11 @@
   #include"./Rng/dSFMT/dSFMT.h"
   #include"./Su2/su2.h"
   #include"./Su2/su2_upd.h"
+  #include"./SuN/sun.h"
+  #include"./SuN/sun_aux.h"
+  #include"./SuN/sun_upd.h"
+
+
 
   #include"./Const/const.c"
   #include"./Func_Point/function_pointers.c"
@@ -32,6 +37,9 @@
   #include"./Rng/dSFMT/dSFMT.c"
   #include"./Su2/su2.c"
   #include"./Su2/su2_upd.c"
+  #include"./SuN/sun.h"
+  #include"./SuN/sun_aux.h"
+  #include"./SuN/sun_upd.h"
 
 #else
 

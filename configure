@@ -627,6 +627,8 @@ CPPFLAGS
 LDFLAGS
 CFLAGS
 CC
+N_c
+GAUGEGROUP
 SIMD_CHECK_COMPILATION_FALSE
 SIMD_CHECK_COMPILATION_TRUE
 ONE_FILE_COMPILATION_FALSE
@@ -702,6 +704,8 @@ enable_dependency_tracking
       ac_precious_vars='build_alias
 host_alias
 target_alias
+GAUGEGROUP
+N_c
 CC
 CFLAGS
 LDFLAGS
@@ -1330,6 +1334,8 @@ Optional Features:
   --enable-dependency-tracking   do not reject slow dependency extractors
 
 Some influential environment variables:
+  GAUGEGROUP  choices are Su2 SuN G2
+  N_c         the number of color for SuN
   CC          C compiler command
   CFLAGS      C compiler flags
   LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
@@ -2680,6 +2686,11 @@ else
   SIMD_CHECK_COMPILATION_TRUE='#'
   SIMD_CHECK_COMPILATION_FALSE=
 fi
+
+
+
+# Choice of the gauge group
+
 
 
 
@@ -4637,7 +4648,7 @@ fi
 done
 
 
-for ac_header in math.h stdio.h stdlib.h time.h
+for ac_header in complex.h math.h stdio.h stdlib.h time.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
 ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
@@ -4665,6 +4676,52 @@ fi
 done
 
 
+#define the group-related macro
+if test x${GAUGEGROUP} = xSu2; then
+
+$as_echo "#define Su2_GROUP /**/" >>confdefs.h
+
+
+$as_echo "#define NCOLOR 2" >>confdefs.h
+
+else
+  if test x${GAUGEGROUP} = xG2; then
+
+$as_echo "#define G2_GROUP /**/" >>confdefs.h
+
+
+$as_echo "#define NCOLOR 7" >>confdefs.h
+
+  else
+    if test x${GAUGEGROUP} = xSuN; then
+
+$as_echo "#define SuN_GROUP /**/" >>confdefs.h
+
+      if test x${N_c} = x; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: No chosen N_c: using the default N_c=2" >&5
+$as_echo "$as_me: WARNING: No chosen N_c: using the default N_c=2" >&2;}
+
+$as_echo "#define NCOLOR 2" >>confdefs.h
+
+      else
+
+cat >>confdefs.h <<_ACEOF
+#define NCOLOR ${N_c}
+_ACEOF
+
+      fi
+    else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: No chosen GAUGEGROUP: using the default Su2" >&5
+$as_echo "$as_me: WARNING: No chosen GAUGEGROUP: using the default Su2" >&2;}
+
+$as_echo "#define Su2_GROUP /**/" >>confdefs.h
+
+
+$as_echo "#define NCOLOR 2" >>confdefs.h
+
+    fi
+  fi
+fi
 
 ac_config_files="$ac_config_files Makefile"
 
