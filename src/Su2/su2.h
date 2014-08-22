@@ -7,7 +7,7 @@
 
 typedef struct Su2 {
    #ifdef __GNUC__
-     double comp[4] __attribute__ ((aligned (16)));
+     double comp[4] __attribute__ ((aligned (DOUBLE_ALIGN)));
    #else
      double comp[4];
    #endif

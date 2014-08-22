@@ -6,10 +6,12 @@
 
 ** ACTION
 *****************************************************
-The action used is the standard Wilson action, with the
-normalization:
+The action used for G2 is the standard Wilson action, 
+with the normalization:
 
 -beta*Tr(plaquette)   (NOT Tr/7)
+
+(for Su2 is Tr/2)
 
 The update is performed by means of heatbath and 
 overrelaxation updates and random gauge 

@@ -10,7 +10,7 @@
 
 typedef struct G2 {
    #ifdef __GNUC__
-     double comp[7][7] __attribute__ ((aligned (16)));
+     double comp[7][7] __attribute__ ((aligned (DOUBLE_ALIGN)));
    #else
      double comp[7][7];
    #endif
