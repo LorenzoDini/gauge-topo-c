@@ -32,8 +32,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = debug_rng$(EXEEXT) debug_su2$(EXEEXT) \
-	debug_sun$(EXEEXT) debug_g2$(EXEEXT) gauge_topo$(EXEEXT)
+bin_PROGRAMS = debug_rng$(EXEEXT) debug_son$(EXEEXT) \
+	debug_su2$(EXEEXT) debug_sun$(EXEEXT) debug_g2$(EXEEXT) \
+	gauge_topo$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -65,6 +66,11 @@ am_debug_rng_OBJECTS = debug_rng.$(OBJEXT) random.$(OBJEXT) \
 debug_rng_OBJECTS = $(am_debug_rng_OBJECTS)
 debug_rng_LDADD = $(LDADD)
 debug_rng_DEPENDENCIES =
+am_debug_son_OBJECTS = debug_son.$(OBJEXT) const.$(OBJEXT) \
+	son.$(OBJEXT) random.$(OBJEXT) $(am__objects_1)
+debug_son_OBJECTS = $(am_debug_son_OBJECTS)
+debug_son_LDADD = $(LDADD)
+debug_son_DEPENDENCIES =
 am_debug_su2_OBJECTS = debug_su2.$(OBJEXT) const.$(OBJEXT) \
 	su2.$(OBJEXT) su2_upd.$(OBJEXT) random.$(OBJEXT) \
 	$(am__objects_1)
@@ -134,10 +140,10 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(debug_sun_SOURCES) \
+	$(debug_son_SOURCES) $(debug_su2_SOURCES) $(debug_sun_SOURCES) \
 	$(gauge_topo_SOURCES)
 DIST_SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(debug_sun_SOURCES) \
+	$(debug_son_SOURCES) $(debug_su2_SOURCES) $(debug_sun_SOURCES) \
 	$(am__gauge_topo_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
@@ -286,6 +292,13 @@ top_srcdir = @top_srcdir@
 debug_rng_SOURCES = ./src/Rng/debug_rng.c ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
                   $(dSFMT)
 
+debug_son_SOURCES = ./src/SoN/debug_son.c \
+                  ./src/Const/const.c ./src/Const/const.h \
+                  ./src/Macro/macro.h \
+                  ./src/SoN/son.c ./src/SoN/son.h \
+                  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                  $(dSFMT)
+
 debug_su2_SOURCES = ./src/Su2/debug_su2.c \
                   ./src/Const/const.c ./src/Const/const.h \
                   ./src/Macro/macro.h \
@@ -425,6 +438,9 @@ debug_g2$(EXEEXT): $(debug_g2_OBJECTS) $(debug_g2_DEPENDENCIES) $(EXTRA_debug_g2
 debug_rng$(EXEEXT): $(debug_rng_OBJECTS) $(debug_rng_DEPENDENCIES) $(EXTRA_debug_rng_DEPENDENCIES) 
 	@rm -f debug_rng$(EXEEXT)
 	$(LINK) $(debug_rng_OBJECTS) $(debug_rng_LDADD) $(LIBS)
+debug_son$(EXEEXT): $(debug_son_OBJECTS) $(debug_son_DEPENDENCIES) $(EXTRA_debug_son_DEPENDENCIES) 
+	@rm -f debug_son$(EXEEXT)
+	$(LINK) $(debug_son_OBJECTS) $(debug_son_LDADD) $(LIBS)
 debug_su2$(EXEEXT): $(debug_su2_OBJECTS) $(debug_su2_DEPENDENCIES) $(EXTRA_debug_su2_DEPENDENCIES) 
 	@rm -f debug_su2$(EXEEXT)
 	$(LINK) $(debug_su2_OBJECTS) $(debug_su2_LDADD) $(LIBS)
@@ -445,6 +461,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dSFMT.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_g2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_rng.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_son.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_su2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug_sun.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/function_pointers.Po@am__quote@
@@ -458,6 +475,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gauge_topo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/geometry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/random.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/son.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/su2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/su2_upd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sun.Po@am__quote@
@@ -631,6 +649,34 @@ debug_rng.obj: ./src/Rng/debug_rng.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/Rng/debug_rng.c' object='debug_rng.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_rng.obj `if test -f './src/Rng/debug_rng.c'; then $(CYGPATH_W) './src/Rng/debug_rng.c'; else $(CYGPATH_W) '$(srcdir)/./src/Rng/debug_rng.c'; fi`
+
+debug_son.o: ./src/SoN/debug_son.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT debug_son.o -MD -MP -MF $(DEPDIR)/debug_son.Tpo -c -o debug_son.o `test -f './src/SoN/debug_son.c' || echo '$(srcdir)/'`./src/SoN/debug_son.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/debug_son.Tpo $(DEPDIR)/debug_son.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SoN/debug_son.c' object='debug_son.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_son.o `test -f './src/SoN/debug_son.c' || echo '$(srcdir)/'`./src/SoN/debug_son.c
+
+debug_son.obj: ./src/SoN/debug_son.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT debug_son.obj -MD -MP -MF $(DEPDIR)/debug_son.Tpo -c -o debug_son.obj `if test -f './src/SoN/debug_son.c'; then $(CYGPATH_W) './src/SoN/debug_son.c'; else $(CYGPATH_W) '$(srcdir)/./src/SoN/debug_son.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/debug_son.Tpo $(DEPDIR)/debug_son.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SoN/debug_son.c' object='debug_son.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_son.obj `if test -f './src/SoN/debug_son.c'; then $(CYGPATH_W) './src/SoN/debug_son.c'; else $(CYGPATH_W) '$(srcdir)/./src/SoN/debug_son.c'; fi`
+
+son.o: ./src/SoN/son.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT son.o -MD -MP -MF $(DEPDIR)/son.Tpo -c -o son.o `test -f './src/SoN/son.c' || echo '$(srcdir)/'`./src/SoN/son.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/son.Tpo $(DEPDIR)/son.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SoN/son.c' object='son.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o son.o `test -f './src/SoN/son.c' || echo '$(srcdir)/'`./src/SoN/son.c
+
+son.obj: ./src/SoN/son.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT son.obj -MD -MP -MF $(DEPDIR)/son.Tpo -c -o son.obj `if test -f './src/SoN/son.c'; then $(CYGPATH_W) './src/SoN/son.c'; else $(CYGPATH_W) '$(srcdir)/./src/SoN/son.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/son.Tpo $(DEPDIR)/son.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/SoN/son.c' object='son.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o son.obj `if test -f './src/SoN/son.c'; then $(CYGPATH_W) './src/SoN/son.c'; else $(CYGPATH_W) '$(srcdir)/./src/SoN/son.c'; fi`
 
 debug_su2.o: ./src/Su2/debug_su2.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT debug_su2.o -MD -MP -MF $(DEPDIR)/debug_su2.Tpo -c -o debug_su2.o `test -f './src/Su2/debug_su2.c' || echo '$(srcdir)/'`./src/Su2/debug_su2.c

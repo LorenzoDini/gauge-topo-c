@@ -1,4 +1,4 @@
-bin_PROGRAMS = debug_rng debug_su2 debug_sun debug_g2 gauge_topo
+bin_PROGRAMS = debug_rng debug_son debug_su2 debug_sun debug_g2 gauge_topo
 
 if ONE_FILE_COMPILATION
   gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h
@@ -69,6 +69,14 @@ endif
 
 
 debug_rng_SOURCES=./src/Rng/debug_rng.c ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                  $(dSFMT)
+
+
+debug_son_SOURCES=./src/SoN/debug_son.c \
+                  ./src/Const/const.c ./src/Const/const.h \
+                  ./src/Macro/macro.h \
+                  ./src/SoN/son.c ./src/SoN/son.h \
+                  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
                   $(dSFMT)
 
 
