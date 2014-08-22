@@ -25,12 +25,10 @@
 #include<new>
 #include<string>
 
-#include"./random.cc"
-
 #define REAL long double
 
 
-/* global variables  to be read from inputfile */
+////// global variables 
 std::string *dati_in;
 std::string dati_out;
 
@@ -46,9 +44,8 @@ REAL betastep;
 REAL volume;
 
 int numfiles;
-long int campione;
 
-/* const global variables  */
+//////
 
 const int numobs=2;
 const int numobs_tot_jack=4;
@@ -57,12 +54,15 @@ const REAL pi=3.141592653589793238462643383279502884197169399375105820974944;
 
 const REAL energy_off=0.0;
 
-/*-----*/
+//////
+
+
 
 REAL logsum(REAL a, REAL b);
 REAL logdiff(REAL a, REAL b);
 
-/*--------*/
+
+
 
 
 int readinput(char *in_file)
@@ -126,7 +126,6 @@ int readinput(char *in_file)
       numblocks = new long int [numfiles];
       betas = new REAL [numfiles];
 
-      campione=0;
       numblockstot=0;
       for(int i=0; i<numfiles; i++)
          {
@@ -144,7 +143,6 @@ int readinput(char *in_file)
    
          numblocks[i]=sample[i]/block[i]; 
          numblockstot+=numblocks[i];
-         campione+=block[i]*numblocks[i];
 
          input.ignore(char_to_ignore, '\n');
          }
@@ -164,23 +162,19 @@ int readinput(char *in_file)
 
 class Data {
 private:
-  REAL*** dati0; // complete data
-  REAL** dati;  // bootstrapped data
-  long int * sample_loc;  // bootstrapped equivalent of "sample"
+  REAL*** dati;
   REAL*  medie;
-  REAL* zetas0;
+  REAL*  errori;
+  REAL** jacksample;
   REAL* zetas;
-  long int campione_loc;
-
 public:
   Data();
   ~Data();
   void initfromfile(std::string *nome_file);
-  void bootstrapdata(void);
-  void computezetas0(void);
   void computezetas(void);
-  void computeobs(REAL beta);
-  REAL betapc(REAL beta_low, REAL beta_high, REAL precision);
+  void jacksamplegen(REAL beta);
+  void computeobs(void);
+  void printobs(std::string nome_file, REAL beta);
 }; 
 
 
@@ -189,28 +183,26 @@ Data::Data(void)
   {
   long int i, j;
   
-  dati = new REAL * [campione];
-  for(i=0; i<campione; i++)
-     {
-     dati[i]=new REAL [numobs+1];  // in the +1 the beta value is stored
-     }
-
-  dati0 = new REAL ** [numfiles];
+  dati = new REAL ** [numfiles];
   for(i=0; i<numfiles; i++)
      {
-     dati0[i] = new REAL * [sample[i]];
+     dati[i] = new REAL * [sample[i]];
      for(j=0; j<sample[i]; j++)
         {
-        dati0[i][j]=new REAL [numobs];
+        dati[i][j]=new REAL [numobs];
         }
      }
 
-  sample_loc = new long int [numfiles];
- 
   medie  = new REAL [numobs_tot_jack];
+  errori = new REAL [numobs_tot_jack];
+
+  jacksample = new REAL * [numblockstot];
+  for(i=0; i<numblockstot; i++)
+     {
+     jacksample[i]=new REAL [numobs_tot_jack];
+     }
 
   zetas = new REAL [numfiles];
-  zetas0 = new REAL [numfiles];
   }
 
 
@@ -218,28 +210,26 @@ Data::~Data(void)
   {
   long int i, j;
   
-  for(i=0; i<campione; i++)
-     {
-     delete [] dati[i];
-     }
-  delete [] dati;
-
   for(i=0; i<numfiles; i++)
      {
      for(j=0; j<sample[i]; j++)
         {
-        delete [] dati0[i][j];
+        delete [] dati[i][j];
         }
-     delete [] dati0[i];
+     delete [] dati[i];
      }
-  delete [] dati0;
-
-  delete [] sample_loc;
+  delete [] dati;
 
   delete [] medie;
+  delete [] errori;
+
+  for(i=0; i<numblockstot; i++)
+     {
+     delete [] jacksample[i];
+     }
+  delete [] jacksample;
 
   delete [] zetas;
-  delete [] zetas0;
   }
 
 
@@ -265,11 +255,11 @@ void Data::initfromfile(std::string *nome_file)
              filein >> temp1;
              if(j==0)
                {
-               dati0[f][i][j]=temp1 + energy_off; // so that it is >0
+               dati[f][i][j]=temp1 + energy_off; // so that it is >0
                }
              else
                {
-               dati0[f][i][j]=temp1;
+               dati[f][i][j]=temp1;
                }
              }
           }
@@ -285,78 +275,29 @@ void Data::initfromfile(std::string *nome_file)
   }
 
 
-void Data::bootstrapdata(void)
-  {
-  long int f, i, r, j;
-  int stop, test;
-  
-  campione_loc=0;
-  for(f=0; f<numfiles; f++)
-     {
-     sample_loc[f]=0;
-     }
 
-  stop=0;
-  while(stop==0)
-       {
-       f=(long int)(numfiles*casuale());
-
-       if(campione_loc+block[f]<campione)
-         {
-         r=(long int) (numblocks[f]*casuale());
-         for(i=0; i<block[f]; i++)    
-            {                                    
-            for(j=0; j<numobs; j++)
-               {
-               dati[campione_loc+i][j]=dati0[f][r*block[f]+i][j];
-               }
-            dati[campione_loc+i][numobs]=betas[f];
-            }
-        
-         campione_loc+=block[f];
-         sample_loc[f]+=block[f];
-         }
-       else
-         {
-         stop=1;
-         }
-       }
-
-  test=1;
-  for(f=0; f<numfiles; f++)
-     {
-     if(sample_loc[f]==0)
-       {
-       test=0;
-       }
-     }
-
-  if(test==0)
-    {
-    bootstrapdata();
-    }
-  }
-
-
-
-// compute the partition functions of the global data
-void Data::computezetas0(void) 
+// compute the partition functions
+void Data::computezetas(void) 
   {
   const REAL minvalue=1.0e-7;
   const REAL minvaluespeedup=1.0e-4;
 
   REAL stopcond, stopcondold, energy, temp1, temp2;
-  int i, k, f, j, l, first, fileexists;
+  int i, k, f, j, l, first;
   REAL *zetasold;
   int speedup;
-  long int count=1;
-
+  int count=1;
+  
+  int fileexists;
   std::ifstream infile;
   std::ofstream outfile;
 
   std::cout << "\nSelfconsistent computation started\n";
+  std::cout << "remainder (stopvalue="<<minvalue<<"):\n";
 
   zetasold = new REAL [numfiles];
+
+  srand((unsigned)time(0)); 
 
   infile.open("zetas.dat", std::ios::in);
   if(infile.is_open())
@@ -374,13 +315,11 @@ void Data::computezetas0(void)
     {
     for(i=0; i<numfiles; i++)
        {
-       zetasold[i]=1.0+casuale();
+       zetasold[i]=1.0+rand()/RAND_MAX;
        }
     speedup=500;
     fileexists=1;
     }
-
-  std::cout << "remainder (stopvalue="<<minvalue<<"):" << std::endl;
 
   stopcond=1.0;
   while(stopcond>minvalue)
@@ -393,19 +332,19 @@ void Data::computezetas0(void)
              {                                    // 
              for(j=0; j<sample[f]; j+=speedup)    //  this means for all the points 
                 {                                 //
-                           
+                                
                 if(j+speedup<sample[f])
                   {     
                   energy=0.0;
                   for(l=0; l<speedup; l++)
                      {
-                     energy+=volume*6.0*(1.0-dati0[f][j+l][0]);
+                     energy+=7.0*volume*6.0*(1.0-dati[f][j+l][0]);
                      }
                   energy/=speedup;
                   }
                 else
                   {
-                  energy=volume*6.0*(1.0-dati0[f][j][0]);
+                  energy=7.0*volume*6.0*(1.0-dati[f][j][0]);
                   }
                 temp1=log(sample[0]/speedup)-zetasold[0]+(betas[k]-betas[0])*energy;
                 for(l=1; l<numfiles; l++)
@@ -416,11 +355,11 @@ void Data::computezetas0(void)
 
                 if(first==0)
                   {
-                  zetas0[k]=-temp1;
+                  zetas[k]=-temp1;
                   } 
                 else
                   {
-                  zetas0[k]=logsum(zetas0[k], -temp1);
+                  zetas[k]=logsum(zetas[k], -temp1);
                   }
                 
                 first=1;
@@ -432,7 +371,7 @@ void Data::computezetas0(void)
        stopcond=0.0;
        for(i=0; i<numfiles; i++)
           {
-          stopcond+=(zetasold[i]-zetas0[i])*(zetasold[i]-zetas0[i]);
+          stopcond+=(zetasold[i]-zetas[i])*(zetasold[i]-zetas[i]);
           }
        stopcond=sqrt(stopcond/numfiles);
 
@@ -442,7 +381,6 @@ void Data::computezetas0(void)
          {
          REAL aux=speedup/2;
          speedup=(long int) aux;
-
          if(speedup<1) 
            {
            speedup=1;
@@ -458,7 +396,7 @@ void Data::computezetas0(void)
          {
          for(i=0; i<numfiles; i++)
             {
-            temp1=(zetas0[i]-zetasold[i]);
+            temp1=(zetas[i]-zetasold[i]);
             zetasold[i]+=2.0*temp1;
             }
          count=0;
@@ -468,7 +406,7 @@ void Data::computezetas0(void)
          {        
          for(i=0; i<numfiles; i++)
             {
-            zetasold[i]=zetas0[i];
+            zetasold[i]=zetas[i];
             }
          }
        count++;
@@ -490,257 +428,173 @@ void Data::computezetas0(void)
 
 
 
-// compute the partition functions of the bootstrapped data
-void Data::computezetas(void) 
-  {
-  const REAL minvalue=1.0e-6;
-  const REAL minvaluespeedup=1.0e-4;
 
-  REAL stopcond, stopcondold, energy, temp1, temp2;
-  int i, k, j, l, first;
-  REAL *zetasold;
-  int speedup;
-  long int count=1;
-
-  
-  std::cout << "\nSelfconsistent computation started\n";
-  std::cout << "remainder (stopvalue="<<minvalue<<"):" << std::endl;
-
- 
-  zetasold = new REAL [numfiles];
-  for(i=0; i<numfiles; i++)
-     {
-     zetasold[i]=zetas0[i];
-     }
-
-  speedup=1;
-  stopcond=1.0;
-  while(stopcond>minvalue)
-       {
-       for(k=0; k<numfiles; k++) // estimate zetas[k]
-          {
-          first=0;
-
-             for(j=0; j<campione_loc; j+=speedup)    //  this means for all the points 
-                {                                 
-
-                if(j+speedup<campione_loc)
-                  {     
-                  energy=0.0;
-                  for(l=0; l<speedup; l++)
-                     {
-                     energy+=volume*6.0*(1.0-dati[j+l][0]);
-                     }
-                  energy/=speedup;
-                  }
-                else
-                  {
-                  energy=volume*6.0*(1.0-dati[j][0]);
-                  }
-
-                temp1=log(sample_loc[0]/speedup)-zetasold[0]+(betas[k]-betas[0])*energy;
-                for(l=1; l<numfiles; l++)
-                   {
-                   temp2=log(sample_loc[l]/speedup)-zetasold[l]+(betas[k]-betas[l])*energy;
-                   temp1=logsum(temp1, temp2);
-                   }
-
-                if(first==0)
-                  {
-                  zetas[k]=-temp1;
-                  } 
-                else
-                  {
-                  zetas[k]=logsum(zetas[k], -temp1);
-                  }
-                
-                first=1;
-                }
-          }
-      
-       stopcondold=stopcond;
-       stopcond=0.0;
-       for(i=0; i<numfiles; i++)
-          {
-          stopcond+=(zetasold[i]-zetas[i])*(zetasold[i]-zetas[i]);
-          }
-       stopcond=sqrt(stopcond/numfiles);
-
-       std::cout << stopcond << "  (speedup=" << speedup <<")" << std::endl;
- 
-       if(stopcond<minvaluespeedup || fabs(stopcond-stopcondold)<minvaluespeedup) 
-         {
-         REAL aux=speedup/2;
-         speedup=(long int) aux;
-         if(speedup<1) 
-           {
-           speedup=1;
-           }
-         }
-
-       if(speedup>1 && stopcond<=minvalue)
-         {
-         stopcond=1.0;
-         }      
-
-       if(count%4==0)
-         {
-         for(i=0; i<numfiles; i++)
-            {
-            temp1=(zetas[i]-zetasold[i]);
-            zetasold[i]+=2.0*temp1;
-            }
-         count=0;
-         std::cout << "overrelaxed" << std::endl;
-         }
-       else
-         {        
-         for(i=0; i<numfiles; i++)
-            {
-            zetasold[i]=zetas[i];
-            }
-         }
-       count++;
-
-       }
-
-  delete [] zetasold;
-  }
-
-
-
-void Data::computeobs(REAL beta)
+// generate jacknife samples
+void Data::jacksamplegen(REAL beta)
   {
   int first;
-  long int f, j, k;
+  long int f, i, j, k, b, btot;
   REAL energy, Z, temp1, temp2;
-  REAL *h;
-  const int N=2;
-
+  REAL *h, *h0, Zh;
+  const int N=2; // sometimes to compute numobs_tot_jack you need more
+                 // than just numobs_tot_jack/numobs set for partial updates
+                 // so it is useful to introduce this "N"                
+ 
+  h0=new REAL [N*numobs];
   h=new REAL [N*numobs];
 
   Z=0.0; // just to avoid warning during compilation!
 
   // sum up all data
   first=0;
-  for(f=0; f<campione_loc; f++)              //
+  for(f=0; f<numfiles; f++)                  //
      {                                       //  for all data
+     for(i=0; i<numblocks[f]*block[f]; i++)  //  
+        {                                    //
 
-     energy=volume*6.0*(1.0-dati[f][0]);
-     temp1=log(sample_loc[0])-zetas[0]+(beta-betas[0])*energy;
-     for(j=1; j<numfiles; j++)
+        energy=7.0*volume*6.0*(1.0-dati[f][i][0]);
+        temp1=log(sample[0])-zetas[0]+(beta-betas[0])*energy;
+        for(j=1; j<numfiles; j++)
+           {
+           temp2=log(sample[j])-zetas[j]+(beta-betas[j])*energy;
+           temp1=logsum(temp1, temp2);
+           }     
+
+        if(first==0)
+          {
+          Z=-temp1;
+          for(k=0; k<numobs; k++)
+             {
+             h0[N*k]   =     log(dati[f][i][k])-temp1; // Q
+             h0[N*k+1] = 2.0*log(dati[f][i][k])-temp1; // Q^2
+             }
+          }
+        else
+          {
+          Z=logsum(Z, -temp1);
+          for(k=0; k<numobs; k++)
+             {
+             h0[N*k]  =logsum(h0[N*k],       log(dati[f][i][k])-temp1);
+             h0[N*k+1]=logsum(h0[N*k+1], 2.0*log(dati[f][i][k])-temp1);
+             }
+          } 
+        first=1;
+
+        }
+     }
+
+ 
+  // generate jacknife samples         
+  btot=0;                              //
+  for(f=0; f<numfiles; f++)            // for all blocks
+     {                                 //
+     for(b=0; b<numblocks[f]; b++)     //
         {
-        temp2=log(sample_loc[j])-zetas[j]+(beta-betas[j])*energy;
-        temp1=logsum(temp1, temp2);
-        }     
 
-     if(first==0)
-       {
-       Z=-temp1;
-       for(k=0; k<numobs; k++)
-          {
-          h[N*k]   =     log(dati[f][k])-temp1; // Q
-          h[N*k+1] = 2.0*log(dati[f][k])-temp1; // Q^2
-          }
-       }
-     else
-       {
-       Z=logsum(Z, -temp1);
-       for(k=0; k<numobs; k++)
-          {
-          h[N*k]  =logsum(h[N*k],       log(dati[f][k])-temp1);
-          h[N*k+1]=logsum(h[N*k+1], 2.0*log(dati[f][k])-temp1);
-          }
-       } 
-     first=1;
+        // initialize helpers
+        Zh=Z;
+        for(j=0; j<N*numobs; j++)
+           {
+           h[j]=h0[j];
+           }
 
+        // subtract the b-th block
+        for(i=b*block[f]; i<(b+1)*block[f]; i++)
+           {
+           energy=7.0*volume*6.0*(1.0-dati[f][i][0]);
+           temp1=log(sample[0])-zetas[0]+(beta-betas[0])*energy;
+           for(j=1; j<numfiles; j++)
+              {
+              temp2=log(sample[j])-zetas[j]+(beta-betas[j])*energy;
+              temp1=logsum(temp1, temp2);
+              }     
+ 
+           Zh=logdiff(Zh, -temp1);
+           for(k=0; k<numobs; k++)
+             {
+             h[N*k]  =logdiff(h[N*k],       log(dati[f][i][k])-temp1);
+             h[N*k+1]=logdiff(h[N*k+1], 2.0*log(dati[f][i][k])-temp1);
+             }
+           }
+
+        // normalize helper
+        for(j=0; j<N*numobs; j++)
+           {
+           temp1=h[j]-Zh;
+           h[j]=exp(temp1);
+           }
+
+        //====================
+        // compute observables
+        //====================
+        // first observable: mean plaquette
+        jacksample[btot][0] = h[N*0]-energy_off; // mean 
+        jacksample[btot][1] = volume*(h[N*0+1]-h[N*0]*h[N*0]); // susceptivity
+        // second observable: polyakov
+        jacksample[btot][2] = h[N*1]; // mean 
+        jacksample[btot][3] = volume*(h[N*1+1]-h[N*1]*h[N*1]); // susceptibility
+
+        btot++;       
+
+        }
      }
-
-  // normalize helper
-  for(j=0; j<N*numobs; j++)
-     {
-     temp1=h[j]-Z;
-     h[j]=exp(temp1);
-     }
-
-  //====================
-  // compute observables
-  //====================
-  // first observable: mean plaquette
-  medie[0] = h[N*0]-energy_off; // mean 
-  medie[1] = volume*(h[N*0+1]-h[N*0]*h[N*0]); // susceptivity
-  // second observable: polyakov
-  medie[2] = h[N*1]; // mean 
-  medie[3] = volume*(h[N*1+1]-h[N*1]*h[N*1]); // susceptibility
 
   delete [] h;
+  delete [] h0;
   }
 
 
-
-REAL Data::betapc(REAL beta_low, REAL beta_high, REAL precision)
+void Data::computeobs(void)
   {
-  int i;
-  REAL beta[4];
-  REAL suscpoly[4];
+  long int i;
+  int j;
+  double temp;
 
-  beta[0]=beta_low;
-  beta[3]=beta_high;
+  for(j=0; j<numobs_tot_jack; j++)
+     {
+     temp=0.0;
+     for(i=0; i<numblockstot; i++)
+        {
+        temp+=jacksample[i][j];
+        }
+     temp/=(double)numblockstot;
+     medie[j]=temp;
+     }
 
-  if(beta[3]<beta[0])
-    {
-    return -1.0;
-    }
-
-  std::cout.precision(13);    // <--- print precision
-
-  std::cout << "started computation for beta="<<beta[3]<<"...";
-  // compute observables
-  computeobs(beta[3]);
-  suscpoly[3]=medie[3]; // medie[3] is the polyakov loop susceptibility
-  std::cout << " terminated (value=" << medie[3] << ")" << std::endl;
-
-
-  std::cout << "started computation for beta="<<beta[0]<<"...";
-  // compute observables
-  computeobs(beta[0]);
-  suscpoly[0]=medie[3]; // medie[3] is the polyakov loop susceptibility
-  std::cout << " terminated (value=" << medie[3] << ")" << std::endl;
-
-  while(beta[3]-beta[0]> precision)
-       {
-       beta[1]=beta[0]+    (beta[3]-beta[0])/3.0;
-       beta[2]=beta[0]+2.0*(beta[3]-beta[0])/3.0;
-
-       for(i=1; i<3; i++)
-          {
-          std::cout << "started computation for beta="<<beta[i]<<"...";
-          // compute observables
-          computeobs(beta[i]);
-          suscpoly[i]=medie[3]; // medie[3] is the polyakov loop susceptibility
-          std::cout << " terminated (value=" << medie[3] << " " << "delta="<< beta[3]-beta[0] << ")" << std::endl;
-          }
-
-       if(suscpoly[0]<suscpoly[1] && suscpoly[2]<suscpoly[1]) // maximum near beta[1]
-         {
-         beta[3]=beta[2];
-         suscpoly[3]=suscpoly[2];
-         }
-       else 
-         {
-          // maximum near beta[2]
-         beta[0]=beta[1];
-         suscpoly[0]=suscpoly[1];
-         }
-       }
-  std::cout << "Max. position: beta=" << (beta[3]+beta[0])/2.0 << " +- " << (beta[3]-beta[0])/2.0 << std::endl;
-
-  return (beta[3]+beta[0])/2.0;
+  for(j=0; j<numobs_tot_jack; j++)
+     {
+     temp=0.0;
+     for(i=0; i<numblockstot; i++)
+        {
+        temp+=(jacksample[i][j]-medie[j])*(jacksample[i][j]-medie[j]);
+        }
+     temp/=(double)numblockstot;
+     temp*=(double)(numblockstot-1);
+     errori[j]=sqrt(temp);
+     }
   }
 
 
+void Data::printobs(std::string nome_file, REAL beta)
+  {
+  std::ofstream file1; 
+  int i;
 
-/* ----- auxilliary functions ------- */
+  file1.open (nome_file.c_str(), std::ios::app);
+
+  file1.precision(13);    // <--- print precision
+  file1<< beta;
+  for(i=0; i<numobs_tot_jack; i++)
+     {
+     file1 << " " << medie[i]  << " " << errori[i];
+     }
+  
+  file1<<"\n";
+
+  file1.close();
+  }
+
+
 
 // compute log(e^a+e^b)
 // =a+log(1+e^(b-a)) if a>b 
@@ -776,18 +630,11 @@ REAL logdiff(REAL a, REAL b)
      }
 
 
-/* ------ MAIN ------ */
-
 
 int main(int argc, char **argv)
    {
-   const int boot_iter=10;
    char *in_file;
-   int iter;
-   REAL bootsample[boot_iter];
-   REAL ris, err;
-   std::ofstream file1; 
- 
+   REAL beta;
 
    if(argc != 2)
      {
@@ -822,9 +669,6 @@ int main(int argc, char **argv)
      return 1;
      }
 
-   // initialize random number generator
-   initrand(0);
-
    // this block is important: 
    // the Data object must be destroied while 
    //  the global variable are still defined !!!
@@ -834,50 +678,22 @@ int main(int argc, char **argv)
    // initialize data
    x.initfromfile(dati_in);
 
-   // compute the partition functions of the original data
-   x.computezetas0();
+   // compute the partition functions
+   x.computezetas();
 
-   for(iter=0; iter<boot_iter; iter++)
+   for(beta=betamin; beta<betamax; beta+=betastep)
       {
-      std::cout << "\nSTARTED BOOTSTRAP NUMBER " << iter <<std::endl; 
+      std::cout << "started computation for beta="<<beta<<"...";
+      // generate jacknife samples
+      x.jacksamplegen(beta);
 
-      // generate bootstrapped data
-      x.bootstrapdata();
+      // compute observables
+      x.computeobs();
 
-      // compute the partition functions of the bootstrapped data
-      x.computezetas();
-     
-      bootsample[iter]=x.betapc(betamin, betamax, 1.0e-6);
-
-      file1.open (dati_out.c_str(), std::ios::app);
-      file1.precision(13);    // <--- print precision
-      file1 << iter << "  " << bootsample[iter] << "\n";
-      file1.close();
+      // print results
+      x.printobs(dati_out, beta);
+      std::cout << " terminated\n";
       }
-
-   ris=0.0;
-   for(iter=0; iter<boot_iter; iter++)
-      {
-      ris+=bootsample[iter];
-      }
-   ris/=boot_iter;
-
-   err=0.0;
-   for(iter=0; iter<boot_iter; iter++)
-      {
-      err+=(ris-bootsample[iter])*(ris-bootsample[iter]);
-      }
-   err/=boot_iter;
-   err=sqrt(err);
-
-   /*
-   std::cout << "FINAL RESULT: beta_pc = " << ris << " +/- " << err << std::endl;
-
-   file1.open (dati_out.c_str(), std::ios::app);
-   file1.precision(13);    // <--- print precision
-   file1 << "## FINAL:  " << ris << "  " << err;
-   file1.close();
-   */
 
    }
 

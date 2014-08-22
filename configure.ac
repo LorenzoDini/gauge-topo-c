@@ -1,7 +1,7 @@
 AC_PREREQ([2.59])
-AC_INIT([g2_topo_c], [1.1], [bonati@df.unipi.it bonati@pi.infn.it])
+AC_INIT([gauge_topo_c], [1.1], [bonati@df.unipi.it bonati@pi.infn.it])
 AM_INIT_AUTOMAKE()
-AC_CONFIG_SRCDIR([./src/g2_topo.c])
+AC_CONFIG_SRCDIR([./src/gauge_topo.c])
 AC_CONFIG_HEADERS([config.h])
 
 # overwrite default values

@@ -11,7 +11,9 @@ with the normalization:
 
 -beta*Tr(plaquette)   (NOT Tr/7)
 
-(for Su2 is Tr/2)
+For all the other groups:
+
+-beta*Tr(plaquette)/Ncolor
 
 The update is performed by means of heatbath and 
 overrelaxation updates and random gauge 

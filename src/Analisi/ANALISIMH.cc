@@ -338,13 +338,13 @@ void Data::computezetas(void)
                   energy=0.0;
                   for(l=0; l<speedup; l++)
                      {
-                     energy+=7.0*volume*6.0*(1.0-dati[f][j+l][0]);
+                     energy+=volume*6.0*(1.0-dati[f][j+l][0]);
                      }
                   energy/=speedup;
                   }
                 else
                   {
-                  energy=7.0*volume*6.0*(1.0-dati[f][j][0]);
+                  energy=volume*6.0*(1.0-dati[f][j][0]);
                   }
                 temp1=log(sample[0]/speedup)-zetasold[0]+(betas[k]-betas[0])*energy;
                 for(l=1; l<numfiles; l++)
@@ -436,10 +436,8 @@ void Data::jacksamplegen(REAL beta)
   long int f, i, j, k, b, btot;
   REAL energy, Z, temp1, temp2;
   REAL *h, *h0, Zh;
-  const int N=2; // sometimes to compute numobs_tot_jack you need more
-                 // than just numobs_tot_jack/numobs set for partial updates
-                 // so it is useful to introduce this "N"                
- 
+  const int N=2;
+
   h0=new REAL [N*numobs];
   h=new REAL [N*numobs];
 
@@ -452,7 +450,7 @@ void Data::jacksamplegen(REAL beta)
      for(i=0; i<numblocks[f]*block[f]; i++)  //  
         {                                    //
 
-        energy=7.0*volume*6.0*(1.0-dati[f][i][0]);
+        energy=volume*6.0*(1.0-dati[f][i][0]);
         temp1=log(sample[0])-zetas[0]+(beta-betas[0])*energy;
         for(j=1; j<numfiles; j++)
            {
@@ -501,7 +499,7 @@ void Data::jacksamplegen(REAL beta)
         // subtract the b-th block
         for(i=b*block[f]; i<(b+1)*block[f]; i++)
            {
-           energy=7.0*volume*6.0*(1.0-dati[f][i][0]);
+           energy=volume*6.0*(1.0-dati[f][i][0]);
            temp1=log(sample[0])-zetas[0]+(beta-betas[0])*energy;
            for(j=1; j<numfiles; j++)
               {

@@ -1,11 +1,11 @@
-#ifndef G2_TOPO_H
-#define G2_TOPO_H
+#ifndef GAUGE_TOPO_H
+#define GAUGE_TOPO_H
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
-#include"g2_topo_include.h"
+#include"gauge_topo_include.h"
 
 int main (int argc, char **argv)
     {

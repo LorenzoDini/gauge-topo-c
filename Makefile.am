@@ -1,7 +1,7 @@
-bin_PROGRAMS = debug_rng debug_su2 debug_g2 g2_topo
+bin_PROGRAMS = debug_rng debug_su2 debug_g2 gauge_topo
 
 if ONE_FILE_COMPILATION
-  g2_topo_SOURCES=./src/g2_topo.c ./src/g2_topo_include.h
+  gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h
   EXTRA_DIST = \
                ./src/input.in \
                ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_MAXPOLY.cc  ./src/Analisi/merge.py \
@@ -28,7 +28,7 @@ if ONE_FILE_COMPILATION
                ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h 
   DISTCHECK_CONFIGURE_FLAGS = --enable-one-file-compilation
 else
-  g2_topo_SOURCES=./src/g2_topo.c ./src/g2_topo_include.h \
+  gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h \
                   ./src/Const/const.c ./src/Const/const.h \
                   ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
                   ./src/G2/g2.c ./src/G2/g2.h \

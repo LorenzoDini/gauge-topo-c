@@ -69,7 +69,3 @@ for file in filelist:
   out_file.close() 
 
   input_file.write("./MH/"+file.lstrip(indir)+"  "+beta+"  "+str(i)+"  XXX \n")
-
-
-os.system('g++ -Wall --pedantic -O3 ANALISIMH.cc -o ANALISIMH')
-os.system('g++ -Wall --pedantic -O3 ANALISIMH_MAXPOLY.cc -o ANALISIMH_MAXPOLY')

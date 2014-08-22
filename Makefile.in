@@ -33,7 +33,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 bin_PROGRAMS = debug_rng$(EXEEXT) debug_su2$(EXEEXT) debug_g2$(EXEEXT) \
-	g2_topo$(EXEEXT)
+	gauge_topo$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -71,9 +71,9 @@ am_debug_su2_OBJECTS = debug_su2.$(OBJEXT) const.$(OBJEXT) \
 debug_su2_OBJECTS = $(am_debug_su2_OBJECTS)
 debug_su2_LDADD = $(LDADD)
 debug_su2_DEPENDENCIES =
-am__g2_topo_SOURCES_DIST = ./src/g2_topo.c ./src/g2_topo_include.h \
-	./src/Const/const.c ./src/Const/const.h \
-	./src/Func_Point/function_pointers.c \
+am__gauge_topo_SOURCES_DIST = ./src/gauge_topo.c \
+	./src/gauge_topo_include.h ./src/Const/const.c \
+	./src/Const/const.h ./src/Func_Point/function_pointers.c \
 	./src/Func_Point/function_pointers.h ./src/G2/g2.c \
 	./src/G2/g2.h ./src/G2/g2_check.c ./src/G2/g2_check.h \
 	./src/G2/g2_un.c ./src/G2/g2_un.h ./src/G2/g2_upd.c \
@@ -97,7 +97,8 @@ am__g2_topo_SOURCES_DIST = ./src/g2_topo.c ./src/g2_topo_include.h \
 	./src/Rng/dSFMT/dSFMT-params86243.h \
 	./src/Rng/dSFMT/dSFMT-params.h ./src/Su2/su2.c ./src/Su2/su2.h \
 	./src/Su2/su2_upd.c ./src/Su2/su2_upd.h
-@ONE_FILE_COMPILATION_FALSE@am_g2_topo_OBJECTS = g2_topo.$(OBJEXT) \
+@ONE_FILE_COMPILATION_FALSE@am_gauge_topo_OBJECTS =  \
+@ONE_FILE_COMPILATION_FALSE@	gauge_topo.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	const.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	function_pointers.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	g2.$(OBJEXT) g2_check.$(OBJEXT) \
@@ -108,10 +109,11 @@ am__g2_topo_SOURCES_DIST = ./src/g2_topo.c ./src/g2_topo_include.h \
 @ONE_FILE_COMPILATION_FALSE@	geometry.$(OBJEXT) \
 @ONE_FILE_COMPILATION_FALSE@	random.$(OBJEXT) $(am__objects_1) \
 @ONE_FILE_COMPILATION_FALSE@	su2.$(OBJEXT) su2_upd.$(OBJEXT)
-@ONE_FILE_COMPILATION_TRUE@am_g2_topo_OBJECTS = g2_topo.$(OBJEXT)
-g2_topo_OBJECTS = $(am_g2_topo_OBJECTS)
-g2_topo_LDADD = $(LDADD)
-g2_topo_DEPENDENCIES =
+@ONE_FILE_COMPILATION_TRUE@am_gauge_topo_OBJECTS =  \
+@ONE_FILE_COMPILATION_TRUE@	gauge_topo.$(OBJEXT)
+gauge_topo_OBJECTS = $(am_gauge_topo_OBJECTS)
+gauge_topo_LDADD = $(LDADD)
+gauge_topo_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -121,9 +123,9 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(g2_topo_SOURCES)
+	$(debug_su2_SOURCES) $(gauge_topo_SOURCES)
 DIST_SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(am__g2_topo_SOURCES_DIST)
+	$(debug_su2_SOURCES) $(am__gauge_topo_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -228,7 +230,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-@ONE_FILE_COMPILATION_FALSE@g2_topo_SOURCES = ./src/g2_topo.c ./src/g2_topo_include.h \
+@ONE_FILE_COMPILATION_FALSE@gauge_topo_SOURCES = ./src/gauge_topo.c ./src/gauge_topo_include.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Const/const.c ./src/Const/const.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/G2/g2.c ./src/G2/g2.h \
@@ -245,7 +247,7 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Su2/su2.c ./src/Su2/su2.h \
 @ONE_FILE_COMPILATION_FALSE@                  ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h 
 
-@ONE_FILE_COMPILATION_TRUE@g2_topo_SOURCES = ./src/g2_topo.c ./src/g2_topo_include.h
+@ONE_FILE_COMPILATION_TRUE@gauge_topo_SOURCES = ./src/gauge_topo.c ./src/gauge_topo_include.h
 @ONE_FILE_COMPILATION_FALSE@EXTRA_DIST = \
 @ONE_FILE_COMPILATION_FALSE@               ./src/input.in \
 @ONE_FILE_COMPILATION_FALSE@               ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_MAXPOLY.cc  ./src/Analisi/merge.py \
@@ -416,9 +418,9 @@ debug_rng$(EXEEXT): $(debug_rng_OBJECTS) $(debug_rng_DEPENDENCIES) $(EXTRA_debug
 debug_su2$(EXEEXT): $(debug_su2_OBJECTS) $(debug_su2_DEPENDENCIES) $(EXTRA_debug_su2_DEPENDENCIES) 
 	@rm -f debug_su2$(EXEEXT)
 	$(LINK) $(debug_su2_OBJECTS) $(debug_su2_LDADD) $(LIBS)
-g2_topo$(EXEEXT): $(g2_topo_OBJECTS) $(g2_topo_DEPENDENCIES) $(EXTRA_g2_topo_DEPENDENCIES) 
-	@rm -f g2_topo$(EXEEXT)
-	$(LINK) $(g2_topo_OBJECTS) $(g2_topo_LDADD) $(LIBS)
+gauge_topo$(EXEEXT): $(gauge_topo_OBJECTS) $(gauge_topo_DEPENDENCIES) $(EXTRA_gauge_topo_DEPENDENCIES) 
+	@rm -f gauge_topo$(EXEEXT)
+	$(LINK) $(gauge_topo_OBJECTS) $(gauge_topo_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -434,12 +436,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/function_pointers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2_check.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2_topo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2_un.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g2_upd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gauge_conf_def.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gauge_conf_meas.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gauge_conf_upd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gauge_topo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/geometry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/random.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/su2.Po@am__quote@
@@ -627,19 +629,19 @@ debug_su2.obj: ./src/Su2/debug_su2.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o debug_su2.obj `if test -f './src/Su2/debug_su2.c'; then $(CYGPATH_W) './src/Su2/debug_su2.c'; else $(CYGPATH_W) '$(srcdir)/./src/Su2/debug_su2.c'; fi`
 
-g2_topo.o: ./src/g2_topo.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT g2_topo.o -MD -MP -MF $(DEPDIR)/g2_topo.Tpo -c -o g2_topo.o `test -f './src/g2_topo.c' || echo '$(srcdir)/'`./src/g2_topo.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/g2_topo.Tpo $(DEPDIR)/g2_topo.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/g2_topo.c' object='g2_topo.o' libtool=no @AMDEPBACKSLASH@
+gauge_topo.o: ./src/gauge_topo.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gauge_topo.o -MD -MP -MF $(DEPDIR)/gauge_topo.Tpo -c -o gauge_topo.o `test -f './src/gauge_topo.c' || echo '$(srcdir)/'`./src/gauge_topo.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gauge_topo.Tpo $(DEPDIR)/gauge_topo.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/gauge_topo.c' object='gauge_topo.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o g2_topo.o `test -f './src/g2_topo.c' || echo '$(srcdir)/'`./src/g2_topo.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gauge_topo.o `test -f './src/gauge_topo.c' || echo '$(srcdir)/'`./src/gauge_topo.c
 
-g2_topo.obj: ./src/g2_topo.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT g2_topo.obj -MD -MP -MF $(DEPDIR)/g2_topo.Tpo -c -o g2_topo.obj `if test -f './src/g2_topo.c'; then $(CYGPATH_W) './src/g2_topo.c'; else $(CYGPATH_W) '$(srcdir)/./src/g2_topo.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/g2_topo.Tpo $(DEPDIR)/g2_topo.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/g2_topo.c' object='g2_topo.obj' libtool=no @AMDEPBACKSLASH@
+gauge_topo.obj: ./src/gauge_topo.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gauge_topo.obj -MD -MP -MF $(DEPDIR)/gauge_topo.Tpo -c -o gauge_topo.obj `if test -f './src/gauge_topo.c'; then $(CYGPATH_W) './src/gauge_topo.c'; else $(CYGPATH_W) '$(srcdir)/./src/gauge_topo.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gauge_topo.Tpo $(DEPDIR)/gauge_topo.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./src/gauge_topo.c' object='gauge_topo.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o g2_topo.obj `if test -f './src/g2_topo.c'; then $(CYGPATH_W) './src/g2_topo.c'; else $(CYGPATH_W) '$(srcdir)/./src/g2_topo.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gauge_topo.obj `if test -f './src/gauge_topo.c'; then $(CYGPATH_W) './src/gauge_topo.c'; else $(CYGPATH_W) '$(srcdir)/./src/gauge_topo.c'; fi`
 
 function_pointers.o: ./src/Func_Point/function_pointers.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT function_pointers.o -MD -MP -MF $(DEPDIR)/function_pointers.Tpo -c -o function_pointers.o `test -f './src/Func_Point/function_pointers.c' || echo '$(srcdir)/'`./src/Func_Point/function_pointers.c

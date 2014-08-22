@@ -399,13 +399,13 @@ void Data::computezetas0(void)
                   energy=0.0;
                   for(l=0; l<speedup; l++)
                      {
-                     energy+=volume*6.0*(1.0-dati0[f][j+l][0]);
+                     energy+=7.0*volume*6.0*(1.0-dati0[f][j+l][0]);
                      }
                   energy/=speedup;
                   }
                 else
                   {
-                  energy=volume*6.0*(1.0-dati0[f][j][0]);
+                  energy=7.0*volume*6.0*(1.0-dati0[f][j][0]);
                   }
                 temp1=log(sample[0]/speedup)-zetasold[0]+(betas[k]-betas[0])*energy;
                 for(l=1; l<numfiles; l++)
@@ -529,13 +529,13 @@ void Data::computezetas(void)
                   energy=0.0;
                   for(l=0; l<speedup; l++)
                      {
-                     energy+=volume*6.0*(1.0-dati[j+l][0]);
+                     energy+=7.0*volume*6.0*(1.0-dati[j+l][0]);
                      }
                   energy/=speedup;
                   }
                 else
                   {
-                  energy=volume*6.0*(1.0-dati[j][0]);
+                  energy=7.0*volume*6.0*(1.0-dati[j][0]);
                   }
 
                 temp1=log(sample_loc[0]/speedup)-zetasold[0]+(betas[k]-betas[0])*energy;
@@ -626,7 +626,7 @@ void Data::computeobs(REAL beta)
   for(f=0; f<campione_loc; f++)              //
      {                                       //  for all data
 
-     energy=volume*6.0*(1.0-dati[f][0]);
+     energy=7.0*volume*6.0*(1.0-dati[f][0]);
      temp1=log(sample_loc[0])-zetas[0]+(beta-betas[0])*energy;
      for(j=1; j<numfiles; j++)
         {
