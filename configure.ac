@@ -1,5 +1,5 @@
 AC_PREREQ([2.59])
-AC_INIT([gauge_topo_c], [1.1], [bonati@df.unipi.it bonati@pi.infn.it])
+AC_INIT([gauge_topo_c], [1.2], [bonati@df.unipi.it bonati@pi.infn.it])
 AM_INIT_AUTOMAKE()
 AC_CONFIG_SRCDIR([./src/gauge_topo.c])
 AC_CONFIG_HEADERS([config.h])
@@ -27,7 +27,7 @@ AM_CONDITIONAL([SIMD_CHECK_COMPILATION], [test x${simd_check_mode} = xyes])
 
 
 # Choice of the gauge group
-AC_ARG_VAR(GAUGEGROUP, choices are Su2 SuN G2)
+AC_ARG_VAR(GAUGEGROUP, choices are Su2 SuN G2 SoN)
 AC_ARG_VAR(N_c, the number of color for SuN)
 
 
@@ -64,9 +64,19 @@ else
         AC_DEFINE_UNQUOTED(NCOLOR, ${N_c}, [Number of colors])
       fi
     else
-      AC_MSG_WARN(No chosen GAUGEGROUP: using the default Su2)
-      AC_DEFINE(Su2_GROUP,, [Uses the gauge group SU(2)])
-      AC_DEFINE(NCOLOR, 2, [Number of colors])
+      if test x${GAUGEGROUP} = xSoN; then
+        AC_DEFINE(SoN_GROUP,, [Uses the gauge group SO(N)])
+        if test x${N_c} = x; then
+          AC_MSG_WARN(No chosen N_c: using the default N_c=2)
+          AC_DEFINE(NCOLOR, 2, [Number of colors])
+        else
+          AC_DEFINE_UNQUOTED(NCOLOR, ${N_c}, [Number of colors])
+        fi
+      else
+        AC_MSG_WARN(No chosen GAUGEGROUP: using the default Su2)
+        AC_DEFINE(Su2_GROUP,, [Uses the gauge group SU(2)])
+        AC_DEFINE(NCOLOR, 2, [Number of colors])
+      fi
     fi
   fi
 fi

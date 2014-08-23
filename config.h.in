@@ -99,6 +99,9 @@
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
+/* Uses the gauge group SO(N) */
+#undef SoN_GROUP
+
 /* Uses the gauge group SU(2) */
 #undef Su2_GROUP
 

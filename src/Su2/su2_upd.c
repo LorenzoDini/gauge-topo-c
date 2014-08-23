@@ -12,7 +12,7 @@
 
 /* random number generator for heabath (see Kennedy, Pendleton Phys. Lett. B 156, 393 (1985))
    given "k" return "a" in [-1,1] with P(a) = sqrt(1-a*a)*exp(k*a) */
-void randheat(double k, double *__restrict__ out)
+void randheat_Su2(double k, double *__restrict__ out)
     {
     double r, r1, r2, c, r3;
 
@@ -83,7 +83,7 @@ void single_heatbath_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const s
       times_equal_real_Su2(&matrix1, 1.0/p);  /* matrix1 *= 1.0/p */
       equal_dag_Su2(&matrix2, &matrix1);      /* matrix2 = matrix1^{dag} */
 
-      randheat(p, &p0);
+      randheat_Su2(p, &p0);
  
       rand_matrix_p0_Su2(p0, link);
       times_equal_Su2(link, &matrix2);        /* link*=matrix2 */

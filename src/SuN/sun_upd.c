@@ -37,7 +37,7 @@ void single_heatbath_SuN(SuN *__restrict__ link,
 
           if(xi>MIN_VALUE)
             {
-            randheat(xi, &p0);
+            randheat_Su2(xi, &p0);
 
             equal_dag_Su2(&w, &u); /* w=u^{dag} */
             rand_matrix_p0_Su2(p0, &v);

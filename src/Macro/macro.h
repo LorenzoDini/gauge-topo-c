@@ -9,6 +9,7 @@
 
 #ifdef G2_GROUP
   #define GAUGE_GROUP G2
+  #define RAND_GAUGE_TRANSF
 #endif
 
 #ifdef Su2_GROUP
@@ -18,6 +19,12 @@
 #ifdef SuN_GROUP
   #define GAUGE_GROUP SuN
 #endif
+
+#ifdef SoN_GROUP
+  #define GAUGE_GROUP SoN
+  #define RAND_GAUGE_TRANSF
+#endif
+
 
 
 #define INT_ALIGN 8

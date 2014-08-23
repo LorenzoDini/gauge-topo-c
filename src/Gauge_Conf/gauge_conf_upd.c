@@ -7,6 +7,8 @@
 #include"gauge_conf.h"
 #include"../Macro/macro.h"
 #include"../Rng/random.h"
+#include"../SoN/son.h"
+#include"../SoN/son_upd.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
 #include"../SuN/sun.h"
@@ -91,7 +93,9 @@ void overrelaxation(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const
 void update(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
    {
    int r, j, i;
+   #ifdef RAND_GAUGE_TRANSF
    GAUGE_GROUP aux1, aux2;
+   #endif
 
    /* heatbath */
    for(i=0; i<4; i++)
@@ -115,7 +119,7 @@ void update(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
       }
    
    /* random gauge transformation */
-   #ifdef G2_GROUP
+   #ifdef RAND_GAUGE_TRANSF
    for(r=0; r<(param->d_volume); r++)
       {
       rand_matrix(&aux1);
@@ -149,7 +153,10 @@ void update(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
 /* perform n cooling steps */
 void cooling(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param, int n)
    {
-   GAUGE_GROUP staple, aux1, aux2;
+   GAUGE_GROUP staple;
+   #ifdef RAND_GAUGE_TRANSF
+   GAUGE_GROUP aux1, aux2;
+   #endif
    int r, i, k; 
 
    for(k=0; k<n; k++)
@@ -165,7 +172,7 @@ void cooling(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param,
          }
 
       /* random gauge transformation */
-      #ifdef G2_GROUP
+      #ifdef RAND_GAUGE_TRANSF
       for(r=0; r<(param->d_volume); r++)
          {
          rand_matrix(&aux1);
@@ -199,7 +206,10 @@ void cooling(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param,
 /* perform n cooling steps different method */
 void cooling2(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param, int n)
    {
-   GAUGE_GROUP staple, aux1, aux2;
+   GAUGE_GROUP staple;
+   #ifdef RAND_GAUGE_TRANSF
+   GAUGE_GROUP aux1, aux2;
+   #endif
    int r, r1, i, j, k; 
 
    for(k=0; k<n; k++)
@@ -216,7 +226,7 @@ void cooling2(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param
          }
 
       /* random gauge transformation */
-      #ifdef G2_GROUP
+      #ifdef RAND_GAUGE_TRANSF
       for(r=0; r<(param->d_volume); r++)
          {
          rand_matrix(&aux1);

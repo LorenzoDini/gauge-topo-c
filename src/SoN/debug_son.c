@@ -7,7 +7,7 @@
 #include"../Macro/macro.h"
 #include"../Rng/random.h"
 #include"son.h"
-/*#include"son_upd.h"*/
+#include"son_upd.h"
 
 
 int main(void)
@@ -45,7 +45,6 @@ int main(void)
     printf("    ERROR!!!!!!!!!!!\n");
     }
 
-#ifdef COMMENT
 
   printf("\n\n");
   printf("VERIFY THAT UPDATE SU(N)->SU(N)\n\n");
@@ -132,8 +131,6 @@ int main(void)
     }
 
   printf("\n\n");
-
-#endif
 
   return 0;
   }

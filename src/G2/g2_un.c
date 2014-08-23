@@ -35,7 +35,7 @@ void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple,
         norm=w_mod*beta_aux;
 
         /* generate the component parallel to a w (i.e. t[0]) with heatbath, the other are random */
-        randheat(norm, &temp_mod);
+        randheat_Su2(norm, &temp_mod);
         temp[0]=temp_mod;
         temp[1]=1.0-2.0*casuale();
         temp[2]=1.0-2.0*casuale();
@@ -114,7 +114,7 @@ void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple,
         norm=w_mod*beta_aux;
 
         /* generate the component parallel to a w (i.e. t[0]) with heatbath, the other are random */
-        randheat(norm, &temp_mod);
+        randheat_Su2(norm, &temp_mod);
         temp[0]=temp_mod;
         temp[1]=1.0-2.0*casuale();
         temp[2]=1.0-2.0*casuale();
@@ -192,7 +192,7 @@ void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple,
         norm=w_mod*beta_aux;
 
         /* generate the component parallel to a w (i.e. t[0]) with heatbath, the other are random */
-        randheat(norm, &temp_mod);
+        randheat_Su2(norm, &temp_mod);
         temp[0]=temp_mod;
         temp[1]=1.0-2.0*casuale();
         temp[2]=1.0-2.0*casuale();
