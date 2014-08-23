@@ -25,15 +25,15 @@ int main(void)
   param.d_beta=2.3;
     
   printf("\n*******************************\n");
-  printf("PROGRAM FOR THE DEBUG OF SU(N)\n");
+  printf("PROGRAM FOR THE DEBUG OF SO(N)\n");
   printf("*******************************\n\n");
 
-  printf("Precision: double");
- 
+  printf("Precision: double\n");
+  printf("N_c=%d\n", NCOLOR);
 
  
   printf("\n\n");
-  printf("VERIFY THAT THE RANDOM MATRIX IS IN SU(N)\n\n");
+  printf("VERIFY THAT THE RANDOM MATRIX IS IN SO(N)\n\n");
   printf("  random matrix ....");
   rand_matrix_SoN(&M);
   if(scheck_SoN(&M) == 0) 
@@ -47,11 +47,11 @@ int main(void)
 
 
   printf("\n\n");
-  printf("VERIFY THAT UPDATE SU(N)->SU(N)\n\n");
+  printf("VERIFY THAT UPDATE SO(N)->SO(N)\n\n");
   rand_matrix_SoN(&M);
   rand_matrix_SoN(&N);
   rand_matrix_SoN(&L);
-  plus_equal_SoN(&N, &L); /* N+=L,  M in SU(N), N no   (M=link, N=staple) */
+  plus_equal_SoN(&N, &L); /* N+=L,  M in SO(N), N no   (M=link, N=staple) */
 
   /* heatbath */
   single_heatbath_SoN(&M, &N, &param);
@@ -69,7 +69,7 @@ int main(void)
   rand_matrix_SoN(&M);
   rand_matrix_SoN(&N);
   rand_matrix_SoN(&L);
-  plus_equal_SoN(&N, &L); /* N+=L,  M in SU(N), N no   (M=link, N=staple) */
+  plus_equal_SoN(&N, &L); /* N+=L,  M in SO(N), N no   (M=link, N=staple) */
   single_overrelaxation_SoN(&M, &N, &param);
   printf("  Overrelaxation ...");
   if(scheck_SoN(&M) == 0) 
@@ -88,7 +88,7 @@ int main(void)
   rand_matrix_SoN(&M);
   rand_matrix_SoN(&N);
   rand_matrix_SoN(&L);
-  plus_equal_SoN(&N, &L); /* N+=L,  M in SU(N), N no   (M=link, N=staple) */
+  plus_equal_SoN(&N, &L); /* N+=L,  M in SO(N), N no   (M=link, N=staple) */
 
   times_SoN(&T, &M, &N);  /* T=M*N */
   energy=retr_SoN(&T);    /* initial energy */
@@ -111,7 +111,7 @@ int main(void)
   rand_matrix_SoN(&M);
   rand_matrix_SoN(&N);
   rand_matrix_SoN(&L);
-  plus_equal_SoN(&N, &L); /* N+=L,  M in SU(N), N no   (M=link, N=staple) */
+  plus_equal_SoN(&N, &L); /* N+=L,  M in SO(N), N no   (M=link, N=staple) */
 
   times_SoN(&T, &M, &N);  /* T=M*N */
   energy=retr_SoN(&T);    /* initial energy */

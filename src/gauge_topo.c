@@ -21,7 +21,11 @@ int main (int argc, char **argv)
       {
       printf("Program %s version %s\n", PACKAGE_NAME, PACKAGE_VERSION);
       printf("Claudio Bonati %s\n", PACKAGE_BUGREPORT);
-      printf("Usage: %s input_file\n", argv[0]);
+      printf("Usage: %s input_file\n\n", argv[0]);
+
+      printf("Compiled with:\n");
+      printf("  gauge group: %s\n", QUOTEME(GAUGE_GROUP));
+      printf("  number of colors: %d\n", NCOLOR);
       return 0;
       }
     else

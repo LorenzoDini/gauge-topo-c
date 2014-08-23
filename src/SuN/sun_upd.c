@@ -57,7 +57,7 @@ void single_heatbath_SuN(SuN *__restrict__ link,
           else
             {
             fp=fopen(param->err_file, "a");
-            fprintf(fp, "Warning: nell'heatbath in sun_upd.cc xi=%g < min_value\n", xi); 
+            fprintf(fp, "Warning: nell'heatbath in sun_upd.c xi=%g < min_value\n", xi); 
             fclose(fp);
             }
           }
@@ -105,7 +105,7 @@ void single_overrelaxation_SuN(SuN *__restrict__ link,
           else
             {
             fp=fopen(param->err_file, "a");
-            fprintf(fp, "Warning: nell'overrelaxation in sun_upd.cc xi=%g < min_value\n", xi); 
+            fprintf(fp, "Warning: nell'overrelaxation in sun_upd.c xi=%g < min_value\n", xi); 
             fclose(fp);
             }
           }

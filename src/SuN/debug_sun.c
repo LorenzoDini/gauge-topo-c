@@ -28,8 +28,8 @@ int main(void)
   printf("PROGRAM FOR THE DEBUG OF SU(N)\n");
   printf("*******************************\n\n");
 
-  printf("Precision: double");
- 
+  printf("Precision: double\n");
+  printf("N_c=%d\n", NCOLOR); 
 
  
   printf("\n\n");
