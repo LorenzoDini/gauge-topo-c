@@ -22,7 +22,6 @@
 
 #ifdef SoN_GROUP
   #define GAUGE_GROUP SoN
-  #define RAND_GAUGE_TRANSF
 #endif
 
 
