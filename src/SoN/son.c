@@ -213,6 +213,7 @@ void times_equal_real_SoN(SoN *__restrict__ A, double r)
 /* A*=B */
 void times_equal_SoN(SoN *__restrict__ A, SoN const *__restrict__ const B)
    {
+   #if NCOLOR != 3
    int i, j, k;
    double sum, aux[NCOLOR];
 
@@ -233,11 +234,33 @@ void times_equal_SoN(SoN *__restrict__ A, SoN const *__restrict__ const B)
          A->comp[i][j]=sum;
          }
       }
+   #else
+   int i, j;
+   register double sum, aux0, aux1, aux2;
+
+   for(i=0; i<NCOLOR; i++)
+      {
+      aux0=A->comp[i][0];
+      aux1=A->comp[i][1];
+      aux2=A->comp[i][2];
+
+      for(j=0; j<NCOLOR; j++)
+         {
+         sum=aux0*(B->comp[0][j]);
+         sum+=aux1*(B->comp[1][j]);
+         sum+=aux2*(B->comp[2][j]);
+
+         A->comp[i][j]=sum;
+         }
+      }
+
+   #endif
    }
  
 /* A*=B^{dag} */
 void times_equal_dag_SoN(SoN *__restrict__ A, SoN const *__restrict__ const B)
    {
+   #if NCOLOR !=3
    int i, j, k;
    double sum, aux[NCOLOR];
 
@@ -258,6 +281,27 @@ void times_equal_dag_SoN(SoN *__restrict__ A, SoN const *__restrict__ const B)
          A->comp[i][j]=sum;
          }
       }
+   #else
+   int i, j;
+   register double sum, aux0, aux1, aux2;
+
+   for(i=0; i<NCOLOR; i++)
+      {
+      aux0=A->comp[i][0];
+      aux1=A->comp[i][1];
+      aux2=A->comp[i][2];
+
+      for(j=0; j<NCOLOR; j++)
+         {
+         sum=aux0*(B->comp[j][0]);
+         sum+=aux1*(B->comp[j][1]);
+         sum+=aux2*(B->comp[j][2]);
+
+         A->comp[i][j]=sum;
+         }
+      }
+
+   #endif
    }
 
 /* A=B*C */
