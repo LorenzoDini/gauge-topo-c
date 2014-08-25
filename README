@@ -19,6 +19,22 @@ The update is performed by means of heatbath and
 overrelaxation updates and random gauge 
 transformations.
 
+The choice of the gauge group happens at configuration 
+time through the macro GAUGEGROUP and, for SU(N), N_c.
+
+The possible choices are
+GAUGEGROUP=G2
+GAUGEGROUP=Su2
+GAUGEGROUP=SuN
+GAUGEGROUP=SoN
+the default one being Su2. For the SuN an SoN cases 
+the choice of the number of colors is performed by 
+means of the macro N_c (the default value being 2).
+
+As an example, to simulate the SU(5) gauge theory the
+program has to be configured through
+./configure GAUGEGROUP=SuN N_c=5
+
 For compilers lacking of inter-procedural optimization
 it is usually convenient to use also 
 --enable-one-file-compilation 
@@ -76,13 +92,6 @@ nummeas: number of measures, see cooling and wilsontime
 cooling: nummeas measures of the top. charge are performed, 
         each one after "cooling" cooling steps. If <=0 
         no cooling is performed
-wilsontime: nummeas measures of the top. charge are performed,
-        each one after a wilson flow of "wislontime" time.
-        If wilsontime <=0 no wilson evolution is performed
-wilsonstep: step for the integration of the wilson flow with
-        the 4-th order Runge Kutta integrator
-smoothing: if =0 cooling is used as smoothing procedure, 
-        if =1 wilson flow, if =2 both are measured
 
 inizio: starting configuration (0=ordered configuration, 
 	1=random configuration, 2=saved configuration)
@@ -96,7 +105,7 @@ err_file: name of the error file
 
 randseed: random seed. If equal to 0 the time is used
 
-** OUTPUT OF SUN_TOPO
+** OUTPUT OF GAUGE_TOPO
 ********************************************************
 
 The measured observables are the spatial/temporal 
