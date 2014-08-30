@@ -26,10 +26,9 @@ The possible choices are
 GAUGEGROUP=G2
 GAUGEGROUP=Su2
 GAUGEGROUP=SuN
-GAUGEGROUP=SoN
-the default one being Su2. For the SuN an SoN cases 
-the choice of the number of colors is performed by 
-means of the macro N_c (the default value being 2).
+the default one being Su2. For the SuN cases the choice 
+of the number of colors is performed by means of the 
+macro N_c (the default value being 2).
 
 As an example, to simulate the SU(5) gauge theory the
 program has to be configured through
