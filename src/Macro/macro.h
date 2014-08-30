@@ -21,7 +21,6 @@
 #endif
 
 
-
 #define INT_ALIGN 8
 #define DOUBLE_ALIGN 16
 

@@ -4,7 +4,6 @@
 #include"../config.h"
 
 #ifdef ONE_FILE_MODE
-
   #include"./Const/const.h"
   #include"./Func_Point/function_pointers.h"
   #include"./G2/g2.h"
@@ -21,8 +20,6 @@
   #include"./SuN/sun_aux.h"
   #include"./SuN/sun_upd.h"
 
-
-
   #include"./Const/const.c"
   #include"./Func_Point/function_pointers.c"
   #include"./G2/g2.c"
@@ -37,9 +34,9 @@
   #include"./Rng/dSFMT/dSFMT.c"
   #include"./Su2/su2.c"
   #include"./Su2/su2_upd.c"
-  #include"./SuN/sun.h"
-  #include"./SuN/sun_aux.h"
-  #include"./SuN/sun_upd.h"
+  #include"./SuN/sun.c"
+  #include"./SuN/sun_aux.c"
+  #include"./SuN/sun_upd.c"
 
 #else
 
@@ -49,6 +46,8 @@
   #include"./Geometry/geometry.h"
   #include"./Macro/macro.h"
   #include"./Rng/random.h"
+
 #endif
+
 
 #endif
