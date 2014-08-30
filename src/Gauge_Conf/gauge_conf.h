@@ -7,7 +7,6 @@
 #include"../G2/g2.h"
 #include"../Geometry/geometry.h"
 #include"../Macro/macro.h"
-#include"../SoN/son.h"
 #include"../Su2/su2.h"
 #include"../SuN/sun.h"
 

@@ -7,8 +7,6 @@
 #include"../G2/g2_un.h"
 #include"../G2/g2_upd.h"
 #include"../Macro/macro.h"
-#include"../SoN/son.h"
-#include"../SoN/son_upd.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
 #include"../SuN/sun.h"
@@ -18,39 +16,6 @@
 
 void init_function_pointers(void)
   {
-  #ifdef SoN_GROUP 
-  one  = &one_SoN;
-  zero = &zero_SoN;
-  equal     = &equal_SoN;
-  equal_dag = &equal_dag_SoN;
-  plus_equal     = &plus_equal_SoN;
-  plus_equal_dag = &plus_equal_dag_SoN;
-  minus_equal     = &minus_equal_SoN;
-  minus_equal_dag = &minus_equal_dag_SoN;
-  lin_comb       = &lin_comb_SoN;
-  lin_comb_dag1  = &lin_comb_dag1_SoN;
-  lin_comb_dag2  = &lin_comb_dag2_SoN;
-  lin_comb_dag12 = &lin_comb_dag12_SoN;
-  times_equal_real = &times_equal_real_SoN;
-  times_equal     = &times_equal_SoN;
-  times_equal_dag = &times_equal_dag_SoN;
-  times       = &times_SoN;
-  times_dag1  = &times_dag1_SoN;
-  times_dag2  = &times_dag2_SoN;
-  times_dag12 = &times_dag12_SoN;
-  rand_matrix = &rand_matrix_SoN;
-  retr = &retr_SoN;
-  imtr = &imtr_SoN;
-  unitarize = &unitarize_SoN;
-  print_on_screen = &print_on_screen_SoN;
-  print_on_file   = &print_on_file_SoN;
-  read_from_file   = &read_from_file_SoN;
-  single_heatbath = &single_heatbath_SoN;
-  single_overrelaxation = &single_overrelaxation_SoN;
-  cool = &cool_SoN;
-  #endif
-
-
   #ifdef SuN_GROUP 
   one  = &one_SuN;
   zero = &zero_SuN;

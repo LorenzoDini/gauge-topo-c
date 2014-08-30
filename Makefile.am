@@ -1,4 +1,4 @@
-bin_PROGRAMS = debug_g2 debug_rng debug_son debug_su2 debug_sun gauge_topo
+bin_PROGRAMS = debug_g2 debug_rng debug_su2 debug_sun gauge_topo
 
 
 if ONE_FILE_COMPILATION
@@ -18,7 +18,6 @@ if ONE_FILE_COMPILATION
     ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
     ./src/G2/g2.c ./src/G2/g2.h \
     ./src/G2/g2_check.c ./src/G2/g2_check.h \
-    ./src/G2/g2_un.c ./src/G2/g2_un.h \
     ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
     ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
     ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
@@ -26,8 +25,6 @@ if ONE_FILE_COMPILATION
     ./src/Macro/macro.h \
     ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
     $(dSFMT) \
-    ./src/SoN/son.c ./src/SoN/son.h \
-    ./src/SoN/son_upd.c ./src/SoN/son_upd.h \
     ./src/Su2/su2.c ./src/Su2/su2.h \
     ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
     ./src/SuN/sun.c ./src/SuN/sun.h \
@@ -49,8 +46,6 @@ else
     ./src/Macro/macro.h \
     ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
     $(dSFMT) \
-    ./src/SoN/son.c ./src/SoN/son.h \
-    ./src/SoN/son_upd.c ./src/SoN/son_upd.h \
     ./src/Su2/su2.c ./src/Su2/su2.h \
     ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
     ./src/SuN/sun.c ./src/SuN/sun.h \
@@ -84,15 +79,6 @@ debug_g2_SOURCES=./src/G2/debug_g2.c \
 
 
 debug_rng_SOURCES=./src/Rng/debug_rng.c ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
-  $(dSFMT)
-
-
-debug_son_SOURCES=./src/SoN/debug_son.c \
-  ./src/Const/const.c ./src/Const/const.h \
-  ./src/Macro/macro.h \
-  ./src/SoN/son.c ./src/SoN/son.h \
-  ./src/SoN/son_upd.c ./src/SoN/son_upd.h \
-  ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
   $(dSFMT)
 
 

@@ -20,10 +20,6 @@
   #define GAUGE_GROUP SuN
 #endif
 
-#ifdef SoN_GROUP
-  #define GAUGE_GROUP SoN
-#endif
-
 
 
 #define INT_ALIGN 8

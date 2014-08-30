@@ -7,8 +7,6 @@
 #include"gauge_conf.h"
 #include"../Macro/macro.h"
 #include"../Rng/random.h"
-#include"../SoN/son.h"
-#include"../SoN/son_upd.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
 #include"../SuN/sun.h"
