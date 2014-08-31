@@ -107,7 +107,7 @@ double topcharge(Gauge_Conf const *__restrict__ const GC, Const const *__restric
    {
    GAUGE_GROUP aux1, aux2, aux3;
    double ris, real1, real2, loc_charge; 
-   #ifdef G2_GROUP
+   #ifndef G2_GROUP
      const double chnorm=1.0/(128.0*PI*PI);
    #else
      const double chnorm=1.0/(256.0*PI*PI);
@@ -163,7 +163,7 @@ double topchargedens(Gauge_Conf const *__restrict__ const GC, int r)
    {
    GAUGE_GROUP aux1, aux2, aux3;
    double real1, real2, loc_charge; 
-   #ifdef G2_GROUP
+   #ifndef G2_GROUP
      const double chnorm=1.0/(128.0*PI*PI);
    #else
      const double chnorm=1.0/(256.0*PI*PI);
