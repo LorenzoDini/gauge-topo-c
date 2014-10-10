@@ -4,11 +4,12 @@
 /* for definitions see
    Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 #include<stdio.h>
 
 #include"g2.h"
-#include"../Macro/macro.h"
 #include"../Rng/random.h"
 
 /* A=1 */

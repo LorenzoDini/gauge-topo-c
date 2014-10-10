@@ -1,8 +1,9 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include"../Const/const.h"
 #include"../Macro/macro.h"
+
+#include"../Const/const.h"
 
 int lex_index(int t, int x, int y, int z, Const const * const param);
 

@@ -1,12 +1,13 @@
 #ifndef GAUGE_CONF_MEAS_C
 #define GAUGE_CONF_MEAS_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 
 #include"../Const/const.h"
 #include"../Func_Point/function_pointers.h"
 #include"gauge_conf.h"
-#include"../Macro/macro.h"
 
 
 /* computation of the plaquette (the trace of) in position r and positive directions i,j  */

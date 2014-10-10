@@ -4,9 +4,9 @@
 /* for definitions see
    Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
 
-#include<stdio.h>
-
 #include"../Macro/macro.h"
+
+#include<stdio.h>
 
 typedef struct G2 {
    #ifdef __GNUC__

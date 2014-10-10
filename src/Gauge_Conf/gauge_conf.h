@@ -1,12 +1,13 @@
 #ifndef GAUGE_CONF_H
 #define GAUGE_CONF_H
 
+#include"../Macro/macro.h"
+
 #include<stdio.h>
 
 #include"../Const/const.h"
 #include"../G2/g2.h"
 #include"../Geometry/geometry.h"
-#include"../Macro/macro.h"
 #include"../Su2/su2.h"
 #include"../SuN/sun.h"
 

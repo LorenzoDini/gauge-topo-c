@@ -1,12 +1,13 @@
 #ifndef RANDOM_C
 #define RANDOM_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 #include<time.h>
 
 #include"./dSFMT/dSFMT.h"
 #include"random.h"
-#include"../Macro/macro.h"
 
 /* random number in (0,1) */
 double casuale(void)

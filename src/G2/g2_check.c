@@ -1,11 +1,12 @@
 #ifndef G2_CHECK_C
 #define G2_CHECK_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 
 #include"g2.h"
 #include"../Const/const.h"
-#include"../Macro/macro.h"
 
 /* verify the cubic condition needed for an SO(7) matrix to be in G2
    return 1 if ok, 0 else */

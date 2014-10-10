@@ -1,6 +1,8 @@
 #ifndef GAUGE_CONF_DEF_C
 #define GAUGE_CONF_DEF_C
 
+#include"../Macro/macro.h"
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -8,7 +10,6 @@
 #include"../Geometry/geometry.h"
 #include"gauge_conf.h"
 #include"../Func_Point/function_pointers.h"
-#include"../Macro/macro.h"
 #include"../Su2/su2.h"
 
 int init_gauge_conf(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)

@@ -1,13 +1,14 @@
 #ifndef SU2_UPD_C
 #define SU2_UPD_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 #include<stdio.h>
 
 #include"su2.h"
 #include"su2_upd.h"
 #include"../Const/const.h"
-#include"../Macro/macro.h"
 #include"../Rng/random.h"
 
 /* random number generator for heabath (see Kennedy, Pendleton Phys. Lett. B 156, 393 (1985))

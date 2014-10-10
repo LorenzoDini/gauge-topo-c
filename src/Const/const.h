@@ -1,9 +1,9 @@
 #ifndef CONST_H
 #define CONST_H
 
-#include<time.h>
-
 #include"../Macro/macro.h"
+
+#include<time.h>
 
 typedef struct Const {
   /* lattice dimensions */

@@ -1,12 +1,13 @@
 #ifndef G2_UN_C
 #define G2_UN_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 
 #include"g2.h"
 #include"g2_check.h"
 #include"g2_un.h"
-#include"../Macro/macro.h"
 #include"../Rng/random.h"
 #include"../Su2/su2_upd.h"
 

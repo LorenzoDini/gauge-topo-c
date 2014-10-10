@@ -1,12 +1,13 @@
 #ifndef SUN_UPD_C
 #define SUN_UPD_C
 
+#include"../Macro/macro.h"
+
 #include<complex.h>
 #include<math.h>
 #include<stdio.h>
 
 #include"../Const/const.h"
-#include"../Macro/macro.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
 #include"sun.h"

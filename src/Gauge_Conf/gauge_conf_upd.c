@@ -1,11 +1,12 @@
 #ifndef GAUGE_CONF_UPD_C
 #define GAUGE_CONF_UPD_C
 
+#include"../Macro/macro.h"
+
 #include"../Const/const.h"
 #include"../Func_Point/function_pointers.h"
 #include"../G2/g2.h"
 #include"gauge_conf.h"
-#include"../Macro/macro.h"
 #include"../Rng/random.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"

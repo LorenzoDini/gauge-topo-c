@@ -1,6 +1,8 @@
 #ifndef SUN_AUX_H
 #define SUN_AUX_H
 
+#include"../Macro/macro.h"
+
 #include"sun.h"
 #include"../Su2/su2.h"
 

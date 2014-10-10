@@ -1,9 +1,9 @@
 #ifndef SU2_H
 #define SU2_H
 
-#include<stdio.h>
-
 #include"../Macro/macro.h"
+
+#include<stdio.h>
 
 typedef struct Su2 {
    #ifdef __GNUC__

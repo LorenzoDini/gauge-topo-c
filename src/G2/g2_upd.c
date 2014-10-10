@@ -1,6 +1,8 @@
 #ifndef G2_UPD_C
 #define G2_UPD_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 
 #include"../Const/const.h"
@@ -8,7 +10,6 @@
 #include"g2_check.h"
 #include"g2_un.h"
 #include"g2_upd.h"
-#include"../Macro/macro.h"
 #include"../Rng/random.h"
 #include"../Su2/su2_upd.h"
 

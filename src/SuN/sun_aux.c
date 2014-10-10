@@ -1,11 +1,12 @@
 #ifndef SUN_AUX_C
 #define SUN_AUX_C
 
+#include"../Macro/macro.h"
+
 #include<complex.h>
 #include<math.h>
 
 #include"sun.h"
-#include"../Macro/macro.h"
 #include"../Su2/su2.h"
 
 /* given the matrix N*N "in" extracts the i, j lines and column and

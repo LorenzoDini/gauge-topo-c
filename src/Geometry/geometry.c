@@ -1,12 +1,13 @@
 #ifndef GEOMETRY_C
 #define GEOMETRY_C
 
+#include"../Macro/macro.h"
+
 #include<stdio.h>
 #include<stdlib.h>
 
 #include"geometry.h"
 #include"../Const/const.h"
-#include"../Macro/macro.h"
 
 
 /* lexicographic index */

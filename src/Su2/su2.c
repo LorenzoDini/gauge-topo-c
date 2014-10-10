@@ -1,6 +1,8 @@
 #ifndef SU2_C
 #define SU2_C
 
+#include"../Macro/macro.h"
+
 #include<math.h>
 #include<stdio.h>
 

@@ -1,12 +1,13 @@
 #ifndef FUNCTION_POINTERS_C
 #define FUNCTION_POINTERS_C
 
+#include"../Macro/macro.h"
+
 #include"function_pointers.h"
 #include"../G2/g2.h"
 #include"../G2/g2_check.h"
 #include"../G2/g2_un.h"
 #include"../G2/g2_upd.h"
-#include"../Macro/macro.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
 #include"../SuN/sun.h"

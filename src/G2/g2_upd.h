@@ -1,6 +1,8 @@
 #ifndef G2_UPD_H
 #define G2_UPD_H
 
+#include"../Macro/macro.h"
+
 #include"../Const/const.h"
 #include"g2.h"
 

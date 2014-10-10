@@ -1,6 +1,8 @@
 #ifndef SUN_UPD_H
 #define SUN_UPD_H
 
+#include"../Macro/macro.h"
+
 #include"../Const/const.h"
 #include"../Su2/su2.h"
 #include"sun.h"

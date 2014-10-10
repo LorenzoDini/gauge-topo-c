@@ -1,12 +1,13 @@
 #ifndef CONST_C
 #define CONST_C
 
+#include"../Macro/macro.h"
+
 #include<stdio.h>
 #include<string.h>
 #include<time.h>
 
 #include"const.h"
-#include"../Macro/macro.h"
 
 int readinput(char *in_file, Const *param)
     {

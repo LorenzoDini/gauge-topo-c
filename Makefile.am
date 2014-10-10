@@ -115,7 +115,7 @@ dSFMT=./src/Rng/dSFMT/dSFMT.c ./src/Rng/dSFMT/dSFMT-common.h ./src/Rng/dSFMT/dSF
 LDADD=-lm 
 
 
-AM_CFLAGS = -O3 -Wall --pedantic 
+AM_CFLAGS = -std=c99 -O3 -Wall --pedantic 
 
 
 if SIMD_CHECK_COMPILATION
