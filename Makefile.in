@@ -266,10 +266,7 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_TRUE@gauge_topo_SOURCES = ./src/gauge_topo.c ./src/gauge_topo_include.h
 @ONE_FILE_COMPILATION_FALSE@EXTRA_DIST = \
 @ONE_FILE_COMPILATION_FALSE@    ./src/input.in \
-@ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_G2.cc \
-@ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/ANALISIMH_MAXPOLY.cc ./src/Analisi/ANALISIMH_MAXPOLY_G2.cc \
-@ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/merge.py \
-@ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
+@ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/ANALISIMH_G2.cc ./src/Analisi/merge.py \
 @ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
 @ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
 @ONE_FILE_COMPILATION_FALSE@    ./src/Analisi/ordina.py \
@@ -278,10 +275,7 @@ top_srcdir = @top_srcdir@
 
 @ONE_FILE_COMPILATION_TRUE@EXTRA_DIST = \
 @ONE_FILE_COMPILATION_TRUE@    ./src/input.in \
-@ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/ANALISIMH.cc  ./src/Analisi/ANALISIMH_G2.cc \
-@ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/ANALISIMH_MAXPOLY.cc ./src/Analisi/ANALISIMH_MAXPOLY_G2.cc \
-@ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/merge.py \
-@ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
+@ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/ANALISIMH_G2.cc ./src/Analisi/merge.py \
 @ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
 @ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
 @ONE_FILE_COMPILATION_TRUE@    ./src/Analisi/ordina.py \
