@@ -246,7 +246,7 @@ void Data::jacksamplegen(void)
         {
         jacksample[b][3*j] = h[3*j]; // media
         jacksample[b][3*j+1] = (h[3*j+1]-h[3*j]*h[3*j])*vol; // vol(<Q^2>-<Q>^2)
-        jacksample[b][3*j+2] = 1.0-h[3*j+2]/h[3*j+1]/h[3*j+1]; // 1-<Q^4>/<Q^2>^2
+        jacksample[b][3*j+2] = 1.0-h[3*j+2]/h[3*j+1]/h[3*j+1]/3.0; // 1-<Q^4>/<Q^2>^2/3
         }
      }
   delete [] h;
