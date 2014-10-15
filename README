@@ -78,7 +78,6 @@ latox, latoy, latoz, latot: the lattice extensions in
 	the x, y, z, and t directions respectively
 
 beta: the beta to be simulated
-theta: the (imaginary part) of the imaginary theta to be simulated
 campione: the total number of updates to be performed
 thermal: the number of thermalization updates to be
 	performed prior to starting the measures
