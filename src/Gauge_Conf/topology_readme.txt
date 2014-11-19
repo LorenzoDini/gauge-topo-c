@@ -13,7 +13,7 @@ F_{\mu\nu}^aF_{\rho\sigma}^a=2Tr(F_{\mu\nu}F_{\rho\sigma})
 
 and thus for SU(N)
 
-Q=\frac{1}{32 \pi^2} \int \epsilon_{\mu\nu\rho\sigma} F_{\mu\nu}^a F_{\rho\sigma}^a d^x
+Q=\frac{1}{32 \pi^2} \int \epsilon_{\mu\nu\rho\sigma} Tr(F_{\mu\nu} F_{\rho\sigma}) d^x
 
 For G2 a basis of the algebra is explicitly constructed in 
 S. L. Cacciatori, B. L. Cerchiai, A. Della Vedova, G. Ortenzi, 
