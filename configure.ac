@@ -1,6 +1,6 @@
 AC_PREREQ([2.59])
 AC_INIT([gauge_topo_c], [1.2], [bonati@df.unipi.it bonati@pi.infn.it])
-AM_INIT_AUTOMAKE()
+AM_INIT_AUTOMAKE(subdir-objects)
 AC_CONFIG_SRCDIR([./src/gauge_topo.c])
 AC_CONFIG_HEADERS([config.h])
 
