@@ -233,20 +233,20 @@ int readinput(char *in_file, Const *param)
              { 
              do
                {
-               c=getc(input);
+               temp_i=getc(input);
                }
-             while(c!='\n');
+             while(temp_i!='\n');
              }
 
            /* check if the read line is tha last one */
-           c=getc(input);
-           if(c==EOF)
+           temp_i=getc(input);
+           if(temp_i==EOF)
              {
              end=0;
              }
            else
              {
-             ungetc(c, input);
+             ungetc(temp_i, input);
              }
            }
 
