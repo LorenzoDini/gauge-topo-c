@@ -143,8 +143,5 @@ analisi_loc.py: to compute e.g. b2, b4 (errors estimated with jacknife)
 analisi_top.py: to compute e.g. b2, b4 (errors estimated with jacknife)
            of topological observables
 
-merge.py: to prepare the files fo the reweighing
-
-
 For all the scripts some more details are obtained by calling 
 them (e.g. ./analisi.py).
