@@ -5,7 +5,7 @@ if ONE_FILE_COMPILATION
   gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h
   EXTRA_DIST = \
     ./src/input.in \
-    ./src/Analisi/ANALISIMH_G2.cc ./src/Analisi/merge.py \
+    ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
     ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
     ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
     ./src/Analisi/ordina.py \
@@ -50,7 +50,7 @@ else
     ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
   EXTRA_DIST = \
     ./src/input.in \
-    ./src/Analisi/ANALISIMH_G2.cc ./src/Analisi/merge.py \
+    ./src/Analisi/ANALISI_LOC.cc ./src/Analisi/analisi_loc.py \
     ./src/Analisi/ANALISI_TOP.cc ./src/Analisi/analisi_top.py \
     ./src/Analisi/AUTOCORR_SELF.cc ./src/Analisi/autocorr_self.py \
     ./src/Analisi/ordina.py \
