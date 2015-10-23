@@ -7,11 +7,7 @@
 #include"../Macro/macro.h"
 
 typedef struct SuN {
-   #ifdef __GNUC__
-     double complex comp[NCOLOR][NCOLOR] __attribute__ ((aligned (DOUBLE_ALIGN)));
-   #else
-     double complex comp[NCOLOR][NCOLOR];
-   #endif
+   double complex comp[NCOLOR][NCOLOR];
 } SuN;
 
 void one_SuN(SuN *__restrict__ A);         /* A=1 */

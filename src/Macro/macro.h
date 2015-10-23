@@ -3,10 +3,6 @@
 
 #include"../../config.h" 
 
-#if HAVE_POSIX_MEMALIGN==1 
-  #define _POSIX_C_SOURCE 200112L
-#endif
-
 /* the choice of the group is done with configure
 #define SuN_GROUP
 */
@@ -24,9 +20,6 @@
   #define GAUGE_GROUP SuN
 #endif
 
-
-#define INT_ALIGN 8
-#define DOUBLE_ALIGN 16
 
 #define MIN_VALUE 1.0e-13
 

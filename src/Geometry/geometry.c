@@ -24,78 +24,36 @@ void init_geometry(Geometry *geo, Const const * const param)
   int t, tp, tm, x, xp, xm, y, yp, ym, z, zp, zm;
   int ris, risp, rism;
   int i;
-  #if HAVE_POSIX_MEMALIGN == 1
-    void *vp;
-  #endif
 
   /* allocate memory */  
-  #if HAVE_POSIX_MEMALIGN == 1
-    t=posix_memalign(&vp, INT_ALIGN, param->d_volume*sizeof(int*));
-    if(t!=0)
-      {
-      fprintf(stderr, "Problems in allocating the geometry!\n");
-      }
-    geo->d_nnp=vp;
-    t=posix_memalign(&vp, INT_ALIGN, param->d_volume*sizeof(int*));
-    if(t!=0)
-      {
-      fprintf(stderr, "Problems in allocating the geometry!\n");
-      }
-    geo->d_nnm=vp;
-  #else
-    geo->d_nnp = (int **) malloc(param->d_volume * sizeof(int *));
-    if(geo->d_nnp==NULL)
-      {
-      fprintf(stderr, "Problems in allocating the geometry!\n");
-      }
-    geo->d_nnm = (int **) malloc(param->d_volume * sizeof(int *));
-    if(geo->d_nnm==NULL)
-      {
-      fprintf(stderr, "Problems in allocating the geometry!\n");
-      }
-  #endif
+  geo->d_nnp = (int **) malloc(param->d_volume * sizeof(int *));
+  if(geo->d_nnp==NULL)
+    {
+    fprintf(stderr, "Problems in allocating the geometry!\n");
+    }
+  geo->d_nnm = (int **) malloc(param->d_volume * sizeof(int *));
+  if(geo->d_nnm==NULL)
+    {
+    fprintf(stderr, "Problems in allocating the geometry!\n");
+    }
   for(i=0; i<(param->d_volume); i++)
      {
-     #if HAVE_POSIX_MEMALIGN == 1
-       t=posix_memalign(&vp, INT_ALIGN, 4*sizeof(int));
-       if(t!=0)
-         {
-         fprintf(stderr, "Problems in allocating the geometry!\n");
-         }
-       geo->d_nnp[i]=vp;
-       t=posix_memalign(&vp, INT_ALIGN, 4*sizeof(int));
-       if(t!=0)
-         {
-         fprintf(stderr, "Problems in allocating the geometry!\n");
-         }
-       geo->d_nnm[i]=vp;
-     #else
-       geo->d_nnp[i] = (int *) malloc(4 * sizeof(int)); 
-       if(geo->d_nnp[i]==NULL)
-         {
-         fprintf(stderr, "Problems in allocating the geometry!\n");
-         }
-       geo->d_nnm[i] = (int *) malloc(4 * sizeof(int)); 
-       if(geo->d_nnm[i]==NULL)
-         {
-         fprintf(stderr, "Problems in allocating the geometry!\n");
-         }
-     #endif
-     }
-  #if HAVE_POSIX_MEMALIGN == 1
-     t=posix_memalign(&vp, INT_ALIGN, param->d_volume*sizeof(int));
-     if(t!=0)
+     geo->d_nnp[i] = (int *) malloc(4 * sizeof(int)); 
+     if(geo->d_nnp[i]==NULL)
        {
        fprintf(stderr, "Problems in allocating the geometry!\n");
        }
-     geo->d_timeslice=vp;
-  #else
-     geo->d_timeslice = (int *) malloc(param->d_volume * sizeof(int));
-     if(geo->d_timeslice==NULL)
-      {
-      fprintf(stderr, "Problems in allocating the geometry!\n");
-      }
-  #endif
+     geo->d_nnm[i] = (int *) malloc(4 * sizeof(int)); 
+     if(geo->d_nnm[i]==NULL)
+       {
+       fprintf(stderr, "Problems in allocating the geometry!\n");
+       }
+     }
+   geo->d_timeslice = (int *) malloc(param->d_volume * sizeof(int));
+   if(geo->d_timeslice==NULL)
+     {
+     fprintf(stderr, "Problems in allocating the geometry!\n");
+     }
 
   /* assign values */
   for(t=0; t<(param->d_latot); t++)

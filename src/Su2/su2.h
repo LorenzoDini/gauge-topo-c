@@ -6,11 +6,7 @@
 #include<stdio.h>
 
 typedef struct Su2 {
-   #ifdef __GNUC__
-     double comp[4] __attribute__ ((aligned (DOUBLE_ALIGN)));
-   #else
-     double comp[4];
-   #endif
+   double comp[4];
 } Su2;
 
 void init_Su2(Su2 *__restrict__ A, double vec[4]);

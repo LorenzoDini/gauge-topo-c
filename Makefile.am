@@ -106,12 +106,7 @@ dSFMT=./src/Rng/dSFMT/dSFMT.c ./src/Rng/dSFMT/dSFMT-common.h ./src/Rng/dSFMT/dSF
   ./src/Rng/dSFMT/dSFMT-params.h
 
 
-LDADD=-lm 
+LDADD=-lm -lcrypto -lssl 
 
 
-AM_CFLAGS = -std=c99 -O3 -Wall --pedantic 
-
-
-if SIMD_CHECK_COMPILATION
-  AM_CPPFLAGS = @SIMD_FLAGS@
-endif
+AM_CFLAGS = -std=c99 -O3 -Wall

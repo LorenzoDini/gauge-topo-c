@@ -1,7 +1,6 @@
 #ifndef GAUGE_CONF_DEF_C
 #define GAUGE_CONF_DEF_C
 
-#include"../Macro/macro.h"
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,50 +9,28 @@
 #include"../Geometry/geometry.h"
 #include"gauge_conf.h"
 #include"../Func_Point/function_pointers.h"
+#include"../Macro/macro.h"
 #include"../Su2/su2.h"
 
 int init_gauge_conf(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
   {
   int i, j;
-  #if HAVE_POSIX_MEMALIGN == 1 
-  void *vp;
-  #endif
 
   /* allocate lattice */
-  #if HAVE_POSIX_MEMALIGN == 1 
-    j=posix_memalign(&vp, DOUBLE_ALIGN, param->d_volume * sizeof(GAUGE_GROUP *));
-    if(j!=0)
-      {
-      fprintf(stderr, "Problems in allocating the lattice!\n");
-      return 1;    
-      }
-    GC->lattice=vp;
-  #else
-    GC->lattice = (GAUGE_GROUP **) malloc(param->d_volume * sizeof(GAUGE_GROUP *)); 
-    if(GC->lattice == NULL)
-      {
-      fprintf(stderr, "Problems in allocating the lattice!\n");
-      return 1;    
-      }
-  #endif
+  GC->lattice = (GAUGE_GROUP **) malloc(param->d_volume * sizeof(GAUGE_GROUP *)); 
+  if(GC->lattice == NULL)
+    {
+    fprintf(stderr, "Problems in allocating the lattice!\n");
+    return 1;    
+    }
   for(i=0; i<(param->d_volume); i++)
      {
-     #if HAVE_POSIX_MEMALIGN == 1 
-       j=posix_memalign(&vp, DOUBLE_ALIGN, 4 * sizeof(GAUGE_GROUP));
-       if(j!=0)
-         {
-         fprintf(stderr, "Problems in allocating the lattice!\n");
-         return 1;    
-         }
-       GC->lattice[i]=vp;
-     #else
-       GC->lattice[i] = (GAUGE_GROUP *) malloc( 4 * sizeof(GAUGE_GROUP)); 
-       if(GC->lattice[i]==NULL)
-         {
-         fprintf(stderr, "Problems in allocating the lattice!\n");
-         return 1;    
-         }
-     #endif
+     GC->lattice[i] = (GAUGE_GROUP *) malloc( 4 * sizeof(GAUGE_GROUP)); 
+     if(GC->lattice[i]==NULL)
+       {
+       fprintf(stderr, "Problems in allocating the lattice!\n");
+       return 1;    
+       }
      }
 
   /* initialize geometry */
@@ -177,43 +154,21 @@ void save_on_file(Gauge_Conf const *__restrict__ const GC, Const const *__restri
 void init_gauge_conf_from_gauge_conf(Gauge_Conf *__restrict__ GC, Gauge_Conf const *__restrict__ const GC2, Const const *__restrict__ const param) 
   {
   int i, j;
-  #if HAVE_POSIX_MEMALIGN==1
-  void *vp;
-  #endif
 
   /* allocate lattice */
-  #if HAVE_POSIX_MEMALIGN==1
-    j=posix_memalign(&vp, DOUBLE_ALIGN, param->d_volume * sizeof(GAUGE_GROUP *));
-    if(j!=0)
-      {
-      fprintf(stderr, "Problems in allocating the lattice!\n");
-      }
-    GC->lattice=vp;
-  #else
-    GC->lattice = (GAUGE_GROUP **) malloc(param->d_volume * sizeof(GAUGE_GROUP *)); 
-    if(GC->lattice == NULL)
-      {
-      fprintf(stderr, "Problems in allocating the lattice!\n");
-      }
-  #endif
+  GC->lattice = (GAUGE_GROUP **) malloc(param->d_volume * sizeof(GAUGE_GROUP *)); 
+  if(GC->lattice == NULL)
+    {
+    fprintf(stderr, "Problems in allocating the lattice!\n");
+    }
 
   for(i=0; i<(param->d_volume); i++)
      {
-     #if HAVE_POSIX_MEMALIGN==1
-       j=posix_memalign(&vp, DOUBLE_ALIGN, 4 * sizeof(GAUGE_GROUP));
-       if(j!=0)
-         {
-         fprintf(stderr, "Problems in allocating the lattice!\n");
-         }
-       GC->lattice[i]=vp;
-     #else
-       GC->lattice[i] = (GAUGE_GROUP *) malloc( 4 * sizeof(GAUGE_GROUP)); 
-      if(GC->lattice[i] == NULL)
-        {
-        fprintf(stderr, "Problems in allocating the lattice!\n");
-        }
-     #endif
-
+     GC->lattice[i] = (GAUGE_GROUP *) malloc( 4 * sizeof(GAUGE_GROUP)); 
+     if(GC->lattice[i] == NULL)
+       {
+       fprintf(stderr, "Problems in allocating the lattice!\n");
+       }
      }
 
   /* initialize geometry */

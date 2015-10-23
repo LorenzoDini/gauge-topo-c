@@ -44,26 +44,6 @@ usual by
 make
 
 
-**KNOWN ISSUES
-********************************************************
-
-On some systems, configure fails while checking for 
-the presence of the SIMD extensions, i.e. in one of
-the following lines
-
-checking for x86 cpuid 0x00000001 output... 20655:1100800:29ae3ff:bfebfbff
-checking whether mmx is supported... yes
-checking whether sse is supported... yes
-checking whether sse2 is supported... yes
-checking whether sse3 is supported... yes
-checking whether ssse3 is supported... yes
-checking whether sse4.1 is supported... yes
-checking whether sse4.2 is supported... yes
-checking whether avx is supported... no
-
-if this happens use
---disable-simd-check
-
 
 ** INPUT PARAMETERS
 ********************************************************
@@ -123,6 +103,16 @@ the others are of the form
  top. charge and average plaquette after "nummeas*cooling" cooling steps \
 
 in case cooling =0 or <0 the last 5 columns are all equal. 
+
+
+** TOOLS
+********************************************************
+conf_check.c is a code to check that the md5sum of the configuration
+coincides with the one stored at the beginning of the config.
+
+conf_convert.c is a code to switch the endianess of a configuration
+
+
 
 ** ANALYSIS
 ********************************************************

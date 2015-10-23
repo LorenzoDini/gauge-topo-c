@@ -209,7 +209,6 @@ PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
-SIMD_FLAGS = @SIMD_FLAGS@
 STRIP = @STRIP@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
@@ -351,9 +350,8 @@ dSFMT = ./src/Rng/dSFMT/dSFMT.c ./src/Rng/dSFMT/dSFMT-common.h ./src/Rng/dSFMT/d
   ./src/Rng/dSFMT/dSFMT-params521.h ./src/Rng/dSFMT/dSFMT-params86243.h \
   ./src/Rng/dSFMT/dSFMT-params.h
 
-LDADD = -lm 
-AM_CFLAGS = -std=c99 -O3 -Wall --pedantic 
-@SIMD_CHECK_COMPILATION_TRUE@AM_CPPFLAGS = @SIMD_FLAGS@
+LDADD = -lm -lcrypto -lssl 
+AM_CFLAGS = -std=c99 -O3 -Wall
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 

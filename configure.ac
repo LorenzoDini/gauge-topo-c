@@ -1,5 +1,5 @@
 AC_PREREQ([2.59])
-AC_INIT([gauge_topo_c], [1.2], [bonati@df.unipi.it bonati@pi.infn.it])
+AC_INIT([gauge_topo_c], [1.2], [claudio.bonati@df.unipi.it bonati@pi.infn.it])
 AM_INIT_AUTOMAKE(subdir-objects)
 AC_CONFIG_SRCDIR([./src/gauge_topo.c])
 AC_CONFIG_HEADERS([config.h])
@@ -21,11 +21,6 @@ fi
 AM_CONDITIONAL([ONE_FILE_COMPILATION], [test x${one_file_mode} = xyes])
 
 
-# to disable simd check
-AC_ARG_ENABLE([simd-check], [  --disable-simd-check     to disable simd check], [simd_check_mode=no], [simd_check_mode=yes])
-AM_CONDITIONAL([SIMD_CHECK_COMPILATION], [test x${simd_check_mode} = xyes])
-
-
 # Choice of the gauge group
 AC_ARG_VAR(GAUGEGROUP, choices are Su2 SuN G2)
 AC_ARG_VAR(N_c, the number of color for SuN)
@@ -35,16 +30,9 @@ AC_ARG_VAR(N_c, the number of color for SuN)
 AC_PROG_CC
 
 
-# Checks for simd extensions
-AS_IF([test x${simd_check_mode} = xyes], [AX_EXT])
-
-
 # Checks for header files.
 AC_CHECK_HEADERS([complex.h math.h stdio.h stdlib.h time.h])
 
-
-#check for posix_memalign, otherwise malloc is used
-AC_CHECK_FUNCS([posix_memalign])
 
 #define the group-related macro
 if test x${GAUGEGROUP} = xSu2; then

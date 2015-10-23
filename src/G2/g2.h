@@ -9,11 +9,7 @@
 #include<stdio.h>
 
 typedef struct G2 {
-   #ifdef __GNUC__
-     double comp[7][7] __attribute__ ((aligned (DOUBLE_ALIGN)));
-   #else
-     double comp[7][7];
-   #endif
+   double comp[7][7];
 } G2;
 
 void one_G2(G2 *__restrict__ A);         /* A=1 */
