@@ -6,11 +6,12 @@
 #include<math.h>
 #include<stdio.h>
 
+#include"../Endian/endianness.h"
 #include"../Rng/random.h"
 
 #include"su2.h"
 
-void init_Su2(Su2 *__restrict__ A, double vec[4])
+void init_Su2(Su2 *A, double vec[4])
   {
   A->comp[0]=vec[0];
   A->comp[1]=vec[1];
@@ -20,7 +21,7 @@ void init_Su2(Su2 *__restrict__ A, double vec[4])
   
 
 /* A=1 */
-void one_Su2(Su2 *__restrict__ A)
+void one_Su2(Su2 *A)
   {
   A->comp[0]=1.0;
   A->comp[1]=0.0;
@@ -30,7 +31,7 @@ void one_Su2(Su2 *__restrict__ A)
 
 
 /* A=0 */
-void zero_Su2(Su2 *__restrict__ A)
+void zero_Su2(Su2 *A)
   {
   A->comp[0]=0.0;
   A->comp[1]=0.0;
@@ -40,7 +41,7 @@ void zero_Su2(Su2 *__restrict__ A)
 
 
 /* A=B */
-void equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void equal_Su2(Su2 *A, Su2 const * const B)
   {
   A->comp[0]=B->comp[0];
   A->comp[1]=B->comp[1];
@@ -50,7 +51,7 @@ void equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A=B^{dag} */
-void equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void equal_dag_Su2(Su2 *A, Su2 const * const B)
   {
   A->comp[0]=B->comp[0];
   A->comp[1]=-B->comp[1];
@@ -60,7 +61,7 @@ void equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A+=B */
-void plus_equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void plus_equal_Su2(Su2 *A, Su2 const * const B)
   {
   A->comp[0]+=B->comp[0];
   A->comp[1]+=B->comp[1];
@@ -70,7 +71,7 @@ void plus_equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A+=B^{dag} */
-void plus_equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void plus_equal_dag_Su2(Su2 *A, Su2 const * const B)
   {
   A->comp[0]+=B->comp[0];
   A->comp[1]-=B->comp[1];
@@ -80,7 +81,7 @@ void plus_equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A-=B */
-void minus_equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void minus_equal_Su2(Su2 *A, Su2 const * const B)
   {
   A->comp[0]-=B->comp[0];
   A->comp[1]-=B->comp[1];
@@ -90,7 +91,7 @@ void minus_equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A-=B^{dag} */
-void minus_equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void minus_equal_dag_Su2(Su2 *A, Su2 const * const B)
   {
   A->comp[0]-=B->comp[0];
   A->comp[1]+=B->comp[1];
@@ -100,7 +101,7 @@ void minus_equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A=b*B+c*C */
-void lin_comb_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ const B, double c, Su2 const *__restrict__ const C)
+void lin_comb_Su2(Su2 *A, double b, Su2 const * const B, double c, Su2 const * const C)
   {
   A->comp[0]= b*B->comp[0] + c*C->comp[0];
   A->comp[1]= b*B->comp[1] + c*C->comp[1];
@@ -110,7 +111,7 @@ void lin_comb_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ const B
 
 
 /* A=b*B^{dag}+c*C */
-void lin_comb_dag1_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ const B, double c, Su2 const *__restrict__ const C)
+void lin_comb_dag1_Su2(Su2 *A, double b, Su2 const * const B, double c, Su2 const * const C)
   {
   A->comp[0]=  b*B->comp[0] + c*C->comp[0];
   A->comp[1]= -b*B->comp[1] + c*C->comp[1];
@@ -120,7 +121,7 @@ void lin_comb_dag1_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ co
 
 
 /* A=b*B+c*C^{dag} */
-void lin_comb_dag2_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ const B, double c, Su2 const *__restrict__ const C)
+void lin_comb_dag2_Su2(Su2 *A, double b, Su2 const * const B, double c, Su2 const * const C)
   {
   A->comp[0]= b*B->comp[0] + c*C->comp[0];
   A->comp[1]= b*B->comp[1] - c*C->comp[1];
@@ -130,7 +131,7 @@ void lin_comb_dag2_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ co
 
 
 /* A=b*B^{dag}+c*C^{dag} */
-void lin_comb_dag12_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ const B, double c, Su2 const *__restrict__ const C)
+void lin_comb_dag12_Su2(Su2 *A, double b, Su2 const * const B, double c, Su2 const * const C)
   {
   A->comp[0]=  b*B->comp[0] + c*C->comp[0];
   A->comp[1]= -b*B->comp[1] - c*C->comp[1];
@@ -140,7 +141,7 @@ void lin_comb_dag12_Su2(Su2 *__restrict__ A, double b, Su2 const *__restrict__ c
 
 
 /* A*=r */
-void times_equal_real_Su2(Su2 *__restrict__ A, double r)
+void times_equal_real_Su2(Su2 *A, double r)
   {
   A->comp[0]*=r;
   A->comp[1]*=r;
@@ -150,7 +151,7 @@ void times_equal_real_Su2(Su2 *__restrict__ A, double r)
 
 
 /* A*=B       */
-void times_equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void times_equal_Su2(Su2 *A, Su2 const * const B)
   {
   double a0, a1, a2, a3;
 
@@ -167,7 +168,7 @@ void times_equal_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A*=B^{dag} */
-void times_equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
+void times_equal_dag_Su2(Su2 *A, Su2 const * const B)
   {
   double a0, a1, a2, a3;
 
@@ -184,7 +185,7 @@ void times_equal_dag_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B)
 
 
 /* A=B*C             */
-void times_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 const *__restrict__ const C)
+void times_Su2(Su2 *A, Su2 const * const B, Su2 const * const C)
   {
   A->comp[0]= B->comp[0]*C->comp[0] - B->comp[1]*C->comp[1] - B->comp[2]*C->comp[2] - B->comp[3]*C->comp[3];
   A->comp[1]= B->comp[0]*C->comp[1] + B->comp[1]*C->comp[0] - B->comp[2]*C->comp[3] + B->comp[3]*C->comp[2];
@@ -194,7 +195,7 @@ void times_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 const *
 
 
 /* A=B^{dag}*C       */
-void times_dag1_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 const *__restrict__ const C)
+void times_dag1_Su2(Su2 *A, Su2 const * const B, Su2 const * const C)
   {
   A->comp[0]= B->comp[0]*C->comp[0] + B->comp[1]*C->comp[1] + B->comp[2]*C->comp[2] + B->comp[3]*C->comp[3];
   A->comp[1]= B->comp[0]*C->comp[1] - B->comp[1]*C->comp[0] + B->comp[2]*C->comp[3] - B->comp[3]*C->comp[2];
@@ -204,7 +205,7 @@ void times_dag1_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 co
 
 
 /* A=B*C^{dag}       */
-void times_dag2_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 const *__restrict__ const C)
+void times_dag2_Su2(Su2 *A, Su2 const * const B, Su2 const * const C)
   {
   A->comp[0]=  B->comp[0]*C->comp[0] + B->comp[1]*C->comp[1] + B->comp[2]*C->comp[2] + B->comp[3]*C->comp[3];
   A->comp[1]= -B->comp[0]*C->comp[1] + B->comp[1]*C->comp[0] + B->comp[2]*C->comp[3] - B->comp[3]*C->comp[2];
@@ -214,7 +215,7 @@ void times_dag2_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 co
 
 
 /* A=B^{dag}*C^{dag}       */
-void times_dag12_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 const *__restrict__ const C)
+void times_dag12_Su2(Su2 *A, Su2 const * const B, Su2 const * const C)
   {
   A->comp[0]=  B->comp[0]*C->comp[0] - B->comp[1]*C->comp[1] - B->comp[2]*C->comp[2] - B->comp[3]*C->comp[3];
   A->comp[1]= -B->comp[0]*C->comp[1] - B->comp[1]*C->comp[0] - B->comp[2]*C->comp[3] + B->comp[3]*C->comp[2];
@@ -224,7 +225,7 @@ void times_dag12_Su2(Su2 *__restrict__ A, Su2 const *__restrict__ const B, Su2 c
 
 
 /* random SU(2) matrix */
-void rand_matrix_Su2(Su2 *__restrict__ A)
+void rand_matrix_Su2(Su2 *A)
   {
   double p0, p1, p2, p3, p;
 
@@ -251,7 +252,7 @@ void rand_matrix_Su2(Su2 *__restrict__ A)
 
 
 /* random SU(2) matrix with p0 given (used in the update) */
-void rand_matrix_p0_Su2(double p0, Su2 *__restrict__ A)
+void rand_matrix_p0_Su2(double p0, Su2 *A)
   {
   register double p1, p2, p3, p;
 
@@ -279,27 +280,27 @@ void rand_matrix_p0_Su2(double p0, Su2 *__restrict__ A)
 
 
 /* real part of the trace /2 */
-double retr_Su2(Su2 const *__restrict__ const A)
+double retr_Su2(Su2 const * const A)
    {
    return A->comp[0];
    }
 
 
 /* imaginary part of the trace /2 */
-double imtr_Su2(Su2 const *__restrict__ const A)
+double imtr_Su2(Su2 const * const A)
    {
    return 0.0;
    }
 
 /* sqrt of the determinant */
-double sqrtdet_Su2(Su2 const *__restrict__ const A)
+double sqrtdet_Su2(Su2 const * const A)
    {
    return sqrt(A->comp[0]*A->comp[0] + A->comp[1]*A->comp[1] + A->comp[2]*A->comp[2] + A->comp[3]*A->comp[3]);
    }
 
 
 /* unitarize the matrix */
-void unitarize_Su2(Su2 *__restrict__ A)
+void unitarize_Su2(Su2 *A)
    {
    double p;
 
@@ -314,21 +315,31 @@ void unitarize_Su2(Su2 *__restrict__ A)
 
 
 /* print on screen */
-void print_on_screen_Su2(Su2 const *__restrict__ const A)
+void print_on_screen_Su2(Su2 const * const A)
   {
-  printf("%.16g %.16g %.16g %.16g\n", A->comp[0], A->comp[1], A->comp[2], A->comp[3]);
+  printf("%.16f %.16f %.16f %.16f\n", A->comp[0], A->comp[1], A->comp[2], A->comp[3]);
   }
 
 
 /* print on file */
-void print_on_file_Su2(FILE *fp, Su2 const *__restrict__ const A)
+void print_on_file_Su2(FILE *fp, Su2 const * const A)
   {
-  fprintf(fp, "%.16g %.16g %.16g %.16g\n", A->comp[0], A->comp[1], A->comp[2], A->comp[3]);
+  fprintf(fp, "%.16f %.16f %.16f %.16f\n", A->comp[0], A->comp[1], A->comp[2], A->comp[3]);
   }
 
 
-/* read form file */
-void read_from_file_Su2(FILE *fp, Su2 *__restrict__ A)
+/* print on binary file */
+void print_on_binary_file_Su2(FILE *fp, Su2 const * const A)
+  {
+  fwrite(&(A->comp[0]), 1, sizeof(double), fp);
+  fwrite(&(A->comp[1]), 1, sizeof(double), fp);
+  fwrite(&(A->comp[2]), 1, sizeof(double), fp);
+  fwrite(&(A->comp[3]), 1, sizeof(double), fp);
+  }
+
+
+/* read from file */
+void read_from_file_Su2(FILE *fp, Su2 *A)
   {
   int err=fscanf(fp, "%lg %lg %lg %lg", &(A->comp[0]), &(A->comp[1]), &(A->comp[2]), &(A->comp[3]));
 
@@ -336,6 +347,43 @@ void read_from_file_Su2(FILE *fp, Su2 *__restrict__ A)
     {
     fprintf(stderr, "Problems reading Su2 matrix from file");
     }
+  }
+
+
+/* read from binary file */
+void read_from_binary_file_Su2(FILE *fp, Su2 *A)
+  {
+  int err=0;
+  err+=fread(&(A->comp[0]), sizeof(double), 1, fp);
+  err+=fread(&(A->comp[1]), sizeof(double), 1, fp);
+  err+=fread(&(A->comp[2]), sizeof(double), 1, fp);
+  err+=fread(&(A->comp[3]), sizeof(double), 1, fp);
+  
+  if(err!=4)
+    {
+    fprintf(stderr, "Problems reading Su2 matrix from file");
+    }
+  }
+
+
+/* read from binary file changing endiannes */
+void read_from_binary_file_swap_Su2(FILE *fp, Su2 *A)
+  {
+  int err=0;
+  err+=fread(&(A->comp[0]), sizeof(double), 1, fp);
+  err+=fread(&(A->comp[1]), sizeof(double), 1, fp);
+  err+=fread(&(A->comp[2]), sizeof(double), 1, fp);
+  err+=fread(&(A->comp[3]), sizeof(double), 1, fp);
+  
+  if(err!=4)
+    {
+    fprintf(stderr, "Problems reading Su2 matrix from file");
+    }
+
+  SwapBytesDouble((void *)&(A->comp[0]));
+  SwapBytesDouble((void *)&(A->comp[1]));
+  SwapBytesDouble((void *)&(A->comp[2]));
+  SwapBytesDouble((void *)&(A->comp[3]));
   }
 
 

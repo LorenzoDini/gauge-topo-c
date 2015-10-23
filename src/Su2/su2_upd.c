@@ -13,7 +13,7 @@
 
 /* random number generator for heabath (see Kennedy, Pendleton Phys. Lett. B 156, 393 (1985))
    given "k" return "a" in [-1,1] with P(a) = sqrt(1-a*a)*exp(k*a) */
-void randheat_Su2(double k, double *__restrict__ out)
+void randheat_Su2(double k, double *out)
     {
     double r, r1, r2, c, r3;
 
@@ -69,10 +69,9 @@ void randheat_Su2(double k, double *__restrict__ out)
 
 
 /* heatbath */
-void single_heatbath_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const staple, Const const *__restrict__ const param)
+void single_heatbath_Su2(Su2 *link, Su2 const * const staple, Const const * const param)
     {
     double p, p0;
-    FILE *fp;  
     Su2 matrix1, matrix2;
 
     equal_Su2(&matrix1, staple);                    /* matrix1=staple */
@@ -89,21 +88,14 @@ void single_heatbath_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const s
       rand_matrix_p0_Su2(p0, link);
       times_equal_Su2(link, &matrix2);        /* link*=matrix2 */
       }
-    else
-      {
-      fp=fopen(param->err_file, "a");
-      fprintf(fp, "Warning: in the heatbath in Su2_upd.cc p=%g < min_value\n",  p);
-      fclose(fp);
-      }
     }
 
 
 /* overrelaxation */
-void single_overrelaxation_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const staple, Const const *__restrict__ const param)
+void single_overrelaxation_Su2(Su2 *link, Su2 const * const staple, Const const * const param)
     {
     double p;
     Su2 matrix1, matrix2;
-    FILE *fp; 
 
     equal_Su2(&matrix1, staple); /* matrix1=staple */
 
@@ -117,17 +109,12 @@ void single_overrelaxation_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ c
       times_dag1_Su2(&matrix1, &matrix2, link);  /* matrix1=matrix2*link^{dag} */
       times_Su2(link, &matrix1, &matrix2);       /* link=matrix1*matrix2 */
       }
-    else
-      {
-      fp=fopen(param->err_file, "a");
-      fprintf(fp, "Warning: in the overrelaxation in Su2_upd.cc p=%g < min_value\n",  p);
-      fclose(fp);
-      }
     }
 
 
+
 /* cooling */
-void cool_Su2(Su2 *__restrict__ link, Su2 const *__restrict__ const staple)
+void cool_Su2(Su2 *link, Su2 const * const staple)
     {
     Su2 matrix1;
     

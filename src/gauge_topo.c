@@ -1,5 +1,5 @@
-#ifndef GAUGE_TOPO_H
-#define GAUGE_TOPO_H
+#ifndef GAUGE_TOPO_C
+#define GAUGE_TOPO_C
 
 #include<stdio.h>
 #include<stdlib.h>
