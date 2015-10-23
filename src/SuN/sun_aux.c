@@ -14,11 +14,7 @@
    4 xi^2 = redet2[s-s^(dag)+1*tr(s^(dag))]
    u = [s-s^(dag)+1*tr(s^(dag))]/2/xi 
    (see Kennedy, Pendleton Phys. Lett. B 156, 393 (1985))  */
-void ennetodue(SuN const *__restrict__ const in, 
-               int i,  
-               int j, 
-               double *xi, 
-               Su2 *__restrict__ u)
+void ennetodue(SuN const * const in, int i, int j, double *xi, Su2 *u)
    {
    double s[2][2][2], auxr[2][2], auxi[2][2];
    double p;
@@ -67,10 +63,7 @@ void ennetodue(SuN const *__restrict__ const in,
 
 
 /* given a 2*2 matrix extend to N*N with 1 on the diagonal */
-void duetoenne(Su2 const *__restrict__ const in, 
-               int i, 
-               int j, 
-               SuN *__restrict__ out)
+void duetoenne(Su2 const * const in, int i, int j, SuN *out)
    {
    one_SuN(out);
 

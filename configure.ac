@@ -37,24 +37,24 @@ AC_CHECK_HEADERS([complex.h math.h stdio.h stdlib.h time.h])
 #define the group-related macro
 if test x${GAUGEGROUP} = xSu2; then
   AC_DEFINE(Su2_GROUP,, [Uses the gauge group SU(2)])
-  AC_DEFINE(NCOLOR, 2, [Number of colors])
+  AC_DEFINE(Ncolor, 2, [Number of colors])
 else
   if test x${GAUGEGROUP} = xG2; then
     AC_DEFINE(G2_GROUP,, [Uses the gauge group G2])
-    AC_DEFINE(NCOLOR, 7, [Number of colors])
+    AC_DEFINE(Ncolor, 7, [Number of colors])
   else
     if test x${GAUGEGROUP} = xSuN; then
       AC_DEFINE(SuN_GROUP,, [Uses the gauge group SU(N)])
       if test x${N_c} = x; then
         AC_MSG_WARN(No chosen N_c: using the default N_c=2)
-        AC_DEFINE(NCOLOR, 2, [Number of colors])
+        AC_DEFINE(Ncolor, 2, [Number of colors])
       else
-        AC_DEFINE_UNQUOTED(NCOLOR, ${N_c}, [Number of colors])
+        AC_DEFINE_UNQUOTED(Ncolor, ${N_c}, [Number of colors])
       fi
     else
       AC_MSG_WARN(No chosen GAUGEGROUP: using the default Su2)
       AC_DEFINE(Su2_GROUP,, [Uses the gauge group SU(2)])
-      AC_DEFINE(NCOLOR, 2, [Number of colors])
+      AC_DEFINE(Ncolor, 2, [Number of colors])
     fi
   fi
 fi

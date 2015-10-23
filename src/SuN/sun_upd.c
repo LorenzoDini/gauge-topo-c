@@ -8,33 +8,31 @@
 #include<stdio.h>
 
 #include"../Const/const.h"
+#include"../Rng/random.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
 #include"sun.h"
 #include"sun_aux.h"
 
-/* Pseudo-heatbath by Cabibbo-Marinari (Phys. Lett. B 119, p.387 (1982)) 
-   in the implementation by Kennedy, Pendleton (Phys. Lett. B 156, p.393 (1985)) */
-void single_heatbath_SuN(SuN *__restrict__ link, 
-                         SuN const *__restrict__ const staple, 
-                         Const const *__restrict__ const param)
+/* Pseudo-heatbath by Cabibbo-Marinari (Phys. Lett. B 119, p.387 (1982)) in the implementation by
+   Kennedy, Pendleton (Phys. Lett. B 156, p.393 (1985)) */
+void single_heatbath_SuN(SuN *link, SuN const * const staple, Const const * const param)
     {
     SuN aux, final;
     Su2 u, v, w;
     double xi, p0; 
-    double complex temp[2];
+    double complex temp0, temp1;
     int i, j, k;
-    FILE *fp; 
 
-    for(i=0; i<NCOLOR-1; i++)
+    for(i=0; i<Ncolor-1; i++)
        {
-       for(j=i+1; j<NCOLOR; j++)
+       for(j=i+1; j<Ncolor; j++)
           {
           equal_SuN(&aux, staple);     /* aux=staple */
           times_equal_SuN(&aux, link); /*aux=staple*link */
           ennetodue(&aux, i, j, &xi, &u);
 
-          xi*=(param->d_beta)*2.0/((double) NCOLOR);
+          xi*=(param->d_beta)*2.0/((double) Ncolor);
 
           if(xi>MIN_VALUE)
             {
@@ -47,41 +45,32 @@ void single_heatbath_SuN(SuN *__restrict__ link,
             duetoenne(&w, i, j, &final); 
 
             /* link*=final */
-            for(k=0; k<NCOLOR; k++)
+            for(k=0; k<Ncolor; k++)
                {
-               temp[0]=link->comp[k][i]*final.comp[i][i] + link->comp[k][j]*final.comp[j][i];
-               temp[1]=link->comp[k][i]*final.comp[i][j] + link->comp[k][j]*final.comp[j][j];
-               link->comp[k][i]=temp[0];
-               link->comp[k][j]=temp[1];
+               temp0=link->comp[k][i]*final.comp[i][i] + link->comp[k][j]*final.comp[j][i];
+               temp1=link->comp[k][i]*final.comp[i][j] + link->comp[k][j]*final.comp[j][j];
+               link->comp[k][i]=temp0;
+               link->comp[k][j]=temp1;
                }
-            }
-          else
-            {
-            fp=fopen(param->err_file, "a");
-            fprintf(fp, "Warning: nell'heatbath in sun_upd.c xi=%g < min_value\n", xi); 
-            fclose(fp);
             }
           }
        }
     }
 
 
-/* Pseudo-overrelaxation by Cabibbo-Marinari (Phys. Lett. B 119, p.387 (1982)) 
-   in the implementation by Kennedy, Pendleton (Phys. Lett. B 156, p.393 (1985)) */
-void single_overrelaxation_SuN(SuN *__restrict__ link, 
-                               SuN const *__restrict__ const staple, 
-                               Const const *__restrict__ const param)
+/* Pseudo-overrelaxation by Cabibbo-Marinari (Phys. Lett. B 119, p.387 (1982)) in the implementation by
+   Kennedy, Pendleton (Phys. Lett. B 156, p.393 (1985)) */
+void single_overrelaxation_SuN(SuN *link, SuN const * const staple, Const const * const param)
     {
     SuN aux, final;
     Su2 u,v;
     double xi; 
-    double complex temp[2];
+    double complex temp0, temp1;
     int i, j, k;
-    FILE *fp; 
 
-    for(i=0; i<NCOLOR-1; i++)
+    for(i=0; i<Ncolor-1; i++)
        {
-       for(j=i+1; j<NCOLOR; j++)
+       for(j=i+1; j<Ncolor; j++)
           { 
           equal_SuN(&aux, staple);     /* aux=staple */
           times_equal_SuN(&aux, link); /*aux=staple*link */
@@ -95,27 +84,21 @@ void single_overrelaxation_SuN(SuN *__restrict__ link,
             duetoenne(&v, i, j, &final); 
 
             /*link*=final */
-            for(k=0; k<NCOLOR; k++)
+            for(k=0; k<Ncolor; k++)
                {
-               temp[0]=link->comp[k][i]*final.comp[i][i] + link->comp[k][j]*final.comp[j][i];
-               temp[1]=link->comp[k][i]*final.comp[i][j] + link->comp[k][j]*final.comp[j][j];
-               link->comp[k][i]=temp[0];
-               link->comp[k][j]=temp[1];
+               temp0=link->comp[k][i]*final.comp[i][i] + link->comp[k][j]*final.comp[j][i];
+               temp1=link->comp[k][i]*final.comp[i][j] + link->comp[k][j]*final.comp[j][j];
+               link->comp[k][i]=temp0;
+               link->comp[k][j]=temp1;
                }
-            }
-          else
-            {
-            fp=fopen(param->err_file, "a");
-            fprintf(fp, "Warning: nell'overrelaxation in sun_upd.c xi=%g < min_value\n", xi); 
-            fclose(fp);
             }
           }
        }
     }
 
+
 /* cooling */
-void cool_SuN(SuN *__restrict__ link, 
-              SuN const *__restrict__ const staple)
+void cool_SuN(SuN *link, SuN const * const staple)
   {
   SuN prod, auxN;
   Su2 aux2, aux2bis;
@@ -126,9 +109,9 @@ void cool_SuN(SuN *__restrict__ link,
   equal_SuN(&prod, staple);         /* prod=staple */
   times_equal_SuN(&prod, link);     /* prod=staple*link */
  
-  for(i=0; i<NCOLOR-1; i++)
+  for(i=0; i<Ncolor-1; i++)
      {
-     for(j=i+1; j<NCOLOR; j++)
+     for(j=i+1; j<Ncolor; j++)
         {
         ennetodue(&prod, i, j, &xi, &aux2);
 
@@ -137,7 +120,7 @@ void cool_SuN(SuN *__restrict__ link,
         duetoenne(&aux2bis, i, j, &auxN);
 
         /* link*=final */
-        for(k=0; k<NCOLOR; k++)
+        for(k=0; k<Ncolor; k++)
            {
            temp[0]=link->comp[k][i]*auxN.comp[i][i] + link->comp[k][j]*auxN.comp[j][i];
            temp[1]=link->comp[k][i]*auxN.comp[i][j] + link->comp[k][j]*auxN.comp[j][j];
@@ -145,8 +128,8 @@ void cool_SuN(SuN *__restrict__ link,
            link->comp[k][j]=temp[1];
            }
 
-        /*prod*=final */
-        for(k=0; k<NCOLOR; k++)
+        /* prod*=final */
+        for(k=0; k<Ncolor; k++)
            {
            temp[0]=prod.comp[k][i]*auxN.comp[i][i] + prod.comp[k][j]*auxN.comp[j][i];
            temp[1]=prod.comp[k][i]*auxN.comp[i][j] + prod.comp[k][j]*auxN.comp[j][j];

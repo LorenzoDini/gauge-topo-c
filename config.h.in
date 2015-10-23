@@ -43,7 +43,7 @@
 #undef HAVE_UNISTD_H
 
 /* Number of colors */
-#undef NCOLOR
+#undef Ncolor
 
 /* Activate the one file compilation */
 #undef ONE_FILE_MODE

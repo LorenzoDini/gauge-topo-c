@@ -3962,7 +3962,7 @@ if test x${GAUGEGROUP} = xSu2; then
 $as_echo "#define Su2_GROUP /**/" >>confdefs.h
 
 
-$as_echo "#define NCOLOR 2" >>confdefs.h
+$as_echo "#define Ncolor 2" >>confdefs.h
 
 else
   if test x${GAUGEGROUP} = xG2; then
@@ -3970,7 +3970,7 @@ else
 $as_echo "#define G2_GROUP /**/" >>confdefs.h
 
 
-$as_echo "#define NCOLOR 7" >>confdefs.h
+$as_echo "#define Ncolor 7" >>confdefs.h
 
   else
     if test x${GAUGEGROUP} = xSuN; then
@@ -3981,12 +3981,12 @@ $as_echo "#define SuN_GROUP /**/" >>confdefs.h
         { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: No chosen N_c: using the default N_c=2" >&5
 $as_echo "$as_me: WARNING: No chosen N_c: using the default N_c=2" >&2;}
 
-$as_echo "#define NCOLOR 2" >>confdefs.h
+$as_echo "#define Ncolor 2" >>confdefs.h
 
       else
 
 cat >>confdefs.h <<_ACEOF
-#define NCOLOR ${N_c}
+#define Ncolor ${N_c}
 _ACEOF
 
       fi
@@ -3997,7 +3997,7 @@ $as_echo "$as_me: WARNING: No chosen GAUGEGROUP: using the default Su2" >&2;}
 $as_echo "#define Su2_GROUP /**/" >>confdefs.h
 
 
-$as_echo "#define NCOLOR 2" >>confdefs.h
+$as_echo "#define Ncolor 2" >>confdefs.h
 
     fi
   fi

@@ -5,6 +5,7 @@
 
 #ifdef ONE_FILE_MODE
   #include"./Const/const.h"
+  #include"./Endian/endianness.h"
   #include"./Func_Point/function_pointers.h"
   #include"./G2/g2.h"
   #include"./G2/g2_check.h"
@@ -21,6 +22,7 @@
   #include"./SuN/sun_upd.h"
 
   #include"./Const/const.c"
+  #include"./Endian/endianness.c"
   #include"./Func_Point/function_pointers.c"
   #include"./G2/g2.c"
   #include"./G2/g2_check.c"

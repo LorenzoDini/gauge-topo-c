@@ -25,7 +25,7 @@ int main (int argc, char **argv)
 
       printf("Compiled with:\n");
       printf("  gauge group: %s\n", QUOTEME(GAUGE_GROUP));
-      printf("  number of colors: %d\n", NCOLOR);
+      printf("  number of colors: %d\n", Ncolor);
       return 0;
       }
     else
