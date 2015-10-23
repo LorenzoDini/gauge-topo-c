@@ -15,7 +15,7 @@
 
 
 /* compute the staple in position r, direction i and save it in M */
-void calcstaples(Gauge_Conf const *__restrict__ const GC, int r, int i, GAUGE_GROUP *__restrict__ M) 
+void calcstaples(Gauge_Conf const * const GC, int r, int i, GAUGE_GROUP *M) 
    {
    int j, k;
    GAUGE_GROUP aux;
@@ -69,7 +69,7 @@ void calcstaples(Gauge_Conf const *__restrict__ const GC, int r, int i, GAUGE_GR
 
 
 /* perform an update with heatbath */
-void heatbath(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param, int r, int i)
+void heatbath(Gauge_Conf *GC, Const const *const param, int r, int i)
    {
    GAUGE_GROUP staple;
 
@@ -79,7 +79,7 @@ void heatbath(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param
 
 
 /* perform an update with overrelaxation */
-void overrelaxation(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param, int r, int i)
+void overrelaxation(Gauge_Conf *GC, Const const * const param, int r, int i)
    {
    GAUGE_GROUP staple;
 
@@ -89,7 +89,7 @@ void overrelaxation(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const
 
 
 /* perform a complete update */
-void update(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
+void update(Gauge_Conf *GC, Const const * const param)
    {
    int r, j, i;
    #ifdef RAND_GAUGE_TRANSF
@@ -150,7 +150,7 @@ void update(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param)
 
 
 /* perform n cooling steps */
-void cooling(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param, int n)
+void cooling(Gauge_Conf *GC, Const const * const param, int n)
    {
    GAUGE_GROUP staple;
    #ifdef RAND_GAUGE_TRANSF
@@ -203,7 +203,7 @@ void cooling(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param,
    }
 
 /* perform n cooling steps different method */
-void cooling2(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param, int n)
+void cooling2(Gauge_Conf *GC, Const const * const param, int n)
    {
    GAUGE_GROUP staple;
    #ifdef RAND_GAUGE_TRANSF
@@ -260,7 +260,7 @@ void cooling2(Gauge_Conf *__restrict__ GC, Const const *__restrict__ const param
 
 
 /* compute the four-leaf clover in position r, in the plane i,j and save it in M */
-void quadrifoglio(Gauge_Conf const *__restrict__ const GC, int r, int j, int i, GAUGE_GROUP *__restrict__ M)
+void quadrifoglio(Gauge_Conf const * const GC, int r, int j, int i, GAUGE_GROUP * M)
    {
    GAUGE_GROUP aux; 
    int k, p;

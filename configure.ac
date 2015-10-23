@@ -1,5 +1,5 @@
 AC_PREREQ([2.59])
-AC_INIT([gauge_topo_c], [1.2], [claudio.bonati@df.unipi.it bonati@pi.infn.it])
+AC_INIT([gauge_topo_c], [1.3], [claudio.bonati@df.unipi.it bonati@pi.infn.it])
 AM_INIT_AUTOMAKE(subdir-objects)
 AC_CONFIG_SRCDIR([./src/gauge_topo.c])
 AC_CONFIG_HEADERS([config.h])
@@ -31,7 +31,7 @@ AC_PROG_CC
 
 
 # Checks for header files.
-AC_CHECK_HEADERS([complex.h math.h stdio.h stdlib.h time.h])
+AC_CHECK_HEADERS([complex.h math.h stdio.h stdlib.h time.h openssl/md5.h])
 
 
 #define the group-related macro

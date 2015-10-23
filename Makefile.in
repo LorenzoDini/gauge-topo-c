@@ -32,7 +32,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = debug_g2$(EXEEXT) debug_rng$(EXEEXT) debug_su2$(EXEEXT) \
+bin_PROGRAMS = conf_check$(EXEEXT) conf_convert$(EXEEXT) \
+	debug_g2$(EXEEXT) debug_rng$(EXEEXT) debug_su2$(EXEEXT) \
 	debug_sun$(EXEEXT) gauge_topo$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
@@ -54,6 +55,30 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = ./src/Rng/dSFMT/dSFMT.$(OBJEXT)
+am_conf_check_OBJECTS = ./src/Tools/conf_check.$(OBJEXT) \
+	./src/Endian/endianness.$(OBJEXT) \
+	./src/Func_Point/function_pointers.$(OBJEXT) \
+	./src/G2/g2.$(OBJEXT) ./src/G2/g2_check.$(OBJEXT) \
+	./src/G2/g2_un.$(OBJEXT) ./src/G2/g2_upd.$(OBJEXT) \
+	./src/Rng/random.$(OBJEXT) $(am__objects_1) \
+	./src/Su2/su2.$(OBJEXT) ./src/Su2/su2_upd.$(OBJEXT) \
+	./src/SuN/sun.$(OBJEXT) ./src/SuN/sun_aux.$(OBJEXT) \
+	./src/SuN/sun_upd.$(OBJEXT)
+conf_check_OBJECTS = $(am_conf_check_OBJECTS)
+conf_check_LDADD = $(LDADD)
+conf_check_DEPENDENCIES =
+am_conf_convert_OBJECTS = ./src/Tools/conf_convert.$(OBJEXT) \
+	./src/Endian/endianness.$(OBJEXT) \
+	./src/Func_Point/function_pointers.$(OBJEXT) \
+	./src/G2/g2.$(OBJEXT) ./src/G2/g2_check.$(OBJEXT) \
+	./src/G2/g2_un.$(OBJEXT) ./src/G2/g2_upd.$(OBJEXT) \
+	./src/Rng/random.$(OBJEXT) $(am__objects_1) \
+	./src/Su2/su2.$(OBJEXT) ./src/Su2/su2_upd.$(OBJEXT) \
+	./src/SuN/sun.$(OBJEXT) ./src/SuN/sun_aux.$(OBJEXT) \
+	./src/SuN/sun_upd.$(OBJEXT)
+conf_convert_OBJECTS = $(am_conf_convert_OBJECTS)
+conf_convert_LDADD = $(LDADD)
+conf_convert_DEPENDENCIES =
 am_debug_g2_OBJECTS = ./src/G2/debug_g2.$(OBJEXT) \
 	./src/Const/const.$(OBJEXT) ./src/Endian/endianness.$(OBJEXT) \
 	./src/G2/g2.$(OBJEXT) ./src/G2/g2_check.$(OBJEXT) \
@@ -145,12 +170,12 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(debug_sun_SOURCES) \
-	$(gauge_topo_SOURCES)
-DIST_SOURCES = $(debug_g2_SOURCES) $(debug_rng_SOURCES) \
-	$(debug_su2_SOURCES) $(debug_sun_SOURCES) \
-	$(am__gauge_topo_SOURCES_DIST)
+SOURCES = $(conf_check_SOURCES) $(conf_convert_SOURCES) \
+	$(debug_g2_SOURCES) $(debug_rng_SOURCES) $(debug_su2_SOURCES) \
+	$(debug_sun_SOURCES) $(gauge_topo_SOURCES)
+DIST_SOURCES = $(conf_check_SOURCES) $(conf_convert_SOURCES) \
+	$(debug_g2_SOURCES) $(debug_rng_SOURCES) $(debug_su2_SOURCES) \
+	$(debug_sun_SOURCES) $(am__gauge_topo_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -299,6 +324,7 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_TRUE@    ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
 @ONE_FILE_COMPILATION_TRUE@    ./src/G2/g2.c ./src/G2/g2.h \
 @ONE_FILE_COMPILATION_TRUE@    ./src/G2/g2_check.c ./src/G2/g2_check.h \
+@ONE_FILE_COMPILATION_TRUE@    ./src/G2/g2_un.c ./src/G2/g2_un.h \
 @ONE_FILE_COMPILATION_TRUE@    ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
 @ONE_FILE_COMPILATION_TRUE@    ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
 @ONE_FILE_COMPILATION_TRUE@    ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
@@ -313,6 +339,38 @@ top_srcdir = @top_srcdir@
 @ONE_FILE_COMPILATION_TRUE@    ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
 
 @ONE_FILE_COMPILATION_TRUE@DISTCHECK_CONFIGURE_FLAGS = --enable-one-file-compilation
+conf_check_SOURCES = ./src/Tools/conf_check.c \
+                   ./src/Endian/endianness.c ./src/Endian/endianness.h \
+                   ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
+                   ./src/G2/g2.c ./src/G2/g2.h \
+                   ./src/G2/g2_check.c ./src/G2/g2_check.h \
+                   ./src/G2/g2_un.c ./src/G2/g2_un.h \
+                   ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
+                   ./src/Macro/macro.h \
+                   ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                   $(dSFMT) \
+                   ./src/Su2/su2.c ./src/Su2/su2.h \
+                   ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                   ./src/SuN/sun.c ./src/SuN/sun.h \
+                   ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                   ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
+
+conf_convert_SOURCES = ./src/Tools/conf_convert.c \
+                     ./src/Endian/endianness.c ./src/Endian/endianness.h \
+                     ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
+                     ./src/G2/g2.c ./src/G2/g2.h \
+                     ./src/G2/g2_check.c ./src/G2/g2_check.h \
+                     ./src/G2/g2_un.c ./src/G2/g2_un.h \
+                     ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
+                     ./src/Macro/macro.h \
+                     ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                     $(dSFMT) \
+                     ./src/Su2/su2.c ./src/Su2/su2.h \
+                     ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                     ./src/SuN/sun.c ./src/SuN/sun.h \
+                     ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                     ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
+
 debug_g2_SOURCES = ./src/G2/debug_g2.c \
   ./src/Const/const.c ./src/Const/const.h \
   ./src/Endian/endianness.c ./src/Endian/endianness.h \
@@ -451,22 +509,14 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-src/G2/$(am__dirstamp):
-	@$(MKDIR_P) ./src/G2
-	@: > src/G2/$(am__dirstamp)
-src/G2/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) ./src/G2/$(DEPDIR)
-	@: > src/G2/$(DEPDIR)/$(am__dirstamp)
-./src/G2/debug_g2.$(OBJEXT): src/G2/$(am__dirstamp) \
-	src/G2/$(DEPDIR)/$(am__dirstamp)
-src/Const/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Const
-	@: > src/Const/$(am__dirstamp)
-src/Const/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Const/$(DEPDIR)
-	@: > src/Const/$(DEPDIR)/$(am__dirstamp)
-./src/Const/const.$(OBJEXT): src/Const/$(am__dirstamp) \
-	src/Const/$(DEPDIR)/$(am__dirstamp)
+src/Tools/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Tools
+	@: > src/Tools/$(am__dirstamp)
+src/Tools/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Tools/$(DEPDIR)
+	@: > src/Tools/$(DEPDIR)/$(am__dirstamp)
+./src/Tools/conf_check.$(OBJEXT): src/Tools/$(am__dirstamp) \
+	src/Tools/$(DEPDIR)/$(am__dirstamp)
 src/Endian/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Endian
 	@: > src/Endian/$(am__dirstamp)
@@ -475,6 +525,21 @@ src/Endian/$(DEPDIR)/$(am__dirstamp):
 	@: > src/Endian/$(DEPDIR)/$(am__dirstamp)
 ./src/Endian/endianness.$(OBJEXT): src/Endian/$(am__dirstamp) \
 	src/Endian/$(DEPDIR)/$(am__dirstamp)
+src/Func_Point/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Func_Point
+	@: > src/Func_Point/$(am__dirstamp)
+src/Func_Point/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Func_Point/$(DEPDIR)
+	@: > src/Func_Point/$(DEPDIR)/$(am__dirstamp)
+./src/Func_Point/function_pointers.$(OBJEXT):  \
+	src/Func_Point/$(am__dirstamp) \
+	src/Func_Point/$(DEPDIR)/$(am__dirstamp)
+src/G2/$(am__dirstamp):
+	@$(MKDIR_P) ./src/G2
+	@: > src/G2/$(am__dirstamp)
+src/G2/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/G2/$(DEPDIR)
+	@: > src/G2/$(DEPDIR)/$(am__dirstamp)
 ./src/G2/g2.$(OBJEXT): src/G2/$(am__dirstamp) \
 	src/G2/$(DEPDIR)/$(am__dirstamp)
 ./src/G2/g2_check.$(OBJEXT): src/G2/$(am__dirstamp) \
@@ -483,16 +548,6 @@ src/Endian/$(DEPDIR)/$(am__dirstamp):
 	src/G2/$(DEPDIR)/$(am__dirstamp)
 ./src/G2/g2_upd.$(OBJEXT): src/G2/$(am__dirstamp) \
 	src/G2/$(DEPDIR)/$(am__dirstamp)
-src/Su2/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Su2
-	@: > src/Su2/$(am__dirstamp)
-src/Su2/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Su2/$(DEPDIR)
-	@: > src/Su2/$(DEPDIR)/$(am__dirstamp)
-./src/Su2/su2.$(OBJEXT): src/Su2/$(am__dirstamp) \
-	src/Su2/$(DEPDIR)/$(am__dirstamp)
-./src/Su2/su2_upd.$(OBJEXT): src/Su2/$(am__dirstamp) \
-	src/Su2/$(DEPDIR)/$(am__dirstamp)
 src/Rng/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Rng
 	@: > src/Rng/$(am__dirstamp)
@@ -509,6 +564,46 @@ src/Rng/dSFMT/$(DEPDIR)/$(am__dirstamp):
 	@: > src/Rng/dSFMT/$(DEPDIR)/$(am__dirstamp)
 ./src/Rng/dSFMT/dSFMT.$(OBJEXT): src/Rng/dSFMT/$(am__dirstamp) \
 	src/Rng/dSFMT/$(DEPDIR)/$(am__dirstamp)
+src/Su2/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Su2
+	@: > src/Su2/$(am__dirstamp)
+src/Su2/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Su2/$(DEPDIR)
+	@: > src/Su2/$(DEPDIR)/$(am__dirstamp)
+./src/Su2/su2.$(OBJEXT): src/Su2/$(am__dirstamp) \
+	src/Su2/$(DEPDIR)/$(am__dirstamp)
+./src/Su2/su2_upd.$(OBJEXT): src/Su2/$(am__dirstamp) \
+	src/Su2/$(DEPDIR)/$(am__dirstamp)
+src/SuN/$(am__dirstamp):
+	@$(MKDIR_P) ./src/SuN
+	@: > src/SuN/$(am__dirstamp)
+src/SuN/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/SuN/$(DEPDIR)
+	@: > src/SuN/$(DEPDIR)/$(am__dirstamp)
+./src/SuN/sun.$(OBJEXT): src/SuN/$(am__dirstamp) \
+	src/SuN/$(DEPDIR)/$(am__dirstamp)
+./src/SuN/sun_aux.$(OBJEXT): src/SuN/$(am__dirstamp) \
+	src/SuN/$(DEPDIR)/$(am__dirstamp)
+./src/SuN/sun_upd.$(OBJEXT): src/SuN/$(am__dirstamp) \
+	src/SuN/$(DEPDIR)/$(am__dirstamp)
+conf_check$(EXEEXT): $(conf_check_OBJECTS) $(conf_check_DEPENDENCIES) $(EXTRA_conf_check_DEPENDENCIES) 
+	@rm -f conf_check$(EXEEXT)
+	$(LINK) $(conf_check_OBJECTS) $(conf_check_LDADD) $(LIBS)
+./src/Tools/conf_convert.$(OBJEXT): src/Tools/$(am__dirstamp) \
+	src/Tools/$(DEPDIR)/$(am__dirstamp)
+conf_convert$(EXEEXT): $(conf_convert_OBJECTS) $(conf_convert_DEPENDENCIES) $(EXTRA_conf_convert_DEPENDENCIES) 
+	@rm -f conf_convert$(EXEEXT)
+	$(LINK) $(conf_convert_OBJECTS) $(conf_convert_LDADD) $(LIBS)
+./src/G2/debug_g2.$(OBJEXT): src/G2/$(am__dirstamp) \
+	src/G2/$(DEPDIR)/$(am__dirstamp)
+src/Const/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Const
+	@: > src/Const/$(am__dirstamp)
+src/Const/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Const/$(DEPDIR)
+	@: > src/Const/$(DEPDIR)/$(am__dirstamp)
+./src/Const/const.$(OBJEXT): src/Const/$(am__dirstamp) \
+	src/Const/$(DEPDIR)/$(am__dirstamp)
 debug_g2$(EXEEXT): $(debug_g2_OBJECTS) $(debug_g2_DEPENDENCIES) $(EXTRA_debug_g2_DEPENDENCIES) 
 	@rm -f debug_g2$(EXEEXT)
 	$(LINK) $(debug_g2_OBJECTS) $(debug_g2_LDADD) $(LIBS)
@@ -522,19 +617,7 @@ debug_rng$(EXEEXT): $(debug_rng_OBJECTS) $(debug_rng_DEPENDENCIES) $(EXTRA_debug
 debug_su2$(EXEEXT): $(debug_su2_OBJECTS) $(debug_su2_DEPENDENCIES) $(EXTRA_debug_su2_DEPENDENCIES) 
 	@rm -f debug_su2$(EXEEXT)
 	$(LINK) $(debug_su2_OBJECTS) $(debug_su2_LDADD) $(LIBS)
-src/SuN/$(am__dirstamp):
-	@$(MKDIR_P) ./src/SuN
-	@: > src/SuN/$(am__dirstamp)
-src/SuN/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) ./src/SuN/$(DEPDIR)
-	@: > src/SuN/$(DEPDIR)/$(am__dirstamp)
 ./src/SuN/debug_sun.$(OBJEXT): src/SuN/$(am__dirstamp) \
-	src/SuN/$(DEPDIR)/$(am__dirstamp)
-./src/SuN/sun.$(OBJEXT): src/SuN/$(am__dirstamp) \
-	src/SuN/$(DEPDIR)/$(am__dirstamp)
-./src/SuN/sun_aux.$(OBJEXT): src/SuN/$(am__dirstamp) \
-	src/SuN/$(DEPDIR)/$(am__dirstamp)
-./src/SuN/sun_upd.$(OBJEXT): src/SuN/$(am__dirstamp) \
 	src/SuN/$(DEPDIR)/$(am__dirstamp)
 debug_sun$(EXEEXT): $(debug_sun_OBJECTS) $(debug_sun_DEPENDENCIES) $(EXTRA_debug_sun_DEPENDENCIES) 
 	@rm -f debug_sun$(EXEEXT)
@@ -547,15 +630,6 @@ src/$(DEPDIR)/$(am__dirstamp):
 	@: > src/$(DEPDIR)/$(am__dirstamp)
 ./src/gauge_topo.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Func_Point/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Func_Point
-	@: > src/Func_Point/$(am__dirstamp)
-src/Func_Point/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Func_Point/$(DEPDIR)
-	@: > src/Func_Point/$(DEPDIR)/$(am__dirstamp)
-./src/Func_Point/function_pointers.$(OBJEXT):  \
-	src/Func_Point/$(am__dirstamp) \
-	src/Func_Point/$(DEPDIR)/$(am__dirstamp)
 src/Gauge_Conf/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Gauge_Conf
 	@: > src/Gauge_Conf/$(am__dirstamp)
@@ -607,6 +681,8 @@ mostlyclean-compile:
 	-rm -f ./src/SuN/sun.$(OBJEXT)
 	-rm -f ./src/SuN/sun_aux.$(OBJEXT)
 	-rm -f ./src/SuN/sun_upd.$(OBJEXT)
+	-rm -f ./src/Tools/conf_check.$(OBJEXT)
+	-rm -f ./src/Tools/conf_convert.$(OBJEXT)
 	-rm -f ./src/gauge_topo.$(OBJEXT)
 
 distclean-compile:
@@ -635,6 +711,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/SuN/$(DEPDIR)/sun.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/SuN/$(DEPDIR)/sun_aux.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/SuN/$(DEPDIR)/sun_upd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Tools/$(DEPDIR)/conf_check.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Tools/$(DEPDIR)/conf_convert.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -921,6 +999,8 @@ distclean-generic:
 	-rm -f src/Su2/$(am__dirstamp)
 	-rm -f src/SuN/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/SuN/$(am__dirstamp)
+	-rm -f src/Tools/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/Tools/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -931,7 +1011,7 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ./src/$(DEPDIR) ./src/Const/$(DEPDIR) ./src/Endian/$(DEPDIR) ./src/Func_Point/$(DEPDIR) ./src/G2/$(DEPDIR) ./src/Gauge_Conf/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Rng/$(DEPDIR) ./src/Rng/dSFMT/$(DEPDIR) ./src/Su2/$(DEPDIR) ./src/SuN/$(DEPDIR)
+	-rm -rf ./src/$(DEPDIR) ./src/Const/$(DEPDIR) ./src/Endian/$(DEPDIR) ./src/Func_Point/$(DEPDIR) ./src/G2/$(DEPDIR) ./src/Gauge_Conf/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Rng/$(DEPDIR) ./src/Rng/dSFMT/$(DEPDIR) ./src/Su2/$(DEPDIR) ./src/SuN/$(DEPDIR) ./src/Tools/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -979,7 +1059,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ./src/$(DEPDIR) ./src/Const/$(DEPDIR) ./src/Endian/$(DEPDIR) ./src/Func_Point/$(DEPDIR) ./src/G2/$(DEPDIR) ./src/Gauge_Conf/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Rng/$(DEPDIR) ./src/Rng/dSFMT/$(DEPDIR) ./src/Su2/$(DEPDIR) ./src/SuN/$(DEPDIR)
+	-rm -rf ./src/$(DEPDIR) ./src/Const/$(DEPDIR) ./src/Endian/$(DEPDIR) ./src/Func_Point/$(DEPDIR) ./src/G2/$(DEPDIR) ./src/Gauge_Conf/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Rng/$(DEPDIR) ./src/Rng/dSFMT/$(DEPDIR) ./src/Su2/$(DEPDIR) ./src/SuN/$(DEPDIR) ./src/Tools/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

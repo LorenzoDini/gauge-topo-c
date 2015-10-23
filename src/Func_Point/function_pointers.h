@@ -52,7 +52,10 @@ void (*unitarize)(GAUGE_GROUP *A);
 
 void (*print_on_screen)(GAUGE_GROUP const * const A);
 void (*print_on_file)(FILE *fp, GAUGE_GROUP const * const A);
+void (*print_on_binary_file)(FILE *fp, GAUGE_GROUP const * const A);
 void (*read_from_file)(FILE *fp, GAUGE_GROUP *A);
+void (*read_from_binary_file)(FILE *fp, GAUGE_GROUP *A);
+void (*read_from_binary_file_swap)(FILE *fp, GAUGE_GROUP *A);
 
 void (*single_heatbath)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple, Const const * const param);
 void (*single_overrelaxation)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple, Const const * const param);

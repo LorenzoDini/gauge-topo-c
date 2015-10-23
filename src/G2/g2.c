@@ -1064,7 +1064,6 @@ void print_on_binary_file_G2(FILE *fp, G2 const * const A)
       fwrite(&(A->comp[i][4]), 1, sizeof(double), fp);
       fwrite(&(A->comp[i][5]), 1, sizeof(double), fp);
       fwrite(&(A->comp[i][6]), 1, sizeof(double), fp);
-      fwrite(&(A->comp[i][7]), 1, sizeof(double), fp);
       }
    }
 

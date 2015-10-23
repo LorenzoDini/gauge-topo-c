@@ -1,4 +1,6 @@
-bin_PROGRAMS = debug_g2 debug_rng debug_su2 debug_sun gauge_topo
+bin_PROGRAMS = conf_check conf_convert \
+               debug_g2 debug_rng debug_su2 debug_sun \
+               gauge_topo
 
 
 if ONE_FILE_COMPILATION
@@ -16,6 +18,7 @@ if ONE_FILE_COMPILATION
     ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
     ./src/G2/g2.c ./src/G2/g2.h \
     ./src/G2/g2_check.c ./src/G2/g2_check.h \
+    ./src/G2/g2_un.c ./src/G2/g2_un.h \
     ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
     ./src/Gauge_Conf/gauge_conf_def.c ./src/Gauge_Conf/gauge_conf_meas.c \
     ./src/Gauge_Conf/gauge_conf_upd.c ./src/Gauge_Conf/gauge_conf.h \
@@ -59,6 +62,40 @@ else
     ./src/Analisi/random.cc \
     ./src/Analisi/unisci.py 
 endif
+
+
+conf_check_SOURCES=./src/Tools/conf_check.c \
+                   ./src/Endian/endianness.c ./src/Endian/endianness.h \
+                   ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
+                   ./src/G2/g2.c ./src/G2/g2.h \
+                   ./src/G2/g2_check.c ./src/G2/g2_check.h \
+                   ./src/G2/g2_un.c ./src/G2/g2_un.h \
+                   ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
+                   ./src/Macro/macro.h \
+                   ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                   $(dSFMT) \
+                   ./src/Su2/su2.c ./src/Su2/su2.h \
+                   ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                   ./src/SuN/sun.c ./src/SuN/sun.h \
+                   ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                   ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
+
+
+conf_convert_SOURCES=./src/Tools/conf_convert.c \
+                     ./src/Endian/endianness.c ./src/Endian/endianness.h \
+                     ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
+                     ./src/G2/g2.c ./src/G2/g2.h \
+                     ./src/G2/g2_check.c ./src/G2/g2_check.h \
+                     ./src/G2/g2_un.c ./src/G2/g2_un.h \
+                     ./src/G2/g2_upd.c ./src/G2/g2_upd.h \
+                     ./src/Macro/macro.h \
+                     ./src/Rng/random.c ./src/Rng/random.h ./src/Rng/myrngparam.h \
+                     $(dSFMT) \
+                     ./src/Su2/su2.c ./src/Su2/su2.h \
+                     ./src/Su2/su2_upd.c ./src/Su2/su2_upd.h \
+                     ./src/SuN/sun.c ./src/SuN/sun.h \
+                     ./src/SuN/sun_aux.c ./src/SuN/sun_aux.h \
+                     ./src/SuN/sun_upd.c ./src/SuN/sun_upd.h 
 
 
 debug_g2_SOURCES=./src/G2/debug_g2.c \

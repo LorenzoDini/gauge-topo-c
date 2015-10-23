@@ -43,7 +43,10 @@ void init_function_pointers(void)
   unitarize = &unitarize_SuN;
   print_on_screen = &print_on_screen_SuN;
   print_on_file   = &print_on_file_SuN;
+  print_on_binary_file   = &print_on_binary_file_SuN;
   read_from_file   = &read_from_file_SuN;
+  read_from_binary_file   = &read_from_binary_file_SuN;
+  read_from_binary_file_swap   = &read_from_binary_file_swap_SuN;
   single_heatbath = &single_heatbath_SuN;
   single_overrelaxation = &single_overrelaxation_SuN;
   cool = &cool_SuN;
@@ -76,7 +79,10 @@ void init_function_pointers(void)
   unitarize = &unitarize_Su2;
   print_on_screen = &print_on_screen_Su2;
   print_on_file   = &print_on_file_Su2;
+  print_on_binary_file   = &print_on_binary_file_Su2;
   read_from_file   = &read_from_file_Su2;
+  read_from_binary_file   = &read_from_binary_file_Su2;
+  read_from_binary_file_swap   = &read_from_binary_file_swap_Su2;
   single_heatbath = &single_heatbath_Su2;
   single_overrelaxation = &single_overrelaxation_Su2;
   cool = &cool_Su2;
@@ -108,7 +114,10 @@ void init_function_pointers(void)
   unitarize = &unitarize_G2;
   print_on_screen = &print_on_screen_G2;
   print_on_file   = &print_on_file_G2;
+  print_on_binary_file   = &print_on_binary_file_G2;
   read_from_file   = &read_from_file_G2;
+  read_from_binary_file   = &read_from_binary_file_G2;
+  read_from_binary_file_swap   = &read_from_binary_file_swap_G2;
   single_heatbath = &single_heatbath_G2;
   single_overrelaxation = &single_overrelaxation_G2;
   cool = &cool_G2;
