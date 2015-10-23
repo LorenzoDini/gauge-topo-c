@@ -5,7 +5,7 @@
 
 #include"g2.h"
 
-void heatbath_aux_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple, double beta_aux);
-void unitarize_G2(G2 *__restrict__ A);
+void heatbath_aux_G2(G2 *link, G2 const * const staple, double beta_aux);
+void unitarize_G2(G2 *A);
 
 #endif

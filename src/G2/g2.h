@@ -12,24 +12,24 @@ typedef struct G2 {
    double comp[7][7];
 } G2;
 
-void one_G2(G2 *__restrict__ A);         /* A=1 */
-void zero_G2(G2 *__restrict__ A);        /* A=0 */
+void one_G2(G2 *A);         /* A=1 */
+void zero_G2(G2 *A);        /* A=0 */
 
-void equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B);      /* A=B       */
-void equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B);  /* A=B^{dag} */
+void equal_G2(G2 *A, G2 const * const B);      /* A=B       */
+void equal_dag_G2(G2 *A, G2 const * B);  /* A=B^{dag} */
 
-void plus_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B);     /* A+=B       */
-void plus_equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B); /* A+=B^{dag} */
+void plus_equal_G2(G2 *A, G2 const * const B);     /* A+=B       */
+void plus_equal_dag_G2(G2 *A, G2 const * const B); /* A+=B^{dag} */
 
-void minus_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B);     /* A-=B       */
-void minus_equal_dag_G2(G2 *__restrict__ A, G2 const *__restrict__ const B); /* A-=B^{dag} */
+void minus_equal_G2(G2 *A, G2 const * B);     /* A-=B       */
+void minus_equal_dag_G2(G2 *A, G2 const * const B); /* A-=B^{dag} */
 
-void lin_comb_G2(G2 *__restrict__ A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C);       /* A=b*B+c*C */
-void lin_comb_dag1_G2(G2 *__restrict__ A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C);  /* A=b*B^{dag}+c*C */
-void lin_comb_dag2_G2(G2 *__restrict__A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C);  /* A=b*B+c*C^{dag} */
-void lin_comb_dag12_G2(G2 *__restrict__A, double b, G2 const *__restrict__ const B, double c, G2 const *__restrict__ const C); /* A=b*B^{dag}+c*C^{dag} */
+void lin_comb_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C);       /* A=b*B+c*C */
+void lin_comb_dag1_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C);  /* A=b*B^{dag}+c*C */
+void lin_comb_dag2_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C);  /* A=b*B+c*C^{dag} */
+void lin_comb_dag12_G2(G2 *A, double b, G2 const * const B, double c, G2 const * const C); /* A=b*B^{dag}+c*C^{dag} */
 
-void times_equal_real_G2(G2 *__restrict__ A, double r); /* A*=r */
+void times_equal_real_G2(G2 *A, double r); /* A*=r */
 
 void times_equal_G2(G2 *__restrict__ A, G2 const *__restrict__ const B);     /* A*=B       */
 void times_equal_4_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, int i0, int i1, int i2, int i3);
@@ -41,29 +41,32 @@ void times_dag2_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const 
 void times_dag12_G2(G2 *__restrict__ A, G2 const *__restrict__ const B, G2 const *__restrict__ const C); /* A=B^{dag}*C^{dag} */
 
 /* rotation matrices */
-void D1(G2 *__restrict__ A, double x);
-void D2(G2 *__restrict__ A, double x);
-void D3(G2 *__restrict__ A, double x);
-void D4(G2 *__restrict__ A, double x);
-void D5(G2 *__restrict__ A, double x);
-void D6(G2 *__restrict__ A, double x);
-void D7(G2 *__restrict__ A, double x);
-void D8(G2 *__restrict__ A, double x);
-void D9(G2 *__restrict__ A, double x);
-void D10(G2 *__restrict__ A, double x);
-void D11(G2 *__restrict__ A, double x);
-void D12(G2 *__restrict__ A, double x);
-void D13(G2 *__restrict__ A, double x);
-void D14(G2 *__restrict__ A, double x);
+void D1(G2 *A, double x);
+void D2(G2 *A, double x);
+void D3(G2 *A, double x);
+void D4(G2 *A, double x);
+void D5(G2 *A, double x);
+void D6(G2 *A, double x);
+void D7(G2 *A, double x);
+void D8(G2 *A, double x);
+void D9(G2 *A, double x);
+void D10(G2 *A, double x);
+void D11(G2 *A, double x);
+void D12(G2 *A, double x);
+void D13(G2 *A, double x);
+void D14(G2 *A, double x);
 
-void rand_matrix_G2(G2 *__restrict__ A);
+void rand_matrix_G2(G2 *A);
 
-double retr_G2(G2 const *__restrict__ const A);
-double imtr_G2(G2 const *__restrict__ const A);
-double norm_G2(G2 const *__restrict__ const A);
+double retr_G2(G2 const * const A);
+double imtr_G2(G2 const * const A);
+double norm_G2(G2 const * const A);
 
-void print_on_screen_G2(G2 const *__restrict__ const A);
-void print_on_file_G2(FILE *fp, G2 const *__restrict__ const A);
-void read_from_file_G2(FILE *fp, G2 *__restrict__ A);
+void print_on_screen_G2(G2 const * const A);
+void print_on_file_G2(FILE *fp, G2 const * const A);
+void print_on_binary_file_G2(FILE *fp, G2 const * const A);
+void read_from_file_G2(FILE *fp, G2 * A);
+void read_from_binary_file_G2(FILE *fp, G2 * A);
+void read_from_binary_file_swap_G2(FILE *fp, G2 * A);
 
 #endif

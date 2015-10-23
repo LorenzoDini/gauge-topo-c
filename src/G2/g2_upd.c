@@ -13,7 +13,7 @@
 #include"../Rng/random.h"
 #include"../Su2/su2_upd.h"
 
-void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple, Const const *__restrict__ const param)
+void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const param)
    {
    G2 aux, mult;
    double w[4], w_mod, k[4], temp[4], temp_mod, norm;
@@ -29,7 +29,8 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
 
       if(mode==0)
         {
-        /* update on the first SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
+        /* update on the first SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   
+           Phys Rev D 75, p.034501 (2007) */
 
         /* action = (param->d_beta)*(w*k) */
         w[0]=aux.comp[3][3]+aux.comp[4][4]+aux.comp[5][5]+aux.comp[6][6];
@@ -119,7 +120,8 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
 
       if(mode==1)
         {
-        /* update on the second SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
+        /* update on the second SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   
+           Phys Rev D 75, p.034501 (2007) */
 
         /* action = (param->d_beta)*(w*k) */
         w[0]=aux.comp[1][1]+aux.comp[2][2]+aux.comp[5][5]+aux.comp[6][6];
@@ -209,7 +211,8 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
 
       if(mode==2)
         {
-        /* update on the third SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   Phys Rev D 75, p.034501 (2007) */
+        /* update on the third SU(2) subgroup, see pag. 19 of  Greensite, Langfeld, Olejnik, Reinhardt, Tok   
+           Phys Rev D 75, p.034501 (2007) */
 
         /* action = (param->d_beta)*(w*k) */
         w[0]=aux.comp[1][1]+aux.comp[2][2]+aux.comp[3][3]+aux.comp[4][4];
@@ -303,7 +306,7 @@ void single_heatbath_G2(G2 *__restrict__ link, G2 const *__restrict__ const stap
 
 
 
-void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple, Const const *__restrict__ const param)
+void single_overrelaxation_G2(G2 *link, G2 const * const staple, Const const * const param)
    {
    G2 M, aux;
    double w0, w1;
@@ -425,7 +428,9 @@ void single_overrelaxation_G2(G2 *__restrict__ link, G2 const *__restrict__ cons
    }
 
 
-void cool_G2(G2 *__restrict__ link, G2 const *__restrict__ const staple)
+
+
+void cool_G2(G2 *link, G2 const * const staple)
    {
    G2 helper, helper2;
    double energy1, energy2;
