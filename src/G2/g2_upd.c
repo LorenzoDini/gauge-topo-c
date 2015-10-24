@@ -5,7 +5,7 @@
 
 #include<math.h>
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"g2.h"
 #include"g2_check.h"
 #include"g2_un.h"
@@ -13,7 +13,7 @@
 #include"../Rng/random.h"
 #include"../Su2/su2_upd.h"
 
-void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const param)
+void single_heatbath_G2(G2 *link, G2 const * const staple, GParam const * const param)
    {
    G2 aux, mult;
    double w[4], w_mod, k[4], temp[4], temp_mod, norm;
@@ -306,7 +306,7 @@ void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const p
 
 
 
-void single_overrelaxation_G2(G2 *link, G2 const * const staple, Const const * const param)
+void single_overrelaxation_G2(G2 *link, G2 const * const staple, GParam const * const param)
    {
    G2 M, aux;
    double w0, w1;

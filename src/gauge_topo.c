@@ -12,7 +12,7 @@ int main (int argc, char **argv)
     int i, count;
     char *in_file;
     FILE *datafilep;
-    Const param;
+    GParam param;
     Gauge_Conf GC;
     double plaqs, plaqt, polyre, polyim, *charge, *meanplaq, charge_nocooling;
     time_t time1, time2;

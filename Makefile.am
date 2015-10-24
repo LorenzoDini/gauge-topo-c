@@ -13,7 +13,7 @@ if ONE_FILE_COMPILATION
     ./src/Analisi/ordina.py \
     ./src/Analisi/random.cc \
     ./src/Analisi/unisci.py \
-    ./src/Const/const.c ./src/Const/const.h \
+    ./src/GParam/gparam.c ./src/GParam/gparam.h \
     ./src/Endian/endianness.c ./src/Endian/endianness.h \
     ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
     ./src/G2/g2.c ./src/G2/g2.h \
@@ -35,7 +35,7 @@ if ONE_FILE_COMPILATION
   DISTCHECK_CONFIGURE_FLAGS = --enable-one-file-compilation
 else
   gauge_topo_SOURCES=./src/gauge_topo.c ./src/gauge_topo_include.h \
-    ./src/Const/const.c ./src/Const/const.h \
+    ./src/GParam/gparam.c ./src/GParam/gparam.h \
     ./src/Endian/endianness.c ./src/Endian/endianness.h \
     ./src/Func_Point/function_pointers.c ./src/Func_Point/function_pointers.h \
     ./src/G2/g2.c ./src/G2/g2.h \
@@ -99,7 +99,7 @@ conf_convert_SOURCES=./src/Tools/conf_convert.c \
 
 
 debug_g2_SOURCES=./src/G2/debug_g2.c \
-  ./src/Const/const.c ./src/Const/const.h \
+  ./src/GParam/gparam.c ./src/GParam/gparam.h \
   ./src/Endian/endianness.c ./src/Endian/endianness.h \
   ./src/G2/g2.c ./src/G2/g2.h \
   ./src/G2/g2_check.c ./src/G2/g2_check.h \
@@ -117,7 +117,7 @@ debug_rng_SOURCES=./src/Rng/debug_rng.c ./src/Rng/random.c ./src/Rng/random.h ./
 
 
 debug_su2_SOURCES=./src/Su2/debug_su2.c \
-  ./src/Const/const.c ./src/Const/const.h \
+  ./src/GParam/gparam.c ./src/GParam/gparam.h \
   ./src/Endian/endianness.c ./src/Endian/endianness.h \
   ./src/Macro/macro.h \
   ./src/Su2/su2.c ./src/Su2/su2.h \
@@ -127,7 +127,7 @@ debug_su2_SOURCES=./src/Su2/debug_su2.c \
 
 
 debug_sun_SOURCES=./src/SuN/debug_sun.c \
-  ./src/Const/const.c ./src/Const/const.h \
+  ./src/GParam/gparam.c ./src/GParam/gparam.h \
   ./src/Endian/endianness.c ./src/Endian/endianness.h \
   ./src/Macro/macro.h \
   ./src/Su2/su2.c ./src/Su2/su2.h \

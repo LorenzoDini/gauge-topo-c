@@ -6,14 +6,14 @@
 #include<stdlib.h>
 #include<string.h>
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"../Geometry/geometry.h"
 #include"gauge_conf.h"
 #include"../Func_Point/function_pointers.h"
 #include"../Macro/macro.h"
 #include"../Su2/su2.h"
 
-int init_gauge_conf(Gauge_Conf * GC, Const const * const param)
+int init_gauge_conf(Gauge_Conf * GC, GParam const * const param)
   {
   int i, j;
 
@@ -138,7 +138,7 @@ int init_gauge_conf(Gauge_Conf * GC, Const const * const param)
   }
 
 
-void end_gauge_conf(Gauge_Conf * GC, Const const * const param)
+void end_gauge_conf(Gauge_Conf * GC, GParam const * const param)
   {
   int i;
 
@@ -154,7 +154,7 @@ void end_gauge_conf(Gauge_Conf * GC, Const const * const param)
   }
 
 
-void save_on_file(Gauge_Conf const * const GC, Const const * const param)
+void save_on_file(Gauge_Conf const * const GC, GParam const * const param)
   {
   int i, j;
   char md5sum[2*MD5_DIGEST_LENGTH+1];
@@ -199,7 +199,7 @@ void save_on_file(Gauge_Conf const * const GC, Const const * const param)
 
 
 /* allocate GC and initialize with GC2 */
-void init_gauge_conf_from_gauge_conf(Gauge_Conf *GC, Gauge_Conf const * const GC2, Const const * const param) 
+void init_gauge_conf_from_gauge_conf(Gauge_Conf *GC, Gauge_Conf const * const GC2, GParam const * const param) 
   {
   int i, j;
 
@@ -235,7 +235,7 @@ void init_gauge_conf_from_gauge_conf(Gauge_Conf *GC, Gauge_Conf const * const GC
 
 
 /* compute the md5sum of the configuration and save it in res, char [2*MD5_DIGEST_LENGTH] */
-void compute_md5sum(char *res, Gauge_Conf const * const GC, Const const * const param)
+void compute_md5sum(char *res, Gauge_Conf const * const GC, GParam const * const param)
   {
   MD5_CTX mdContext;
   unsigned char c[MD5_DIGEST_LENGTH];

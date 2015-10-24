@@ -8,7 +8,7 @@
 
 #include"su2.h"
 #include"su2_upd.h"
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"../Rng/random.h"
 
 /* random number generator for heabath (see Kennedy, Pendleton Phys. Lett. B 156, 393 (1985))
@@ -69,7 +69,7 @@ void randheat_Su2(double k, double *out)
 
 
 /* heatbath */
-void single_heatbath_Su2(Su2 *link, Su2 const * const staple, Const const * const param)
+void single_heatbath_Su2(Su2 *link, Su2 const * const staple, GParam const * const param)
     {
     double p, p0;
     Su2 matrix1, matrix2;
@@ -92,7 +92,7 @@ void single_heatbath_Su2(Su2 *link, Su2 const * const staple, Const const * cons
 
 
 /* overrelaxation */
-void single_overrelaxation_Su2(Su2 *link, Su2 const * const staple, Const const * const param)
+void single_overrelaxation_Su2(Su2 *link, Su2 const * const staple, GParam const * const param)
     {
     double p;
     Su2 matrix1, matrix2;

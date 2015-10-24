@@ -5,7 +5,7 @@
 
 #include<time.h>
 
-typedef struct Const {
+typedef struct GParam {
   /* lattice dimensions */
   int d_latox;
   int d_latoy;
@@ -40,10 +40,10 @@ typedef struct Const {
   double d_inv_vol;
   int d_space_vol;
   double d_inv_space_vol;
-} Const;
+} GParam;
 
 
-int readinput(char *in_file, Const *param);
-void print_parameters(Const const * const param, time_t time_start, time_t time_end);
+int readinput(char *in_file, GParam *param);
+void print_parameters(GParam const * const param, time_t time_start, time_t time_end);
 
 #endif

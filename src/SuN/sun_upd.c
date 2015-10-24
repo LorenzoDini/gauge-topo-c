@@ -7,7 +7,7 @@
 #include<math.h>
 #include<stdio.h>
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"../Rng/random.h"
 #include"../Su2/su2.h"
 #include"../Su2/su2_upd.h"
@@ -16,7 +16,7 @@
 
 /* Pseudo-heatbath by Cabibbo-Marinari (Phys. Lett. B 119, p.387 (1982)) in the implementation by
    Kennedy, Pendleton (Phys. Lett. B 156, p.393 (1985)) */
-void single_heatbath_SuN(SuN *link, SuN const * const staple, Const const * const param)
+void single_heatbath_SuN(SuN *link, SuN const * const staple, GParam const * const param)
     {
     SuN aux, final;
     Su2 u, v, w;
@@ -60,7 +60,7 @@ void single_heatbath_SuN(SuN *link, SuN const * const staple, Const const * cons
 
 /* Pseudo-overrelaxation by Cabibbo-Marinari (Phys. Lett. B 119, p.387 (1982)) in the implementation by
    Kennedy, Pendleton (Phys. Lett. B 156, p.393 (1985)) */
-void single_overrelaxation_SuN(SuN *link, SuN const * const staple, Const const * const param)
+void single_overrelaxation_SuN(SuN *link, SuN const * const staple, GParam const * const param)
     {
     SuN aux, final;
     Su2 u,v;

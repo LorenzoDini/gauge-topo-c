@@ -7,9 +7,9 @@
 #include<string.h>
 #include<time.h>
 
-#include"const.h"
+#include"gparam.h"
 
-int readinput(char *in_file, Const *param)
+int readinput(char *in_file, GParam *param)
     {
     FILE *input;
     char str[20], temp_str[20];
@@ -262,7 +262,7 @@ int readinput(char *in_file, Const *param)
       }
     }
 
-void print_parameters(Const const * const param, time_t time_start, time_t time_end)
+void print_parameters(GParam const * const param, time_t time_start, time_t time_end)
     {
     FILE *fp;
     double diff_sec;

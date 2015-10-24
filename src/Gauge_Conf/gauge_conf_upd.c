@@ -3,7 +3,7 @@
 
 #include"../Macro/macro.h"
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"../Func_Point/function_pointers.h"
 #include"../G2/g2.h"
 #include"gauge_conf.h"
@@ -69,7 +69,7 @@ void calcstaples(Gauge_Conf const * const GC, int r, int i, GAUGE_GROUP *M)
 
 
 /* perform an update with heatbath */
-void heatbath(Gauge_Conf *GC, Const const *const param, int r, int i)
+void heatbath(Gauge_Conf *GC, GParam const *const param, int r, int i)
    {
    GAUGE_GROUP staple;
 
@@ -79,7 +79,7 @@ void heatbath(Gauge_Conf *GC, Const const *const param, int r, int i)
 
 
 /* perform an update with overrelaxation */
-void overrelaxation(Gauge_Conf *GC, Const const * const param, int r, int i)
+void overrelaxation(Gauge_Conf *GC, GParam const * const param, int r, int i)
    {
    GAUGE_GROUP staple;
 
@@ -89,7 +89,7 @@ void overrelaxation(Gauge_Conf *GC, Const const * const param, int r, int i)
 
 
 /* perform a complete update */
-void update(Gauge_Conf *GC, Const const * const param)
+void update(Gauge_Conf *GC, GParam const * const param)
    {
    int r, j, i;
    #ifdef RAND_GAUGE_TRANSF
@@ -150,7 +150,7 @@ void update(Gauge_Conf *GC, Const const * const param)
 
 
 /* perform n cooling steps */
-void cooling(Gauge_Conf *GC, Const const * const param, int n)
+void cooling(Gauge_Conf *GC, GParam const * const param, int n)
    {
    GAUGE_GROUP staple;
    #ifdef RAND_GAUGE_TRANSF
@@ -203,7 +203,7 @@ void cooling(Gauge_Conf *GC, Const const * const param, int n)
    }
 
 /* perform n cooling steps different method */
-void cooling2(Gauge_Conf *GC, Const const * const param, int n)
+void cooling2(Gauge_Conf *GC, GParam const * const param, int n)
    {
    GAUGE_GROUP staple;
    #ifdef RAND_GAUGE_TRANSF

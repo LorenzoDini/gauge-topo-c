@@ -3,7 +3,7 @@
 
 #include"math.h"
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"../Macro/macro.h"
 #include"../Rng/random.h"
 #include"sun.h"
@@ -14,7 +14,7 @@ int main(void)
   {
   int seme=0;
   double energy;
-  Const param;
+  GParam param;
   
   SuN M, N, L, T;
    

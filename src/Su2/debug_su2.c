@@ -3,7 +3,7 @@
 
 #include"math.h"
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"../Macro/macro.h"
 #include"../Rng/random.h"
 #include"su2.h"
@@ -13,7 +13,7 @@ int main(void)
   {
   int seme=0;
   double energy;
-  Const param;
+  GParam param;
   
   Su2 M, N, L, T, mI;
    

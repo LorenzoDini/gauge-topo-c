@@ -5,7 +5,7 @@
 #include<math.h>
 #include<stdio.h>
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 #include"g2.h"
 #include"g2_check.h"
 #include"g2_un.h"
@@ -18,7 +18,7 @@ int main(void)
    int count;
    int seme=0;
    double n, cc, energy;
-   Const param;
+   GParam param;
 
    G2 M, N, L;
 

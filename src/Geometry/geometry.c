@@ -7,11 +7,11 @@
 #include<stdlib.h>
 
 #include"geometry.h"
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 
 
 /* lexicographic index */
-int lex_index(int t, int x, int y, int z, Const const * const param)
+int lex_index(int t, int x, int y, int z, GParam const * const param)
   {
   int ris = t + (param->d_latot)*x + (param->d_latot)*(param->d_latox)*y + (param->d_latot)*(param->d_latox)*(param->d_latoy)*z;
   
@@ -19,7 +19,7 @@ int lex_index(int t, int x, int y, int z, Const const * const param)
   }
 
 
-void init_geometry(Geometry *geo, Const const * const param)
+void init_geometry(Geometry *geo, GParam const * const param)
   {
   int t, tp, tm, x, xp, xm, y, yp, ym, z, zp, zm;
   int ris, risp, rism;
@@ -113,7 +113,7 @@ void init_geometry(Geometry *geo, Const const * const param)
   }  
 
 /* free memory */
-void end_geometry(Geometry *geo, Const const * const param)
+void end_geometry(Geometry *geo, GParam const * const param)
   {
   int i;
 

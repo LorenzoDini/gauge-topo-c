@@ -6,7 +6,7 @@
 #include<math.h>
 
 #include"g2.h"
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 
 /* verify the cubic condition needed for an SO(7) matrix to be in G2
    return 1 if ok, 0 else */

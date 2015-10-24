@@ -3,9 +3,9 @@
 
 #include"../Macro/macro.h"
 
-#include"../Const/const.h"
+#include"../GParam/gparam.h"
 
-int lex_index(int t, int x, int y, int z, Const const * const param);
+int lex_index(int t, int x, int y, int z, GParam const * const param);
 
 typedef struct Geometry {
    int **d_nnp;
@@ -13,8 +13,8 @@ typedef struct Geometry {
    int *d_timeslice;  
 } Geometry;
 
-void init_geometry(Geometry *geo, Const const * const param);
-void end_geometry(Geometry *geo, Const const * const param);
+void init_geometry(Geometry *geo, GParam const * const param);
+void end_geometry(Geometry *geo, GParam const * const param);
 int nnp(Geometry const * const geo, int r, int i);
 int nnm(Geometry const * const geo, int r, int i);
 int timeslice(Geometry const * const geo, int r);

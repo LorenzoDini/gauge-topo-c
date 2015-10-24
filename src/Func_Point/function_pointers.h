@@ -57,8 +57,8 @@ void (*read_from_file)(FILE *fp, GAUGE_GROUP *A);
 void (*read_from_binary_file)(FILE *fp, GAUGE_GROUP *A);
 void (*read_from_binary_file_swap)(FILE *fp, GAUGE_GROUP *A);
 
-void (*single_heatbath)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple, Const const * const param);
-void (*single_overrelaxation)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple, Const const * const param);
+void (*single_heatbath)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple, GParam const * const param);
+void (*single_overrelaxation)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple, GParam const * const param);
 void (*cool)(GAUGE_GROUP *link, GAUGE_GROUP const * const staple);
 
 
