@@ -6,6 +6,7 @@
 #include<complex.h>
 #include<math.h>
 #include<stdio.h>
+#include<string.h>
 
 #include"../Endian/endianness.h"
 #include"../Rng/random.h"
@@ -824,6 +825,7 @@ void read_from_binary_file_SuN(FILE *fp, SuN *A)
   {
   int i, j, err;
   double re, im;
+  double aux[2];
  
   err=0;
 
@@ -833,7 +835,11 @@ void read_from_binary_file_SuN(FILE *fp, SuN *A)
         {
         err+=fread(&re, sizeof(double), 1, fp);
         err+=fread(&im, sizeof(double), 1, fp);
-        A->comp[i][j]=re+im*I;
+        aux[0]=re;
+        aux[1]=im;
+
+        memcpy((void *)&(A->comp[i][j]), (void*)aux, sizeof(aux));
+        //equivalent to A->comp[i][j]=re+im*I;
         }
      }
 
@@ -849,6 +855,7 @@ void read_from_binary_file_swap_SuN(FILE *fp, SuN *A)
   {
   int i, j, err;
   double re, im;
+  double aux[2];
   
   err=0;
 
@@ -860,7 +867,11 @@ void read_from_binary_file_swap_SuN(FILE *fp, SuN *A)
         err+=fread(&im, sizeof(double), 1, fp);
         SwapBytesDouble(&re);
         SwapBytesDouble(&im);
-        A->comp[i][j]=re+im*I;
+        aux[0]=re;
+        aux[1]=im;
+
+        memcpy((void *)&(A->comp[i][j]), (void*)aux, sizeof(aux));
+        // equivalent to A->comp[i][j]=re+im*I;
         }
      }
 
