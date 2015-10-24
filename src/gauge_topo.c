@@ -45,15 +45,15 @@ int main (int argc, char **argv)
     /* open data_file */
     if(param.d_inizio==2)
       {
-      datafilep=fopen(param.data_file, "r");
+      datafilep=fopen(param.d_data_file, "r");
       if(datafilep!=NULL)  /* file exists */
         {
         fclose(datafilep);
-        datafilep=fopen(param.data_file, "a");
+        datafilep=fopen(param.d_data_file, "a");
         }
       else
         {
-        datafilep=fopen(param.data_file, "w");
+        datafilep=fopen(param.d_data_file, "w");
         fprintf(datafilep, "%d %d %d %d %.10f\n", param.d_latox, 
                                                   param.d_latoy, 
                                                   param.d_latoz, 
@@ -63,7 +63,7 @@ int main (int argc, char **argv)
       }
     else
       {
-      datafilep=fopen(param.data_file, "w");
+      datafilep=fopen(param.d_data_file, "w");
       fprintf(datafilep, "%d %d %d %d %.10f\n", param.d_latox, 
                                                 param.d_latoy, 
                                                 param.d_latoz, 

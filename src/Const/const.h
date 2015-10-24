@@ -28,9 +28,9 @@ typedef struct Const {
   int d_saveconf;
 
   /* file names */
-  char conf_file[20];       
-  char data_file[20];       
-  char err_file[20];        
+  char d_conf_file[50];
+  char d_data_file[50];
+  char d_err_file[50];
 
   /* random seed */
   int d_randseed;

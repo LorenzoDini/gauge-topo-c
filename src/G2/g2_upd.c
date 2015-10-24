@@ -112,7 +112,7 @@ void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const p
           }
        else
           {
-          fp=fopen(param->err_file, "a");
+          fp=fopen(param->d_err_file, "a");
           fprintf(fp, "Warning:  in heatbath in g2_upd.cc norm = %g < min_value\n",  norm);
           fclose(fp);
           }
@@ -203,7 +203,7 @@ void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const p
           }
         else
           {
-          fp=fopen(param->err_file, "a");
+          fp=fopen(param->d_err_file, "a");
           fprintf(fp, "Warning:  in heatbath in g2_upd.cc norm = %g < min_value\n",  norm);
           fclose(fp);
           }
@@ -294,7 +294,7 @@ void single_heatbath_G2(G2 *link, G2 const * const staple, Const const * const p
           }
         else
           {
-          fp=fopen(param->err_file, "a");
+          fp=fopen(param->d_err_file, "a");
           fprintf(fp, "Warning:  in heatbath in g2_upd.cc norm = %g < min_value\n",  norm);
           fclose(fp);
           }

@@ -186,7 +186,7 @@ int readinput(char *in_file, Const *param)
                     fprintf(stderr, "Error in reading the file %s\n", in_file);
                     return 1;
                     }
-                  strcpy(param->conf_file, temp_str);
+                  strcpy(param->d_conf_file, temp_str);
                   /* printf("%s\n", param->conf_file); */
                   }
            else if(strncmp(str, "data_file", 9)==0)
@@ -197,7 +197,7 @@ int readinput(char *in_file, Const *param)
                     fprintf(stderr, "Error in reading the file %s\n", in_file);
                     return 1;
                     }
-                  strcpy(param->data_file, temp_str);
+                  strcpy(param->d_data_file, temp_str);
                   /* printf("%s\n", temp_str); */
                   }
            else if(strncmp(str, "err_file", 8)==0)
@@ -208,7 +208,7 @@ int readinput(char *in_file, Const *param)
                     fprintf(stderr, "Error in reading the file %s\n", in_file);
                     return 1;
                     }
-                  strcpy(param->err_file, temp_str);
+                  strcpy(param->d_err_file, temp_str);
                   /* printf("%s\n", temp_str); */
                   }
            else if(strncmp(str, "randseed", 8)==0)

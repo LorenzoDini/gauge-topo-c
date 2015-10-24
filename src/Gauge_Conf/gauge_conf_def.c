@@ -75,10 +75,10 @@ int init_gauge_conf(Gauge_Conf * GC, Const const * const param)
     char md5sum_old[2*MD5_DIGEST_LENGTH+1];
     double bl;
 
-    fp=fopen(param->conf_file, "r"); /* open the configuration file */
+    fp=fopen(param->d_conf_file, "r"); /* open the configuration file */
     if(fp==NULL)
       {
-      fprintf(stderr, "Error in opening the file %s\n", param->conf_file);
+      fprintf(stderr, "Error in opening the file %s\n", param->d_conf_file);
       return 1;
       }
     else
@@ -86,23 +86,23 @@ int init_gauge_conf(Gauge_Conf * GC, Const const * const param)
       i=fscanf(fp, "%d %d %d %d %lg %s\n", &xl, &yl, &zl, &tl, &bl, md5sum_old);
       if(i!=6)
         {
-        fprintf(stderr, "Error in reading the file %s\n", param->conf_file);
+        fprintf(stderr, "Error in reading the file %s\n", param->d_conf_file);
         return 1;
         }
 
       if(xl!=param->d_latox || yl!=param->d_latoy || zl!=param->d_latoz || tl!=param->d_latot)
         {
         fclose(fp);
-        fprintf(stderr, "The configuration in %s is not of the correct size!\n", param->conf_file);
+        fprintf(stderr, "The configuration in %s is not of the correct size!\n", param->d_conf_file);
         return 1;
         }      
       fclose(fp);
       }
 
-    fp=fopen(param->conf_file, "rb"); /* open the configuration file in binary*/
+    fp=fopen(param->d_conf_file, "rb"); /* open the configuration file in binary*/
     if(fp==NULL)
       {
-      fprintf(stderr, "Error in opening the file %s\n", param->conf_file);
+      fprintf(stderr, "Error in opening the file %s\n", param->d_conf_file);
       return 1;
       }
     else
@@ -162,10 +162,10 @@ void save_on_file(Gauge_Conf const * const GC, Const const * const param)
 
   compute_md5sum(md5sum, GC, param);
 
-  fp=fopen(param->conf_file, "w"); /* open the configuration file */
+  fp=fopen(param->d_conf_file, "w"); /* open the configuration file */
   if(fp==NULL)
     {
-    fprintf(stderr, "Error in opening the file %s\n", param->conf_file);
+    fprintf(stderr, "Error in opening the file %s\n", param->d_conf_file);
     }
   else
     {
@@ -179,10 +179,10 @@ void save_on_file(Gauge_Conf const * const GC, Const const * const param)
     }
   fclose(fp);
 
-  fp=fopen(param->conf_file, "ab"); /* open the configuration file in binary mode*/
+  fp=fopen(param->d_conf_file, "ab"); /* open the configuration file in binary mode*/
   if(fp==NULL)
     {
-    fprintf(stderr, "Error in opening the file %s\n", param->conf_file);
+    fprintf(stderr, "Error in opening the file %s\n", param->d_conf_file);
     }
   else
     {
